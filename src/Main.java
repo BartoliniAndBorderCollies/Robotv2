@@ -6,8 +6,12 @@ public class Main {
     // 0. każda tura jest liczona - jest licznik który informuje która to tura
     // każda tura ładuje robota jeśli jest podłączony do ładowania
 
+
+    // POCZĄTEK PĘTLI
+    // Nr tury
+    // przywitanie i krótkie menu co można wykonać
     // użytkownik wydaje komendy
-    // pocz
+
 
     // 1. włączyć robota
     // robot jak jest już włączony to walidacja, że przecież jest już włączony
@@ -40,14 +44,16 @@ public class Main {
     // powiadomić o niskim stanie energii
     // jeśli ma zbyt małą ilosć energii to powiadomić, że nie może tego uczynić bo energy level too low.
     // możliwośc zaniechania ruchu i powrotu do menu głównego
-    // powiadomienie gdy komenda jest niezrozumiała
+    // powiadomienie gdy komenda użytkownika jest niezrozumiała
 
     //7. skip the turn
     // jeśli robot jest podłączony do ładowarki - przybywa mu poziom energii
     // jeśli robot nie jest podłączony do ładowarki - nic się nie dzieje, zwykły komunikat next turn
 
     //8/ zamknięcie aplikacji
-    // wyjście z pętli i krótki komunikat, że
+    // wyjście z pętli i krótki komunikat, że program jest zamykany.
+
+    //KONIEC PĘTLI
 
 
 

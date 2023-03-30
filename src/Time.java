@@ -1,2 +1,6 @@
-package PACKAGE_NAME;public class Time {
+public class Time {
+
+    // liczy która to tura
+    // podaje numer tury
+
 }
