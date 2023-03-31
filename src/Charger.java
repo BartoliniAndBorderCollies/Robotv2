@@ -5,10 +5,12 @@ public class Charger {
 
 
     // możliwośc podłączenie ładowarki do robota
-    private List<Robot> robots = new ArrayList<>();
+    private List<Robot> chargeRobots = new ArrayList<>();
+
+
 
     public void plugInRobot(Robot robot) {
-        robots.add(robot);
+        chargeRobots.add(robot);
     }
 
     // TODO: ładowanie robota
@@ -19,12 +21,12 @@ public class Charger {
 
     // możliwość odłączenia ładowarki
     public void unplugRobot(Robot robot) {
-        robots.remove(robot);
+        chargeRobots.remove(robot);
 
     }
 
     // możliwość zwracania robotów
     public List<Robot> getRobots() {
-        return robots;
+        return chargeRobots;
     }
 }

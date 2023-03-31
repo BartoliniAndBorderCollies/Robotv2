@@ -28,4 +28,9 @@ public class Robot {
     public int getEnergyLevel() {
         return energyLevel;
     }
+
+    //ustawienie imienia robota
+    public void setName(String name) {
+        this.name = name;
+    }
 }
