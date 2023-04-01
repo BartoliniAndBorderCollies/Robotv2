@@ -105,15 +105,27 @@ public class Main {
                 // jeśli robot jest wyłączony i ma ładowarkę to zacząć ładować - powiadomić użytkownika
 
                 case 4 -> {
+                    System.out.println("Which charger you want to choose?");
+                    for (int i = 0; i< chargers.size(); i++) {
+                        System.out.println(i + ". " + chargers.get(i));
+                    }
+                    int userInput = scanner.nextInt();
+                    Charger charger = chargers.get(userInput);
+
                     System.out.println("Which robot you want to connect to charger and start recharging?");
                     String robotName = scanner.nextLine();
+                    for(int i =0; i<robots.size(); i++) {
+                        if(robots.get(i).getName().equalsIgnoreCase(robotName)) {
+                            charger.plugInRobot(robots.get(i));
+                        }
+                        System.out.println("Robot " + robotName + " has been plugged in. ");
+                    }
                     // znalezienie robota z listy robotów - for loop
                     // podłączenie znalezionego robota do ładowarki. metoda plugIn
                     //jeśli slots>robots.size() to true, dodaj robota
                     // jeśli nie ma wolnych slotów to nie można podłączyć robota do ładowarki
                     // jeśli jest wolny slot to dodanie robota do listy podłączonych robotów do ładowarki
                     // jeśli został podłączony do zaczyna działac metoda chargeRobot
-
 
 
                 }
@@ -125,6 +137,8 @@ public class Main {
 
 
             }
+
+
 
 
         } while (true);
