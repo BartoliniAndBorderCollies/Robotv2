@@ -10,10 +10,12 @@ public class Main {
 
 
         List<Robot> robots = new ArrayList<>();
+        List<Charger> chargers = new ArrayList<>();
+
         TurnCounter turnCounter = new TurnCounter();
-        Charger charger;
         ScreenPrinter screenPrinter = new ScreenPrinter();
         Scanner scanner = new Scanner(System.in);
+
 
         int response;
 
@@ -30,11 +32,14 @@ public class Main {
             screenPrinter.showMenu();
 
             // użytkownik wydaje komendy
-            // 0. stworzenie robota
-            // użytkownik nadaje imię robotowi.
 
             scanner.nextLine();
             response = scanner.nextInt();
+
+            // 0. stworzenie robota
+            // użytkownik nadaje imię robotowi.
+            // TODO: jeśli robot o takim imieniu istnieje to walidacja
+
 
             switch (response) {
                 case 0 -> {
@@ -43,9 +48,80 @@ public class Main {
                     Robot robot = new Robot(robotName);
                     robots.add(robot);
                     System.out.println("Robot " + robotName + " has been created.");
+                }
+                //1. stworzyć ładowarkę
+                // stworzenie ładowarki poprzez new Charger();
+                //każda nowo powstała ładowarka ma 3 wolne sloty
+                // dodanie łądowarki do listy ładowarek
+                // jesli ładowarka nie jest stworzona to ją stworzyć - komunikat dla użytkownika
+
+                case 1 -> {
+                   
+                    System.out.println("How many AC power plugs and sockets you want to have in your charger?");
+                    int slotsAmount = scanner.nextInt();
+                    Charger createdCharger = new Charger(slotsAmount);
+                    chargers.add(createdCharger);
+                    System.out.println("Charger has been created.");
+
+                }
+                // 2. włączyć robota
+                // robot jak jest już włączony to walidacja, że przecież jest już włączony
+                // jeśli robot jest wyłączony to zmienia status na włączony - komunikat dla użytkownika
+
+                case 2 -> {
+                    System.out.println("Give the name of the robot which you want to turn on.");
+                    String robotName = scanner.nextLine();
+
+
+                    for (int i = 0; i < robots.size(); i++) {
+                        if (robots.get(i).getName().equals(robotName)) {
+                            robots.get(i).checkIfTurnOn();
+                            robots.get(i).turnOn();
+                            System.out.println(" Robot has been turned on.");
+                            break;
+                        }
+                    }
+                }
+
+                // 3. wyłączyć robota
+                // jeśli robot jest już wyłączony to powiadomić, że przecież jest wyłączony
+                // jeśli robot jest włączony to zmienia status na wyłączony - komunikat dla użytkownika
+                case 3 -> {
+                    System.out.println("Give the name of the robot which you want to turn off?");
+                    String robotName = scanner.nextLine();
+
+                    for (int i = 0; i < robots.size(); i++) {
+                        if(robots.get(i).getName().equals(robotName)) {
+                            robots.get(i).checkIfTurnOn();
+                            robots.get(i).turnOff();
+                            System.out.println("Robot has been turned off. ");
+                            break;
+                        }
+                    }
+                }
+                //4.podłącz ładowarkę.
+                // jeśli robot jest włączony informacja, żeby go wyłączyć
+                // jeśli robot jest wyłączony to informacja, żeby najpierw stworzyć ładowarkę
+                // jeśli robot jest wyłączony i ma ładowarkę to zacząć ładować - powiadomić użytkownika
+
+                case 4 -> {
+                    System.out.println("Which robot you want to connect to charger and start recharging?");
+                    String robotName = scanner.nextLine();
+                    // znalezienie robota z listy robotów - for loop
+                    // podłączenie znalezionego robota do ładowarki. metoda plugIn
+                    //jeśli slots>robots.size() to true, dodaj robota
+                    // jeśli nie ma wolnych slotów to nie można podłączyć robota do ładowarki
+                    // jeśli jest wolny slot to dodanie robota do listy podłączonych robotów do ładowarki
+                    // jeśli został podłączony do zaczyna działac metoda chargeRobot
+
 
 
                 }
+
+
+
+
+
 
 
             }
@@ -54,24 +130,10 @@ public class Main {
         } while (true);
 
 
-//        1. włączyć robota
-        // robot jak jest już włączony to walidacja, że przecież jest już włączony
-        // jeśli robot jest wyłączony to zmienia status na włączony - komunikat dla użytkownika
 
 
-        // 2. wyłączyć robota
-        // jeśli robot jest już wyłączony to powiadomić, że przecież jest wyłączony
-        // jeśli robot jest włączony to zmienia status na wyłączony - komunikat dla użytkownika
 
-        //3. stworzyć ładowarkę
-        // stworzenie ładowarki poprzez new Charger();
-        // jeśli ładowarka jest już stworzona to powiadomić, że przecież istnieje
-        // jesli ładowarka nie jest stworzona to ją stworzyć - komunikat dla użytkownika
 
-        //4.podłącz ładowarkę.
-        // jeśli robot jest włączony informacja, żeby go wyłączyć
-        // jeśli robot jest wyłączony to informacja, żeby najpierw stworzyć ładowarkę
-        // jeśli robot jest wyłączony i ma ładowarkę to zacząć ładować - powiadomić użytkownika
 
         //5. odłącz robota od ładowarki
         // jeśli robot jest już odłączony to komunikat, że przecież jest odłączony
