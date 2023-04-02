@@ -8,7 +8,7 @@ public class ScreenPrinter {
         System.out.println("""
                                 
                 Hello, welcome to Robot command center.
-                
+                                
                 What do you want to do? Type the answer:
                 0. Create the robot.
                 1. Create a charger to be able to recharge battery.
@@ -23,7 +23,21 @@ public class ScreenPrinter {
                 """);
     }
 
+        public void showCommands() {
+            System.out.println("""
+                    What movement you want to do? Type the command:
+                    - step left,
+                    - step right,
+                    - left hand,
+                    - right hand,
+                    jump.
+                    
+                    or type "back" to go back to main menu.
+                    """);
+        }
+    }
 
 
 
-}
+
+

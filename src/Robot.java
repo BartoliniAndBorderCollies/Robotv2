@@ -12,19 +12,29 @@ public class Robot {
     }
 
     // robot ma wykonywać ruch
-    public void move() {
-        // bedziemy wykorzystywać enuma
+    public void move(RobotMovement robotMovement) throws Exception {
+        if (energyLevel < robotMovement.getMoveCost()) {
+            throw new Exception("Not enough energy to make a movement " + robotMovement.getName());
+            //TODO: custom exception, podanie ilosci energii obecnie i potrzebnej
+        }
+        if (!isOn){
+            throw new Exception("Robot is not turned on. ");
+        }
+        energyLevel -= robotMovement.getMoveCost();
+        System.out.println(robotMovement.getAction());
     }
 
     // robota można włączyć
-    public void turnOn(){
+    public void turnOn() {
         isOn = true;
     }
+
     // robota można wyłączyć
-    public void turnOff(){
+    public void turnOff() {
         isOn = false;
     }
-// można sprawdzić poziom energii robota
+
+    // można sprawdzić poziom energii robota
     public int getEnergyLevel() {
         return energyLevel;
     }

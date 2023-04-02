@@ -5,7 +5,6 @@ public class Charger {
 
     private int freeSlots;
 
-
     // możliwośc podłączenie ładowarki do robota
     private List<Robot> chargeRobots = new ArrayList<>();
 

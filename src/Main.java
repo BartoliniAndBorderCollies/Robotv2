@@ -8,7 +8,6 @@ public class Main {
 
     public static void main(String[] args) {
 
-
         List<Robot> robots = new ArrayList<>();
         List<Charger> chargers = new ArrayList<>();
 
@@ -27,7 +26,6 @@ public class Main {
             // przywitanie i krótkie menu co można wykonać
 
             turnCounter.count();
-            charger.chargeRobot();
             screenPrinter.showMenu();
 
             // użytkownik wydaje komendy
@@ -38,7 +36,6 @@ public class Main {
             // 0. stworzenie robota
             // użytkownik nadaje imię robotowi.
             // TODO: jeśli robot o takim imieniu istnieje to walidacja
-
 
             switch (response) {
                 case 0 -> {
@@ -152,42 +149,78 @@ public class Main {
                             break;
                         }
                     }
-
                 }
 
-                //6. poruszyć robota
-                // można poruszyć robota jak jest włączony
-                // jak jest wyłączony powiadomić, że musi być włączony
-                // jesli jest włączony przechodzimy do kolejnego menu z wyborem co ma robić
-                // każdy ruch zabiera energię
-                // gdy dojdzie do zera wyłączyć robota
-                // powiadomić o niskim stanie energii
-                // jeśli ma zbyt małą ilosć energii to powiadomić, że nie może tego uczynić bo energy level too low.
-                // możliwośc zaniechania ruchu i powrotu do menu głównego
-                // powiadomienie gdy komenda użytkownika jest niezrozumiała
+                //poczatek petli
+                // pytam uzytkonika jakiego robota chce poruszyc
+                //uzytkownik podaje imie robota
+                // for loop szuka czy taki jest
+                // jesli jest sprawdza czy jest turn on
+                // jesli jest turn on przechodzę do ruchów
+                // jesli nie ma to komunikat sorry ale robot ktory wpisales nie jest w worku, upewnij sie czy podal
+                //es dobra nazwe robota
+                // znalazl takiego robota, konsola teraz pyta co uzytkownik chce poruszyc
+                // lista mozliwych ruchow + mozliwosc powrotu do menu głownego jesli uzytkownik jednak nie chce ruszyc
+                // input usera
+                // sprawdzenie czy komenda jest zrozumiała
+                // sprawdzanie poziomu baterii robota
+                // wykonanie ruchu jesli poziom baterii odpowiada
+                // brak ruchu jesli zbyt malo energy i komunikat sorry naładuj go
+                //sprawdzenie poziomu baterii po ruchu.
+                //jesli osiagnal poziom ponizej 5% robot turn off.
+                //koniec petli
 
+                case 6 -> {
+                    System.out.println("Enter the name of robot which you want to move: ");
+                    String robotName = scanner.nextLine();
+                    Robot robot = null;
 
+                    for (int i = 0; i < robots.size(); i++) {
+                        if (robots.get(i).getName().equals(robotName)) {
+                            robot = robots.get(i);
+                            break;
+                        }
+                    }
+                    if (robot == null) {
+                        System.out.println("Robot has not been found. ");
+                        break;
+                    }
 
+                    screenPrinter.showCommands();
+                    String command = scanner.nextLine();
+                    //TODO: jesli command nie jest RobotMovement.values
+
+                    for(RobotMovement robotMovement: RobotMovement.values()){
+                        if(robotMovement.getName().equals(command)) {
+                            robot.move(robotMovement); //TODO: handle exception
+                        }
+                    }
+                }
 
 
 
             }
 
 
-        } while (true);
+        }while(true);
 
 
+    }
+
+
+}
 
 
         //7. skip the turn
-        // jeśli robot jest podłączony do ładowarki - przybywa mu poziom energii
-        // jeśli robot nie jest podłączony do ładowarki - nic się nie dzieje, zwykły komunikat next turn
 
+        // jeśli robot nie jest podłączony do ładowarki - nic się nie dzieje, zwykły komunikat next turn
         //8/ zamknięcie aplikacji
         // wyjście z pętli i krótki komunikat, że program jest zamykany.
+
+        //ładowanie robota
+// jeśli robot jest podłączony do ładowarki - przybywa mu poziom energii
 
         //KONIEC PĘTLI
 
 
-    }
-}
+
