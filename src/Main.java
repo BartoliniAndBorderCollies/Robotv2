@@ -115,10 +115,11 @@ public class Main {
                     for (int i = 0; i < robots.size(); i++) {
                         if (robots.get(i).getName().equals(robotName)) {
                             charger.plugInRobot(robots.get(i));
+                            System.out.println("Robot " + robotName + " has been plugged in. ");
                             break;
                         }
                     }
-                    System.out.println("Robot " + robotName + " has been plugged in. ");
+
                     // znalezienie robota z listy robotów - for loop
                     // podłączenie znalezionego robota do ładowarki. metoda plugIn
                     //jeśli slots>robots.size() to true, dodaj robota
@@ -147,11 +148,27 @@ public class Main {
                     for (int i = 0; i < robots.size(); i++) {
                         if (robots.get(i).getName().equals(robotName)) {
                             charger.unplugRobot(robots.get(i));
+                            System.out.println("Robot " + robotName + " has been unplugged.");
                             break;
                         }
                     }
-                    System.out.println("Robot " + robotName + " has been unplugged.");
+
                 }
+
+                //6. poruszyć robota
+                // można poruszyć robota jak jest włączony
+                // jak jest wyłączony powiadomić, że musi być włączony
+                // jesli jest włączony przechodzimy do kolejnego menu z wyborem co ma robić
+                // każdy ruch zabiera energię
+                // gdy dojdzie do zera wyłączyć robota
+                // powiadomić o niskim stanie energii
+                // jeśli ma zbyt małą ilosć energii to powiadomić, że nie może tego uczynić bo energy level too low.
+                // możliwośc zaniechania ruchu i powrotu do menu głównego
+                // powiadomienie gdy komenda użytkownika jest niezrozumiała
+
+
+
+
 
 
             }
@@ -160,16 +177,7 @@ public class Main {
         } while (true);
 
 
-        //6. poruszyć robota
-        // można poruszyć robota jak jest włączony
-        // jak jest wyłączony powiadomić, że musi być włączony
-        // jesli jest włączony przechodzimy do kolejnego menu z wyborem co ma robić
-        // każdy ruch zabiera energię
-        // gdy dojdzie do zera wyłączyć robota
-        // powiadomić o niskim stanie energii
-        // jeśli ma zbyt małą ilosć energii to powiadomić, że nie może tego uczynić bo energy level too low.
-        // możliwośc zaniechania ruchu i powrotu do menu głównego
-        // powiadomienie gdy komenda użytkownika jest niezrozumiała
+
 
         //7. skip the turn
         // jeśli robot jest podłączony do ładowarki - przybywa mu poziom energii
