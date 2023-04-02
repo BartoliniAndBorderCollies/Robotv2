@@ -16,7 +16,6 @@ public class Main {
         ScreenPrinter screenPrinter = new ScreenPrinter();
         Scanner scanner = new Scanner(System.in);
 
-
         int response;
 
         // 0. każda tura jest liczona - jest licznik który informuje która to tura
@@ -56,7 +55,7 @@ public class Main {
                 // jesli ładowarka nie jest stworzona to ją stworzyć - komunikat dla użytkownika
 
                 case 1 -> {
-                   
+
                     System.out.println("How many AC power plugs and sockets you want to have in your charger?");
                     int slotsAmount = scanner.nextInt();
                     Charger createdCharger = new Charger(slotsAmount);
@@ -71,7 +70,6 @@ public class Main {
                 case 2 -> {
                     System.out.println("Give the name of the robot which you want to turn on.");
                     String robotName = scanner.nextLine();
-
 
                     for (int i = 0; i < robots.size(); i++) {
                         if (robots.get(i).getName().equals(robotName)) {
@@ -91,7 +89,7 @@ public class Main {
                     String robotName = scanner.nextLine();
 
                     for (int i = 0; i < robots.size(); i++) {
-                        if(robots.get(i).getName().equals(robotName)) {
+                        if (robots.get(i).getName().equals(robotName)) {
                             robots.get(i).checkIfTurnOn();
                             robots.get(i).turnOff();
                             System.out.println("Robot has been turned off. ");
@@ -105,54 +103,62 @@ public class Main {
                 // jeśli robot jest wyłączony i ma ładowarkę to zacząć ładować - powiadomić użytkownika
 
                 case 4 -> {
-                    System.out.println("Which charger you want to choose?");
-                    for (int i = 0; i< chargers.size(); i++) {
+                    System.out.println("Which charger you want to choose to plug robot in?");
+                    for (int i = 0; i < chargers.size(); i++) {
                         System.out.println(i + ". " + chargers.get(i));
                     }
                     int userInput = scanner.nextInt();
                     Charger charger = chargers.get(userInput);
 
-                    System.out.println("Which robot you want to connect to charger and start recharging?");
+                    System.out.println("Which robot you want to connect to charger?");
                     String robotName = scanner.nextLine();
-                    for(int i =0; i<robots.size(); i++) {
-                        if(robots.get(i).getName().equalsIgnoreCase(robotName)) {
+                    for (int i = 0; i < robots.size(); i++) {
+                        if (robots.get(i).getName().equals(robotName)) {
                             charger.plugInRobot(robots.get(i));
+                            break;
                         }
-                        System.out.println("Robot " + robotName + " has been plugged in. ");
                     }
+                    System.out.println("Robot " + robotName + " has been plugged in. ");
                     // znalezienie robota z listy robotów - for loop
                     // podłączenie znalezionego robota do ładowarki. metoda plugIn
                     //jeśli slots>robots.size() to true, dodaj robota
                     // jeśli nie ma wolnych slotów to nie można podłączyć robota do ładowarki
                     // jeśli jest wolny slot to dodanie robota do listy podłączonych robotów do ładowarki
                     // jeśli został podłączony do zaczyna działac metoda chargeRobot
-
-
                 }
 
+                //5. odłącz robota od ładowarki
+                // wybór robota przez użytkownika
+                // jeśli robot jest już odłączony to komunikat, że przecież jest odłączony
+                // jeśli robot jest podłączony to go odłączyć - komunikat dla użytkownika
+                // zaprzestać ładować co tura
 
+                case 5 -> {
 
+                    System.out.println("Which charger you want to choose to unplug robot?");
+                    for (int i = 0; i < chargers.size(); i++) {
+                        System.out.println(i + ". " + chargers.get(i));
+                    }
+                    int userInput = scanner.nextInt();
+                    Charger charger = chargers.get(userInput);
 
-
+                    System.out.println("Which robot you want to disconnect from charger?");
+                    String robotName = scanner.nextLine();
+                    for (int i = 0; i < robots.size(); i++) {
+                        if (robots.get(i).getName().equals(robotName)) {
+                            charger.unplugRobot(robots.get(i));
+                            break;
+                        }
+                    }
+                    System.out.println("Robot " + robotName + " has been unplugged.");
+                }
 
 
             }
 
 
-
-
         } while (true);
 
-
-
-
-
-
-
-        //5. odłącz robota od ładowarki
-        // jeśli robot jest już odłączony to komunikat, że przecież jest odłączony
-        // jeśli robot jest podłączony to go odłączyć - komunikat dla użytkownika
-        // zaprzestać ładować co tura
 
         //6. poruszyć robota
         // można poruszyć robota jak jest włączony
