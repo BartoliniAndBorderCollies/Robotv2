@@ -16,6 +16,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         int response;
+        boolean repeat = true;
 
         // 0. każda tura jest liczona - jest licznik który informuje która to tura
         // każda tura ładuje robota jeśli jest podłączony do ładowania
@@ -70,7 +71,6 @@ public class Main {
 
                     for (int i = 0; i < robots.size(); i++) {
                         if (robots.get(i).getName().equals(robotName)) {
-                            robots.get(i).checkIfTurnOn();
                             robots.get(i).turnOn();
                             System.out.println(" Robot has been turned on.");
                             break;
@@ -87,7 +87,6 @@ public class Main {
 
                     for (int i = 0; i < robots.size(); i++) {
                         if (robots.get(i).getName().equals(robotName)) {
-                            robots.get(i).checkIfTurnOn();
                             robots.get(i).turnOff();
                             System.out.println("Robot has been turned off. ");
                             break;
@@ -190,37 +189,28 @@ public class Main {
                     String command = scanner.nextLine();
                     //TODO: jesli command nie jest RobotMovement.values
 
-                    for(RobotMovement robotMovement: RobotMovement.values()){
-                        if(robotMovement.getName().equals(command)) {
+                    for (RobotMovement robotMovement : RobotMovement.values()) {
+                        if (robotMovement.getName().equals(command)) {
                             robot.move(robotMovement); //TODO: handle exception
                         }
                     }
                 }
+                //7. skip the turn
+                // jeśli robot nie jest podłączony do ładowarki - nic się nie dzieje, zwykły komunikat next turn
+                case 7 -> turnCounter.skipTurn();
 
+                //8/ zamknięcie aplikacji
+                // wyjście z pętli i krótki komunikat, że program jest zamykany.
 
-
+                case 8 -> {
+                    System.out.println("Program is closing. ");
+                    repeat = false;
+                }
             }
-
-
-        }while(true);
-
-
+            //tutaj trzeba stworzyć ładowanie robotów wszystkich które są w worku z podłączonymi ładowarkami
+            for (int i = 0; i < chargers.size(); i++) {
+                chargers.get(i).chargeRobots();
+            }
+        } while (repeat);
     }
-
-
 }
-
-
-        //7. skip the turn
-
-        // jeśli robot nie jest podłączony do ładowarki - nic się nie dzieje, zwykły komunikat next turn
-        //8/ zamknięcie aplikacji
-        // wyjście z pętli i krótki komunikat, że program jest zamykany.
-
-        //ładowanie robota
-// jeśli robot jest podłączony do ładowarki - przybywa mu poziom energii
-
-        //KONIEC PĘTLI
-
-
-

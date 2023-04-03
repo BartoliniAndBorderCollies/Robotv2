@@ -17,7 +17,7 @@ public class Robot {
             throw new Exception("Not enough energy to make a movement " + robotMovement.getName());
             //TODO: custom exception, podanie ilosci energii obecnie i potrzebnej
         }
-        if (!isOn){
+        if (!isOn) {
             throw new Exception("Robot is not turned on. ");
         }
         energyLevel -= robotMovement.getMoveCost();
@@ -34,6 +34,7 @@ public class Robot {
         isOn = false;
     }
 
+
     // można sprawdzić poziom energii robota
     public int getEnergyLevel() {
         return energyLevel;
@@ -46,5 +47,10 @@ public class Robot {
 
     public String getName() {
         return name;
+    }
+
+    public void setEnergyLevel(int energyLevel) {
+        this.energyLevel = energyLevel;
+        //TODO: polepszyć metodę gdyż teraz nie ma granicy górnej
     }
 }

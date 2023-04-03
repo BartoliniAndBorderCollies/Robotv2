@@ -23,19 +23,19 @@ public class ScreenPrinter {
                 """);
     }
 
-        public void showCommands() {
-            System.out.println("""
-                    What movement you want to do? Type the command:
-                    - step left,
-                    - step right,
-                    - left hand,
-                    - right hand,
-                    jump.
-                    
-                    or type "back" to go back to main menu.
-                    """);
-        }
+    public void showCommands() {
+        System.out.println("""
+                What movement you want to do? Type the command:
+                - step left,
+                - step right,
+                - left hand,
+                - right hand,
+                jump.
+                                    
+                or type "back" to go back to main menu.
+                """);
     }
+}
 
 
 

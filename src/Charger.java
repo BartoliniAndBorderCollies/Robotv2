@@ -6,34 +6,36 @@ public class Charger {
     private int freeSlots;
 
     // możliwośc podłączenie ładowarki do robota
-    private List<Robot> chargeRobots = new ArrayList<>();
+    private List<Robot> pluggedRobots = new ArrayList<>();
 
     public Charger(int freeSlots) {
         this.freeSlots = freeSlots;
     }
 
     public boolean plugInRobot(Robot robot) {
-        if(freeSlots>chargeRobots.size()) {
-            chargeRobots.add(robot);
+        if (freeSlots > pluggedRobots.size()) {
+            pluggedRobots.add(robot);
             return true;
         }
         return false;
     }
 
-    // TODO: ładowanie robota
-    public void chargeRobot() {
-        //robot.charge();
-        // ładowanie odbywa się ileś tam procent na turę
+    public void chargeRobots() {
+
+        for (int i = 0; i < pluggedRobots.size(); i++) {
+            Robot robot = pluggedRobots.get(i);
+            robot.setEnergyLevel(robot.getEnergyLevel() + 10);
+        }
     }
 
     // możliwość odłączenia ładowarki
     public void unplugRobot(Robot robot) {
-        chargeRobots.remove(robot);
+        pluggedRobots.remove(robot);
     }
 
     // możliwość zwracania robotów
     public List<Robot> getRobots() {
-        return chargeRobots;
+        return pluggedRobots;
     }
 
 
