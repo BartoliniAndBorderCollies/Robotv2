@@ -35,21 +35,36 @@ public class Main {
 
             // użytkownik wydaje komendy
 
-            scanner.nextLine();
             response = scanner.nextInt();
+            scanner.nextLine();
 
             // 0. stworzenie robota
             // użytkownik nadaje imię robotowi.
-            // TODO: jeśli robot o takim imieniu istnieje to walidacja
 
             switch (response) {
                 case 0 -> {
+
                     System.out.println("Give name to the robot.");
                     String robotName = scanner.nextLine();
+                    boolean nameAlreadyExist = false;
+
+                    for (int i = 0; i < robots.size(); i++) {
+                        if (robotName.equals(robots.get(i).getName())) {
+                            nameAlreadyExist = true;
+                            System.out.println("This name already exist.");
+                            break;
+                        }
+                    }
+                    if (nameAlreadyExist) {
+                        break;
+                    }
+
                     Robot robot = new Robot(robotName);
                     robots.add(robot);
                     System.out.println("Robot " + robotName + " has been created.");
                 }
+
+
                 //1. stworzyć ładowarkę
                 // stworzenie ładowarki poprzez new Charger();
                 //każda nowo powstała ładowarka ma 3 wolne sloty
