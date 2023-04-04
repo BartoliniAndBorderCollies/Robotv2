@@ -1,6 +1,7 @@
 package klodnicki.robotv2;
 
 import klodnicki.robotv2.exception.TooLowEnergyException;
+import klodnicki.robotv2.exception.RobotNotTurnedOnException;
 
 public class Robot {
 
@@ -16,14 +17,12 @@ public class Robot {
     }
 
     // robot ma wykonywać ruch
-    public void move(RobotMovement robotMovement) throws TooLowEnergyException {
+    public void move(RobotMovement robotMovement) throws TooLowEnergyException, RobotNotTurnedOnException {
         if (energyLevel < robotMovement.getMoveCost()) {
             throw new TooLowEnergyException(energyLevel, robotMovement.getMoveCost());
-
-            // custom exception, podanie ilosci energii obecnie i potrzebnej
         }
         if (!isOn) {
-           // throw new Exception("Robot is not turned on. ");
+            throw new RobotNotTurnedOnException();
         }
         energyLevel -= robotMovement.getMoveCost();
         System.out.println(robotMovement.getAction());

@@ -1,6 +1,7 @@
 package klodnicki.robotv2;
 
 import klodnicki.robotv2.exception.TooLowEnergyException;
+import klodnicki.robotv2.exception.RobotNotTurnedOnException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -113,6 +114,7 @@ public class Main {
                     String robotName = scanner.nextLine();
                     for (int i = 0; i < robots.size(); i++) {
                         if (robots.get(i).getName().equals(robotName)) {
+                            // TODO: sprawdzic czy podpiety faktycznie bo moze ma zbyt malo wolnych slotów
                             charger.plugInRobot(robots.get(i));
                             System.out.println("Robot " + robotName + " has been plugged in. ");
                             break;
@@ -195,14 +197,10 @@ public class Main {
                     for (RobotMovement robotMovement : RobotMovement.values()) {
                         if (robotMovement.getName().equals(command)) {
                             try {
-                                robot.move(robotMovement); //TODO: handle exception
-                            } catch (TooLowEnergyException e) {
+                                robot.move(robotMovement);
+                            } catch (TooLowEnergyException | RobotNotTurnedOnException e) {
                                 System.out.println(e.getMessage());
                             }
-//                            catch (TooLowEnergyException|AbstractMethodError e){}
-//                            catch () {
-//
-//                            }
                         }
                     }
                 }
