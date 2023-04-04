@@ -16,13 +16,14 @@ public class Robot {
     }
 
     // robot ma wykonywać ruch
-    public void move(RobotMovement robotMovement) throws Exception {
+    public void move(RobotMovement robotMovement) throws TooLowEnergyException {
         if (energyLevel < robotMovement.getMoveCost()) {
-            throw new Exception("Not enough energy to make a movement " + robotMovement.getName());
-            //TODO: custom exception, podanie ilosci energii obecnie i potrzebnej
+            throw new TooLowEnergyException(energyLevel, robotMovement.getMoveCost());
+
+            // custom exception, podanie ilosci energii obecnie i potrzebnej
         }
         if (!isOn) {
-            throw new Exception("Robot is not turned on. ");
+           // throw new Exception("Robot is not turned on. ");
         }
         energyLevel -= robotMovement.getMoveCost();
         System.out.println(robotMovement.getAction());

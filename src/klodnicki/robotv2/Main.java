@@ -194,7 +194,15 @@ public class Main {
 
                     for (RobotMovement robotMovement : RobotMovement.values()) {
                         if (robotMovement.getName().equals(command)) {
-                            robot.move(robotMovement); //TODO: handle exception
+                            try {
+                                robot.move(robotMovement); //TODO: handle exception
+                            } catch (TooLowEnergyException e) {
+                                System.out.println(e.getMessage());
+                            }
+//                            catch (TooLowEnergyException|AbstractMethodError e){}
+//                            catch () {
+//
+//                            }
                         }
                     }
                 }
