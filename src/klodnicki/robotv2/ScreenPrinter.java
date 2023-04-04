@@ -1,3 +1,5 @@
+package klodnicki.robotv2;
+
 public class ScreenPrinter {
 
     // pokazuje komunikaty uzytkownikowi

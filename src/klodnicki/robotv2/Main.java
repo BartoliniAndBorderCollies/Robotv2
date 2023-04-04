@@ -1,3 +1,6 @@
+package klodnicki.robotv2;
+
+import klodnicki.robotv2.exception.TooLowEnergyException;
 
 import java.util.ArrayList;
 import java.util.List;

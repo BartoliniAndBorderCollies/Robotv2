@@ -1,3 +1,7 @@
+package klodnicki.robotv2;
+
+import klodnicki.robotv2.exception.TooLowEnergyException;
+
 public class Robot {
 
     // robot ma miec poziom energii wartośc od 0 do 100;

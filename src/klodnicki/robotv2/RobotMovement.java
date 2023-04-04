@@ -1,10 +1,12 @@
+package klodnicki.robotv2;
+
 public enum RobotMovement {
 
-    LEFT_FOOT(20, "step left", "Robot moved left foot."),
-    RIGHT_FOOT(20, "step right", "Robot moved right foot."),
-    LEFT_HAND(10, "left hand", "Robot moved left hand."),
-    RIGHT_HAND(10, "right hand", "Robot moved right hand."),
-    JUMP(35, "jump", "Robot jumped.");
+    LEFT_FOOT(20, "step left", "klodnicki.robotv2.Robot moved left foot."),
+    RIGHT_FOOT(20, "step right", "klodnicki.robotv2.Robot moved right foot."),
+    LEFT_HAND(10, "left hand", "klodnicki.robotv2.Robot moved left hand."),
+    RIGHT_HAND(10, "right hand", "klodnicki.robotv2.Robot moved right hand."),
+    JUMP(35, "jump", "klodnicki.robotv2.Robot jumped.");
 
     private final int moveCost;
     private final String name;
