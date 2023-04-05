@@ -91,20 +91,20 @@ public class Main {
                 case 3 -> {
                     System.out.println("Give the name of the robot which you want to turn on.");
                     String robotName = scanner.nextLine();
-                    boolean robotTurnedOn = false;
+                    Robot robot = null;
 
                     for (int i = 0; i < robots.size(); i++) {
                         if (robots.get(i).getName().equals(robotName)) {
-                            robots.get(i).turnOn();
-                            robotTurnedOn = true;
-                            System.out.println(" Robot has been turned on.");
+                            robot = robots.get(i);
                             break;
                         }
                     }
-                    if (robotTurnedOn) {
+                    if (robot == null) {
+                        System.out.println("Robot with given name was not found. ");
                         break;
                     }
-                    System.out.println("This name does not exist.");
+                    robot.turnOn();
+                    System.out.println("Robot has been turned on.");
                 }
 
                 // 3. wyłączyć robota
