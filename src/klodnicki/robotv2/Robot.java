@@ -1,5 +1,6 @@
 package klodnicki.robotv2;
 
+import klodnicki.robotv2.exception.MaximumEnergyLevelException;
 import klodnicki.robotv2.exception.TooLowEnergyException;
 import klodnicki.robotv2.exception.RobotNotTurnedOnException;
 
@@ -53,8 +54,10 @@ public class Robot {
         return name;
     }
 
-    public void setEnergyLevel(int energyLevel) {
+    public void setEnergyLevel(int energyLevel) throws MaximumEnergyLevelException {
+        if (energyLevel>100) {
+            throw new MaximumEnergyLevelException(name);
+        }
         this.energyLevel = energyLevel;
-        //TODO: polepszyć metodę gdyż teraz nie ma granicy górnej
     }
 }

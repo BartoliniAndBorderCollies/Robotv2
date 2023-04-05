@@ -1,5 +1,6 @@
 package klodnicki.robotv2;
 
+import klodnicki.robotv2.exception.MaximumEnergyLevelException;
 import klodnicki.robotv2.exception.NotEnoughFreeEnergySlotsException;
 
 import java.util.ArrayList;
@@ -27,7 +28,11 @@ public class Charger {
 
         for (int i = 0; i < pluggedRobots.size(); i++) {
             Robot robot = pluggedRobots.get(i);
-            robot.setEnergyLevel(robot.getEnergyLevel() + 10);
+            try {
+                robot.setEnergyLevel(robot.getEnergyLevel() + 10);
+            } catch (MaximumEnergyLevelException e) {
+                System.out.println(e.getMessage());
+            }
         }
     }
 
