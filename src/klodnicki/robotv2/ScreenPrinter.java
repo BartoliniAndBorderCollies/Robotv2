@@ -32,9 +32,7 @@ public class ScreenPrinter {
                 - step right,
                 - left hand,
                 - right hand,
-                jump.
-                                    
-                or type "back" to go back to main menu.
+                - jump.
                 """);
     }
 }
