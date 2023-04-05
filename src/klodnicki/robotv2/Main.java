@@ -1,5 +1,6 @@
 package klodnicki.robotv2;
 
+import klodnicki.robotv2.exception.NotEnoughFreeEnergySlotsException;
 import klodnicki.robotv2.exception.TooLowEnergyException;
 import klodnicki.robotv2.exception.RobotNotTurnedOnException;
 
@@ -132,8 +133,11 @@ public class Main {
                     String robotName = scanner.nextLine();
                     for (int i = 0; i < robots.size(); i++) {
                         if (robots.get(i).getName().equals(robotName)) {
-                            // TODO: sprawdzic czy podpiety faktycznie bo moze ma zbyt malo wolnych slotów
-                            charger.plugInRobot(robots.get(i));
+                            try {
+                                charger.plugInRobot(robots.get(i));
+                            } catch (NotEnoughFreeEnergySlotsException e) {
+                                System.out.println(e.getMessage());
+                            }
                             System.out.println("Robot " + robotName + " has been plugged in. ");
                             break;
                         }
