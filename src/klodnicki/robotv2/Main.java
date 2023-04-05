@@ -139,7 +139,7 @@ public class Main {
                     for (int i = 0; i < chargers.size(); i++) {
                         System.out.println(i + ". " + chargers.get(i));
                     }
-                    int userInput = scanner.nextInt();
+                    int userInput = scanner.nextInt(); //TODO: inputMismatchException if string is provided.
                     Charger charger = chargers.get(userInput);
 
                     System.out.println("Which robot you want to connect to charger?");
@@ -266,3 +266,4 @@ public class Main {
 
 //TODO: dodałbym switch case sprawdzanie poziomu baterii robota o podanym imieniu
 //TODO: dodałbym switch case pobierz listę robotów.
+//TODO: uruchom apkę, wybierz 5 -> podaj nazwę ładowarki Stringa -> crash.
