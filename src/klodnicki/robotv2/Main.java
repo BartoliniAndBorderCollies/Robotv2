@@ -91,14 +91,20 @@ public class Main {
                 case 3 -> {
                     System.out.println("Give the name of the robot which you want to turn on.");
                     String robotName = scanner.nextLine();
+                    boolean robotTurnedOn = false;
 
                     for (int i = 0; i < robots.size(); i++) {
                         if (robots.get(i).getName().equals(robotName)) {
                             robots.get(i).turnOn();
+                            robotTurnedOn = true;
                             System.out.println(" Robot has been turned on.");
                             break;
                         }
                     }
+                    if (robotTurnedOn) {
+                        break;
+                    }
+                    System.out.println("This name does not exist.");
                 }
 
                 // 3. wyłączyć robota
@@ -107,14 +113,21 @@ public class Main {
                 case 4 -> {
                     System.out.println("Give the name of the robot which you want to turn off?");
                     String robotName = scanner.nextLine();
+                    boolean robotTurnedOff = false;
 
                     for (int i = 0; i < robots.size(); i++) {
                         if (robots.get(i).getName().equals(robotName)) {
                             robots.get(i).turnOff();
+                            robotTurnedOff = true;
                             System.out.println("Robot has been turned off. ");
                             break;
                         }
                     }
+                    if (robotTurnedOff) {
+                        break;
+                    }
+
+                    System.out.println("Error. No such name.");
                 }
                 //4.podłącz ładowarkę.
                 // jeśli robot jest włączony informacja, żeby go wyłączyć
