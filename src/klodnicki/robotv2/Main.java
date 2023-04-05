@@ -227,17 +227,22 @@ public class Main {
 
                     screenPrinter.showCommands();
                     String command = scanner.nextLine();
-                    //TODO: jesli command nie jest RobotMovement.values
+                    boolean foundCommand = false;
 
                     for (RobotMovement robotMovement : RobotMovement.values()) {
                         if (robotMovement.getName().equals(command)) {
                             try {
                                 robot.move(robotMovement);
+                                foundCommand = true;
                             } catch (TooLowEnergyException | RobotNotTurnedOnException e) {
                                 System.out.println(e.getMessage());
                             }
                         }
                     }
+                    if (foundCommand) {
+                        break;
+                    }
+                    System.out.println("Unknown command.");
                 }
                 //7. skip the turn
                 // jeśli robot nie jest podłączony do ładowarki - nic się nie dzieje, zwykły komunikat next turn
@@ -258,3 +263,6 @@ public class Main {
         } while (repeat);
     }
 }
+
+//TODO: dodałbym switch case sprawdzanie poziomu baterii robota o podanym imieniu
+//TODO: dodałbym switch case pobierz listę robotów.
