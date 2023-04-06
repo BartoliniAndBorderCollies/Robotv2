@@ -135,11 +135,19 @@ public class Main {
                 // jeśli robot jest wyłączony i ma ładowarkę to zacząć ładować - powiadomić użytkownika
 
                 case 5 -> {
+
                     System.out.println("Which charger you want to choose to plug robot in?");
+                    int userInput = 0;
                     for (int i = 0; i < chargers.size(); i++) {
                         System.out.println(i + ". " + chargers.get(i));
                     }
-                    int userInput = scanner.nextInt(); //TODO: inputMismatchException if string is provided.
+                    try {
+                        userInput = scanner.nextInt();
+                    } catch (InputMismatchException e) {
+                        System.out.println("Must be a number.");
+                        break;
+                    }
+
                     Charger charger = chargers.get(userInput);
 
                     System.out.println("Which robot you want to connect to charger?");
@@ -266,4 +274,3 @@ public class Main {
 
 //TODO: dodałbym switch case sprawdzanie poziomu baterii robota o podanym imieniu
 //TODO: dodałbym switch case pobierz listę robotów.
-//TODO: uruchom apkę, wybierz 5 -> podaj nazwę ładowarki Stringa -> crash.
