@@ -146,6 +146,8 @@ public class Main {
                     } catch (InputMismatchException e) {
                         System.out.println("Must be a number.");
                         break;
+                    }finally {
+                        scanner.nextLine();
                     }
 
                     Charger charger = chargers.get(userInput);
