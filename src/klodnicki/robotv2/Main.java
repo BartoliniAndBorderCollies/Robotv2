@@ -12,6 +12,8 @@ import java.util.Scanner;
 
 public class Main {
 
+    private static final String ROBOT_NOT_FOUND_MESSAGE = "Robot has not been found.";
+
     public static void main(String[] args) {
 
         List<Robot> robots = new ArrayList<>();
@@ -97,20 +99,19 @@ public class Main {
                 // jeśli robot jest wyłączony to zmienia status na włączony - komunikat dla użytkownika
 
                 case 3 -> {
-                    System.out.println("Give the name of the robot which you want to turn on.");
-                    String robotName = scanner.nextLine();
-                    Robot robot = null;
+                    // wyświetl komuniakt
+                    // Pobranie wartości od usera
+                    String robotName = getUserInput(scanner, "Give the name of the robot which you want to turn on.");
 
-                    for (int i = 0; i < robots.size(); i++) {
-                        if (robots.get(i).getName().equals(robotName)) {
-                            robot = robots.get(i);
-                            break;
-                        }
-                    }
+                    // Znalezienie robota na liście
+                    Robot robot = findRobot(robots, robotName);
+
+                    // sprawdzenie czy robot został znaleziony
                     if (robot == null) {
-                        System.out.println("Robot with given name was not found. ");
+                        System.out.println(ROBOT_NOT_FOUND_MESSAGE);
                         break;
                     }
+                    // logika gdy robot został znaleziony
                     robot.turnOn();
                     System.out.println("Robot has been turned on.");
                 }
@@ -119,32 +120,29 @@ public class Main {
                 // jeśli robot jest już wyłączony to powiadomić, że przecież jest wyłączony
                 // jeśli robot jest włączony to zmienia status na wyłączony - komunikat dla użytkownika
                 case 4 -> {
-                    System.out.println("Give the name of the robot which you want to turn off?");
-                    String robotName = scanner.nextLine();
+                    String robotName = getUserInput(scanner, "Give the name of the robot which you want to turn off?");
 
-                    Robot robot = null;
-
-                    for (int i = 0; i < robots.size(); i++) {
-                        if (robots.get(i).getName().equals(robotName)) {
-                            robot = robots.get(i);
-                            break;
-                        }
-                    }
+                    Robot robot = findRobot(robots, robotName);
                     if (robot == null) {
-                        System.out.println("Robot with given name was not found. ");
+                        System.out.println(ROBOT_NOT_FOUND_MESSAGE);
                         break;
                     }
 
                     robot.turnOff();
                     System.out.println("Robot has been turned off. ");
-
                 }
+
                 //4.podłącz ładowarkę.
                 // jeśli robot jest włączony informacja, żeby go wyłączyć
                 // jeśli robot jest wyłączony to informacja, żeby najpierw stworzyć ładowarkę
                 // jeśli robot jest wyłączony i ma ładowarkę to zacząć ładować - powiadomić użytkownika
 
                 case 5 -> {
+                    if (chargers.isEmpty()) {
+                        System.out.println("There is no any charger on the list.");
+                        break;
+                    }
+
                     int userInput;
                     System.out.println("Which charger you want to choose to plug robot in?");
 
@@ -152,10 +150,8 @@ public class Main {
                         System.out.println(i + ". " + chargers.get(i));
                     }
 
-                    if (chargers.size() == 0) {
-                        System.out.println("There is no any charger on the list.");
-                        break;
-                    }
+                    // pobranie inputu INTEGER
+//                    int x = getUserIntInput(scanner);
 
                     try {
                         userInput = scanner.nextInt();
@@ -166,7 +162,7 @@ public class Main {
                         scanner.nextLine();
                     }
 
-                    if (userInput > chargers.size() - 1 || userInput<0) {
+                    if (userInput > chargers.size() - 1 || userInput < 0) {
                         System.out.println("You typed an invalid number.");
                         break;
                     }
@@ -202,7 +198,7 @@ public class Main {
                 // zaprzestać ładować co tura
 
                 case 6 -> {
-                    int userInput = 0;
+                    int userInput;
 
                     System.out.println("Which charger you want to choose to unplug robot?");
                     for (int i = 0; i < chargers.size(); i++) {
@@ -249,18 +245,10 @@ public class Main {
                 //koniec petli
 
                 case 7 -> {
-                    System.out.println("Enter the name of robot which you want to move: ");
-                    String robotName = scanner.nextLine();
-                    Robot robot = null;
-
-                    for (int i = 0; i < robots.size(); i++) {
-                        if (robots.get(i).getName().equals(robotName)) {
-                            robot = robots.get(i);
-                            break;
-                        }
-                    }
+                    String robotName = getUserInput(scanner, "Enter the name of robot which you want to move: ");
+                    Robot robot = findRobot(robots, robotName);
                     if (robot == null) {
-                        System.out.println("Robot has not been found. ");
+                        System.out.println(ROBOT_NOT_FOUND_MESSAGE);
                         break;
                     }
 
@@ -301,7 +289,36 @@ public class Main {
             }
         } while (repeat);
     }
+
+    private static Integer getUserIntInput(Scanner scanner) {
+        Integer userInput;
+        try {
+            return userInput = scanner.nextInt();
+        } catch (InputMismatchException | IndexOutOfBoundsException e) {
+            System.out.println("Must be a number.");
+        } finally {
+            scanner.nextLine();
+        }
+        return null;
+    }
+
+    private static Robot findRobot(List<Robot> robots, String robotName) {
+        Robot robot = null;
+
+        for (int i = 0; i < robots.size(); i++) {
+            if (robots.get(i).getName().equals(robotName)) {
+                robot = robots.get(i);
+                break;
+            }
+        }
+        return robot;
+    }
+
+    private static String getUserInput(Scanner scanner, String message) {
+        System.out.println(message);
+        return scanner.nextLine();
+    }
 }
 
 //TODO: dodałbym switch case sprawdzanie poziomu baterii robota o podanym imieniu
-//TODO: dodałbym switch case pobierz listę robotów.
+//TODO: dodałbym switch case wyświetl listę robotów.
