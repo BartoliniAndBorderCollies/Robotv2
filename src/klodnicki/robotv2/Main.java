@@ -169,7 +169,7 @@ public class Main {
 
                     Charger charger = chargers.get(userInput);
 
-                    System.out.println("Which robot you want to connect to charger?");//TODO: no any info if you want to connect not existing robot
+                    System.out.println("Which robot you want to connect to charger?");
                     String robotName = scanner.nextLine();
                     for (int i = 0; i < robots.size(); i++) {
                         if (robots.get(i).getName().equals(robotName)) {
@@ -181,7 +181,10 @@ public class Main {
                             System.out.println("Robot " + robotName + " has been plugged in. ");
                             break;
                         }
+
+
                     }
+                    System.out.println("This robot does not exist. "); //TODO: dodałem ten wiersz, powinno działać
 
                     // znalezienie robota z listy robotów - for loop
                     // podłączenie znalezionego robota do ładowarki. metoda plugIn
