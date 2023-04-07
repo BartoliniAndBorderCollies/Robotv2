@@ -12,7 +12,7 @@ public class ScreenPrinter {
                 Hello, welcome to Robot command center.
                                 
                 What do you want to do? Type the answer:
-                1. Create the robot.
+                1. Create a robot.
                 2. Create a charger to be able to recharge battery.
                 3. Turn on the robot.
                 4. Turn off the robot.
