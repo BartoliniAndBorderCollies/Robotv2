@@ -76,7 +76,7 @@ public class Main {
                 // jesli ładowarka nie jest stworzona to ją stworzyć - komunikat dla użytkownika
 
                 case 2 -> {
-                    int slotsAmount = 0;
+                    int slotsAmount;
 
                     System.out.println("How many AC power plugs and sockets you want to have in your charger?");
                     try {
@@ -121,21 +121,23 @@ public class Main {
                 case 4 -> {
                     System.out.println("Give the name of the robot which you want to turn off?");
                     String robotName = scanner.nextLine();
-                    boolean robotTurnedOff = false;
+
+                    Robot robot = null;
 
                     for (int i = 0; i < robots.size(); i++) {
                         if (robots.get(i).getName().equals(robotName)) {
-                            robots.get(i).turnOff();
-                            robotTurnedOff = true;
-                            System.out.println("Robot has been turned off. ");
+                            robot = robots.get(i);
                             break;
                         }
                     }
-                    if (robotTurnedOff) {
+                    if (robot == null) {
+                        System.out.println("Robot with given name was not found. ");
                         break;
                     }
 
-                    System.out.println("Error. No such name.");
+                    robot.turnOff();
+                    System.out.println("Robot has been turned off. ");
+
                 }
                 //4.podłącz ładowarkę.
                 // jeśli robot jest włączony informacja, żeby go wyłączyć
