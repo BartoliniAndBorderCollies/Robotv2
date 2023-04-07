@@ -164,19 +164,19 @@ public class Main {
                         scanner.nextLine();
                     }
 
-                    if (userInput > chargers.size() - 1 || userInput<=0) {
+                    if (userInput > chargers.size() - 1 || userInput<0) {
                         System.out.println("You typed an invalid number.");
                         break;
                     }
 
                     Charger charger = chargers.get(userInput);
 
-                    System.out.println("Which robot you want to connect to charger?");
+                    System.out.println("Which robot you want to connect to charger?");//TODO: no any info if you want to connect not existing robot
                     String robotName = scanner.nextLine();
                     for (int i = 0; i < robots.size(); i++) {
                         if (robots.get(i).getName().equals(robotName)) {
                             try {
-                                charger.plugInRobot(robots.get(i));
+                                charger.plugInRobot(robots.get(i)); //TODO: crash when pluggin a robot
                             } catch (NotEnoughFreeEnergySlotsException e) {
                                 System.out.println(e.getMessage());
                             }
@@ -204,7 +204,7 @@ public class Main {
 
                     System.out.println("Which charger you want to choose to unplug robot?");
                     for (int i = 0; i < chargers.size(); i++) {
-                        System.out.println(i + ". " + chargers.get(i)); //TODO: jak nie znajdzie ładowarki to crash
+                        System.out.println(i + ". " + chargers.get(i)); //TODO: crash if the answer is beyond the list
                     }
 
                     try {
