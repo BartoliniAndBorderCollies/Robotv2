@@ -76,9 +76,17 @@ public class Main {
                 // jesli ładowarka nie jest stworzona to ją stworzyć - komunikat dla użytkownika
 
                 case 2 -> {
+                    int slotsAmount = 0;
 
                     System.out.println("How many AC power plugs and sockets you want to have in your charger?");
-                    int slotsAmount = scanner.nextInt(); //TODO: InputMismatchException
+                    try {
+                        slotsAmount = scanner.nextInt();
+                    }catch (InputMismatchException e){
+                        System.out.println("Answer must be a number.");
+                        scanner.nextLine();
+                        break;
+                    }
+
                     Charger createdCharger = new Charger(slotsAmount);
                     chargers.add(createdCharger);
                     System.out.println("Charger has been created.");
