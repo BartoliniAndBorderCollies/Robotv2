@@ -169,8 +169,9 @@ public class Main {
 
                     Charger charger = chargers.get(userInput);
 
-                    System.out.println("Which robot you want to connect to charger?");
-                    String robotName = scanner.nextLine();
+
+                    String robotName = getUserInput(scanner,"Which robot you want to connect to charger?");
+
                     for (int i = 0; i < robots.size(); i++) {
                         if (robots.get(i).getName().equals(robotName)) {
                             try {
@@ -179,12 +180,13 @@ public class Main {
                                 System.out.println(e.getMessage());
                             }
                             System.out.println("Robot " + robotName + " has been plugged in. ");
-                            break;
+
+                        } else {
+                            System.out.println("This robot does not exist. ");
                         }
-
-
                     }
-                    System.out.println("This robot does not exist. "); //TODO: dodałem ten wiersz, powinno działać
+
+
 
                     // znalezienie robota z listy robotów - for loop
                     // podłączenie znalezionego robota do ładowarki. metoda plugIn
@@ -287,7 +289,7 @@ public class Main {
                 }
             }
             //tutaj trzeba stworzyć ładowanie robotów wszystkich które są w worku z podłączonymi ładowarkami
-            for (int i = 0; i < chargers.size(); i++) {
+            for (int i = 0; i < chargers.size(); i++) { //TODO: crash because MESSAGE is malformed
                 chargers.get(i).chargeRobots();
             }
         } while (repeat);
