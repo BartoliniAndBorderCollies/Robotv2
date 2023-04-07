@@ -78,7 +78,7 @@ public class Main {
                 case 2 -> {
 
                     System.out.println("How many AC power plugs and sockets you want to have in your charger?");
-                    int slotsAmount = scanner.nextInt();
+                    int slotsAmount = scanner.nextInt(); //TODO: InputMismatchException
                     Charger createdCharger = new Charger(slotsAmount);
                     chargers.add(createdCharger);
                     System.out.println("Charger has been created.");
@@ -139,7 +139,7 @@ public class Main {
                     System.out.println("Which charger you want to choose to plug robot in?");
                     int userInput = 0;
                     for (int i = 0; i < chargers.size(); i++) {
-                        System.out.println(i + ". " + chargers.get(i));
+                        System.out.println(i + ". " + chargers.get(i)); //TODO: jak nie znajdzie ładowarki to crash
                     }
                     try {
                         userInput = scanner.nextInt();
@@ -181,12 +181,20 @@ public class Main {
                 // zaprzestać ładować co tura
 
                 case 6 -> {
+                    int userInput = 0;
 
                     System.out.println("Which charger you want to choose to unplug robot?");
                     for (int i = 0; i < chargers.size(); i++) {
-                        System.out.println(i + ". " + chargers.get(i));
+                        System.out.println(i + ". " + chargers.get(i)); //TODO: jak nie znajdzie ładowarki to crash
                     }
-                    int userInput = scanner.nextInt();
+
+                    try {
+                        userInput = scanner.nextInt();
+                    }catch(InputMismatchException e) {
+                        System.out.println("Must be a number.");
+                        scanner.nextLine();
+                        break;
+                    }
                     Charger charger = chargers.get(userInput);
 
                     System.out.println("Which robot you want to disconnect from charger?");
