@@ -81,7 +81,7 @@ public class Main {
                     System.out.println("How many AC power plugs and sockets you want to have in your charger?");
                     try {
                         slotsAmount = scanner.nextInt();
-                    }catch (InputMismatchException e){
+                    } catch (InputMismatchException e) {
                         System.out.println("Answer must be a number.");
                         scanner.nextLine();
                         break;
@@ -143,20 +143,28 @@ public class Main {
                 // jeśli robot jest wyłączony i ma ładowarkę to zacząć ładować - powiadomić użytkownika
 
                 case 5 -> {
-
+                    int userInput;
                     System.out.println("Which charger you want to choose to plug robot in?");
-                    int userInput = 0;
+
                     for (int i = 0; i < chargers.size(); i++) {
-                        System.out.println(i + ". " + chargers.get(i)); //TODO: jak nie znajdzie ładowarki to crash
+                        System.out.println(i + ". " + chargers.get(i));
                     }
+
+                    if (chargers.size() == 0) {
+                        System.out.println("There is no any charger on the list.");
+                        break;
+                    }
+
                     try {
                         userInput = scanner.nextInt();
                     } catch (InputMismatchException e) {
                         System.out.println("Must be a number.");
                         break;
-                    }finally {
+                    } finally {
                         scanner.nextLine();
                     }
+
+                    //TODO: exception for invalid answer - what if the there are 2 chargers on the list and the answer is 7
 
                     Charger charger = chargers.get(userInput);
 
@@ -198,7 +206,7 @@ public class Main {
 
                     try {
                         userInput = scanner.nextInt();
-                    }catch(InputMismatchException e) {
+                    } catch (InputMismatchException e) {
                         System.out.println("Must be a number.");
                         scanner.nextLine();
                         break;
