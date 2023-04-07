@@ -157,14 +157,17 @@ public class Main {
 
                     try {
                         userInput = scanner.nextInt();
-                    } catch (InputMismatchException e) {
+                    } catch (InputMismatchException | IndexOutOfBoundsException e) {
                         System.out.println("Must be a number.");
                         break;
                     } finally {
                         scanner.nextLine();
                     }
 
-                    //TODO: exception for invalid answer - what if the there are 2 chargers on the list and the answer is 7
+                    if (userInput > chargers.size() - 1 || userInput<=0) {
+                        System.out.println("You typed an invalid number.");
+                        break;
+                    }
 
                     Charger charger = chargers.get(userInput);
 
