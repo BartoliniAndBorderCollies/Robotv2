@@ -162,10 +162,7 @@ public class Main {
                         scanner.nextLine();
                     }
 
-                    if (userInput > chargers.size() - 1 || userInput < 0) {
-                        System.out.println("You typed an invalid number.");
-                        break;
-                    }
+                    if (userInputExceedTheListBounds(chargers, userInput)) break;
 
                     Charger charger = chargers.get(userInput);
 
@@ -207,7 +204,7 @@ public class Main {
 
                     System.out.println("Which charger you want to choose to unplug robot?");
                     for (int i = 0; i < chargers.size(); i++) {
-                        System.out.println(i + ". " + chargers.get(i)); //TODO: crash if the answer is beyond the list
+                        System.out.println(i + ". " + chargers.get(i));
                     }
 
                     try {
@@ -217,6 +214,8 @@ public class Main {
                         scanner.nextLine();
                         break;
                     }
+                    if (userInputExceedTheListBounds(chargers, userInput)) break;
+
                     Charger charger = chargers.get(userInput);
 
                     System.out.println("Which robot you want to disconnect from charger?");
@@ -293,6 +292,14 @@ public class Main {
                 chargers.get(i).chargeRobots();
             }
         } while (repeat);
+    }
+
+    private static boolean userInputExceedTheListBounds(List<Charger> chargers, int userInput) {
+        if (userInput > chargers.size() - 1 || userInput < 0) {
+            System.out.println("You typed an invalid number.");
+            return true;
+        }
+        return false;
     }
 
     private static Integer getUserIntInput(Scanner scanner) {
