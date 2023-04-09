@@ -19,9 +19,10 @@ public class ScreenPrinter {
                 5. Turn off the robot.
                 6. Plug in the robot and start charging.
                 7. Unplug the robot from the charger.
-                8. Move the robot.
-                9. Skip the turn.
-                10. Close the application.
+                8. Check the energy level.
+                9. Move the robot.
+                10. Skip the turn.
+                11. Close the application.
                                 
                 """);
     }
