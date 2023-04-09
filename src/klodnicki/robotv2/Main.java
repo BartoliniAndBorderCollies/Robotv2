@@ -220,9 +220,6 @@ public class Main {
                     scanner.nextLine();
 
                     System.out.println("Which robot you want to disconnect from charger?");
-                    for (int i = 0; i < robots.size(); i++) {
-                        System.out.println(i + ". " + robots.get(i));
-                    }
 
                     String robotName = scanner.nextLine();
 
