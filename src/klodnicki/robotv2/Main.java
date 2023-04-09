@@ -167,12 +167,12 @@ public class Main {
                     Charger charger = chargers.get(userInput);
 
 
-                    String robotName = getUserInput(scanner,"Which robot you want to connect to charger?");
+                    String robotName = getUserInput(scanner, "Which robot you want to connect to charger?");
 
                     for (int i = 0; i < robots.size(); i++) {
                         if (robots.get(i).getName().equals(robotName)) {
                             try {
-                                charger.plugInRobot(robots.get(i)); //TODO: crash when pluggin a robot
+                                charger.plugInRobot(robots.get(i));
                             } catch (NotEnoughFreeEnergySlotsException e) {
                                 System.out.println(e.getMessage());
                             }
@@ -182,7 +182,6 @@ public class Main {
                             System.out.println("This robot does not exist. ");
                         }
                     }
-
 
 
                     // znalezienie robota z listy robotów - for loop
@@ -218,8 +217,15 @@ public class Main {
 
                     Charger charger = chargers.get(userInput);
 
+                    scanner.nextLine();
+
                     System.out.println("Which robot you want to disconnect from charger?");
+                    for (int i = 0; i < robots.size(); i++) {
+                        System.out.println(i + ". " + robots.get(i));
+                    }
+
                     String robotName = scanner.nextLine();
+
                     for (int i = 0; i < robots.size(); i++) {
                         if (robots.get(i).getName().equals(robotName)) {
                             charger.unplugRobot(robots.get(i));
@@ -288,7 +294,7 @@ public class Main {
                 }
             }
             //tutaj trzeba stworzyć ładowanie robotów wszystkich które są w worku z podłączonymi ładowarkami
-            for (int i = 0; i < chargers.size(); i++) { //TODO: crash because MESSAGE is malformed
+            for (int i = 0; i < chargers.size(); i++) {
                 chargers.get(i).chargeRobots();
             }
         } while (repeat);
