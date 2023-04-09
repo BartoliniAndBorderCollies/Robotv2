@@ -78,10 +78,10 @@ public class Main {
                 // jesli ładowarka nie jest stworzona to ją stworzyć - komunikat dla użytkownika
 
                 case 2 -> {
-                    for (int i =0; i<robots.size(); i++) {
+                    for (int i = 0; i < robots.size(); i++) {
                         System.out.println(i + "." + robots.get(i).getName());
                     }
-                    if(robots.isEmpty()) {
+                    if (robots.isEmpty()) {
                         System.out.println("The list of robots is empty. There has been no any robot created.");
                     }
 
@@ -187,6 +187,7 @@ public class Main {
                                 System.out.println(e.getMessage());
                             }
                             System.out.println("Robot " + robotName + " has been plugged in. ");
+                            break;
 
                         } else {
                             System.out.println("This robot does not exist. ");
@@ -242,6 +243,17 @@ public class Main {
                     }
                 }
 
+                case 8 -> {
+                    System.out.println("List of robots and energy level.");
+                    for (int i = 0; i < robots.size(); i++) {
+                        System.out.println(i + ". " + robots.get(i).getName() + " " + robots.get(i).getEnergyLevel() + "%.");
+                    }
+
+                    if (robots.isEmpty()) {
+                        System.out.println("The list of robots is empty. There has been no any robot created.");
+                    }
+                }
+
                 //poczatek petli
                 // pytam uzytkonika jakiego robota chce poruszyc
                 //uzytkownik podaje imie robota
@@ -261,7 +273,7 @@ public class Main {
                 //jesli osiagnal poziom ponizej 5% robot turn off.
                 //koniec petli
 
-                case 8 -> {
+                case 9 -> {
                     String robotName = getUserInput(scanner, "Enter the name of robot which you want to move: ");
                     Robot robot = findRobot(robots, robotName);
                     if (robot == null) {
@@ -290,12 +302,12 @@ public class Main {
                 }
                 //7. skip the turn
                 // jeśli robot nie jest podłączony do ładowarki - nic się nie dzieje, zwykły komunikat next turn
-                case 9 -> turnCounter.skipTurn();
+                case 10 -> turnCounter.skipTurn();
 
                 //8/ zamknięcie aplikacji
                 // wyjście z pętli i krótki komunikat, że program jest zamykany.
 
-                case 10 -> {
+                case 11 -> {
                     System.out.println("Program is closing. ");
                     repeat = false;
                 }
@@ -344,5 +356,4 @@ public class Main {
         return scanner.nextLine();
     }
 }
-
-//TODO: dodałbym switch case sprawdzanie poziomu baterii robota o podanym imieniu
+//TODO: upgrade the code so that the same blocks of codes will be replaced by methods.
