@@ -106,10 +106,7 @@ public class Main {
                     Robot robot = findRobot(robots, robotName);
 
                     // sprawdzenie czy robot został znaleziony
-                    if (robot == null) {
-                        System.out.println(ROBOT_NOT_FOUND_MESSAGE);
-                        break;
-                    }
+                    if (isRobotIsNull(robot)) break;
                     // logika gdy robot został znaleziony
                     robot.turnOn();
                     System.out.println("Robot has been turned on.");
@@ -122,10 +119,7 @@ public class Main {
                     String robotName = getUserInput(scanner, "Give the name of the robot which you want to turn off?");
 
                     Robot robot = findRobot(robots, robotName);
-                    if (robot == null) {
-                        System.out.println(ROBOT_NOT_FOUND_MESSAGE);
-                        break;
-                    }
+                    if (isRobotIsNull(robot)) break;
 
                     robot.turnOff();
                     System.out.println("Robot has been turned off. ");
@@ -268,10 +262,7 @@ public class Main {
                 case 8 -> {
                     String robotName = getUserInput(scanner, "Enter the name of robot which you want to move: ");
                     Robot robot = findRobot(robots, robotName);
-                    if (robot == null) {
-                        System.out.println(ROBOT_NOT_FOUND_MESSAGE);
-                        break;
-                    }
+                    if (isRobotIsNull(robot)) break;
 
                     screenPrinter.showCommands();
                     String command = scanner.nextLine();
@@ -309,6 +300,14 @@ public class Main {
                 chargers.get(i).chargeRobots();
             }
         } while (repeat);
+    }
+
+    private static boolean isRobotIsNull(Robot robot) {
+        if (robot == null) {
+            System.out.println(ROBOT_NOT_FOUND_MESSAGE);
+            return true;
+        }
+        return false;
     }
 
     private static boolean userInputExceedTheListBounds(List<Charger> chargers, int userInput) {
