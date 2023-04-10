@@ -139,9 +139,7 @@ public class Main {
                     int userInput;
                     System.out.println("Which charger you want to choose to plug robot in?");
 
-                    for (int i = 0; i < chargers.size(); i++) {
-                        System.out.println(i + ". " + chargers.get(i));
-                    }
+                    showListOfChargers(chargers);
 
                     // pobranie inputu INTEGER
 //                    int x = getUserIntInput(scanner);
@@ -196,9 +194,7 @@ public class Main {
                     int userInput;
 
                     System.out.println("Which charger you want to choose to unplug robot?");
-                    for (int i = 0; i < chargers.size(); i++) {
-                        System.out.println(i + ". " + chargers.get(i));
-                    }
+                    showListOfChargers(chargers);
 
                     try {
                         userInput = scanner.nextInt();
@@ -300,6 +296,12 @@ public class Main {
                 chargers.get(i).chargeRobots();
             }
         } while (repeat);
+    }
+
+    private static void showListOfChargers(List<Charger> chargers) {
+        for (int i = 0; i < chargers.size(); i++) {
+            System.out.println(i + ". " + chargers.get(i));
+        }
     }
 
     private static boolean isRobotIsNull(Robot robot) {
