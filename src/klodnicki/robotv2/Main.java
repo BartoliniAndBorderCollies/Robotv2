@@ -11,7 +11,6 @@ import java.util.Scanner;
 
 
 public class Main {
-
     private static final String ROBOT_NOT_FOUND_MESSAGE = "Robot has not been found.";
 
     public static void main(String[] args) {
@@ -78,16 +77,6 @@ public class Main {
                 // jesli ładowarka nie jest stworzona to ją stworzyć - komunikat dla użytkownika
 
                 case 2 -> {
-                    for (int i = 0; i < robots.size(); i++) {
-                        System.out.println(i + "." + robots.get(i).getName());
-                    }
-                    if (robots.isEmpty()) {
-                        System.out.println("The list of robots is empty. There has been no any robot created.");
-                    }
-
-                }
-
-                case 3 -> {
                     int slotsAmount;
 
                     System.out.println("How many AC power plugs and sockets you want to have in your charger?");
@@ -108,7 +97,7 @@ public class Main {
                 // robot jak jest już włączony to walidacja, że przecież jest już włączony
                 // jeśli robot jest wyłączony to zmienia status na włączony - komunikat dla użytkownika
 
-                case 4 -> {
+                case 3 -> {
                     // wyświetl komuniakt
                     // Pobranie wartości od usera
                     String robotName = getUserInput(scanner, "Give the name of the robot which you want to turn on.");
@@ -129,7 +118,7 @@ public class Main {
                 // 3. wyłączyć robota
                 // jeśli robot jest już wyłączony to powiadomić, że przecież jest wyłączony
                 // jeśli robot jest włączony to zmienia status na wyłączony - komunikat dla użytkownika
-                case 5 -> {
+                case 4 -> {
                     String robotName = getUserInput(scanner, "Give the name of the robot which you want to turn off?");
 
                     Robot robot = findRobot(robots, robotName);
@@ -147,7 +136,7 @@ public class Main {
                 // jeśli robot jest wyłączony to informacja, żeby najpierw stworzyć ładowarkę
                 // jeśli robot jest wyłączony i ma ładowarkę to zacząć ładować - powiadomić użytkownika
 
-                case 6 -> {
+                case 5 -> {
                     if (chargers.isEmpty()) {
                         System.out.println("There is no any charger on the list.");
                         break;
@@ -209,7 +198,7 @@ public class Main {
                 // jeśli robot jest podłączony to go odłączyć - komunikat dla użytkownika
                 // zaprzestać ładować co tura
 
-                case 7 -> {
+                case 6 -> {
                     int userInput;
 
                     System.out.println("Which charger you want to choose to unplug robot?");
@@ -243,15 +232,18 @@ public class Main {
                     }
                 }
 
-                case 8 -> {
+                case 7 -> {
+                    if (robots.isEmpty()) {
+                        System.out.println("The list of robots is empty. There has been no any robot created.");
+                        break;
+                    }
+
                     System.out.println("List of robots and energy level.");
                     for (int i = 0; i < robots.size(); i++) {
                         System.out.println(i + ". " + robots.get(i).getName() + " " + robots.get(i).getEnergyLevel() + "%.");
                     }
 
-                    if (robots.isEmpty()) {
-                        System.out.println("The list of robots is empty. There has been no any robot created.");
-                    }
+
                 }
 
                 //poczatek petli
@@ -273,7 +265,7 @@ public class Main {
                 //jesli osiagnal poziom ponizej 5% robot turn off.
                 //koniec petli
 
-                case 9 -> {
+                case 8 -> {
                     String robotName = getUserInput(scanner, "Enter the name of robot which you want to move: ");
                     Robot robot = findRobot(robots, robotName);
                     if (robot == null) {
@@ -302,12 +294,12 @@ public class Main {
                 }
                 //7. skip the turn
                 // jeśli robot nie jest podłączony do ładowarki - nic się nie dzieje, zwykły komunikat next turn
-                case 10 -> turnCounter.skipTurn();
+                case 9 -> turnCounter.skipTurn();
 
                 //8/ zamknięcie aplikacji
                 // wyjście z pętli i krótki komunikat, że program jest zamykany.
 
-                case 11 -> {
+                case 10 -> {
                     System.out.println("Program is closing. ");
                     repeat = false;
                 }
