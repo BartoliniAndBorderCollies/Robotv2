@@ -11,6 +11,7 @@ public class TurnCounter {
     // liczenie która to tura
     public void count() {
         turn++;
+        System.out.println("Turn: " + turn);
     }
 
     public void skipTurn() {
