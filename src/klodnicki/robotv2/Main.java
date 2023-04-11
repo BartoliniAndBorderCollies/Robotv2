@@ -94,6 +94,7 @@ public class Main {
 
                     int slotsAmount;
                     System.out.println("How many AC power plugs and sockets you want to have in your charger?");
+                    //TODO: it is possible to put negative number and 0
                     try {
                         slotsAmount = scanner.nextInt();
                     } catch (InputMismatchException e) {
@@ -143,11 +144,8 @@ public class Main {
                 // jeśli robot jest wyłączony to informacja, żeby najpierw stworzyć ładowarkę
                 // jeśli robot jest wyłączony i ma ładowarkę to zacząć ładować - powiadomić użytkownika
 
-                case 5 -> {
-                    if (chargers.isEmpty()) {
-                        System.out.println("There is no any charger on the list.");
-                        break;
-                    }
+                case 5 -> { //TODO: robot is charged every 10%, 95% not being charged
+                    if (isAnyChargerCreated(chargers)) break;
 
                     int userInput;
                     System.out.println("Which charger you want to choose to plug robot in?");
@@ -186,7 +184,7 @@ public class Main {
                         } else {
                             System.out.println("This robot does not exist. ");
                         }
-                    }
+                    }//TODO: dont skip turn for following actions: 5, 6, 7
 
 
                     // znalezienie robota z listy robotów - for loop
@@ -204,6 +202,8 @@ public class Main {
                 // zaprzestać ładować co tura
 
                 case 6 -> {
+                    if (isAnyChargerCreated(chargers)) break;
+
                     int userInput;
 
                     System.out.println("Which charger you want to choose to unplug robot?");
@@ -309,6 +309,14 @@ public class Main {
                 chargers.get(i).chargeRobots();
             }
         } while (repeat);
+    }
+
+    private static boolean isAnyChargerCreated(List<Charger> chargers) {
+        if (chargers.isEmpty()) {
+            System.out.println("There is no any charger on the list.");
+            return true;
+        }
+        return false;
     }
 
     private static void showListOfChargers(List<Charger> chargers) {
