@@ -5,7 +5,8 @@ public class ScreenPrinter {
     // pokazuje komunikaty uzytkownikowi
     // pewnie bedzie jeszcze jedna komenda: dodaj robota.
 
-    public void showMenu() {
+    public void showMenu(TurnCounter turnCounter) {
+        System.out.println("Turn: " + turnCounter.getTurn());
 
         System.out.println("""
                                 
@@ -21,8 +22,7 @@ public class ScreenPrinter {
                 7. Get the list of robots and their energy level.
                 8. Move the robot.
                 9. Skip the turn.
-                10. Close the application.
-                                
+                10. Close the application.         
                 """);
     }
 
@@ -35,6 +35,10 @@ public class ScreenPrinter {
                 - right hand,
                 - jump.
                 """);
+    }
+
+    public void printSkipTurn() {
+        System.out.println("Next turn is beginning. ");
     }
 }
 

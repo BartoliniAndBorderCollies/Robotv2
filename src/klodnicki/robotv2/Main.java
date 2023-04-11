@@ -34,7 +34,7 @@ public class Main {
             // przywitanie i krótkie menu co można wykonać
 
             turnCounter.count();
-            screenPrinter.showMenu();
+            screenPrinter.showMenu(turnCounter);
 
             // użytkownik wydaje komendy
 
@@ -294,7 +294,8 @@ public class Main {
                 }
                 //7. skip the turn
                 // jeśli robot nie jest podłączony do ładowarki - nic się nie dzieje, zwykły komunikat next turn
-                case 9 -> turnCounter.skipTurn();
+                case 9 -> screenPrinter.printSkipTurn();
+
 
                 //8/ zamknięcie aplikacji
                 // wyjście z pętli i krótki komunikat, że program jest zamykany.
@@ -341,7 +342,7 @@ public class Main {
         return false;
     }
 
-    private static Integer getUserIntInput(Scanner scanner) {
+    private static Integer getUserIntInput(Scanner scanner) { //TODO: correct method
         Integer userInput;
         try {
             return userInput = scanner.nextInt();

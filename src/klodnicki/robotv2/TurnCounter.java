@@ -6,15 +6,14 @@ import java.util.List;
 public class TurnCounter {
 
     // numer tury
-    private int turn;
+    private int turn = 0;
 
     // liczenie która to tura
     public void count() {
         turn++;
-        System.out.println("Turn: " + turn);
     }
 
-    public void skipTurn() {
-        System.out.println("Next turn is beginning. ");
+    public int getTurn() {
+        return turn;
     }
 }
