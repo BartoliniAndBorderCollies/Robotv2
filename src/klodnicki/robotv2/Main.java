@@ -77,8 +77,22 @@ public class Main {
                 // jesli ładowarka nie jest stworzona to ją stworzyć - komunikat dla użytkownika
 
                 case 2 -> {
-                    int slotsAmount;
+                    System.out.println("Give name to the charger.");
+                    String chargerName = scanner.nextLine();
+                    boolean nameAlreadyExist = false;
 
+                    for (int i = 0; i < chargers.size(); i++) {
+                        if (chargerName.equals(chargers.get(i).getName())) {
+                            nameAlreadyExist = true;
+                            System.out.println("This name already exist.");
+                            break;
+                        }
+                    }
+                    if (nameAlreadyExist) {
+                        break;
+                    }
+
+                    int slotsAmount;
                     System.out.println("How many AC power plugs and sockets you want to have in your charger?");
                     try {
                         slotsAmount = scanner.nextInt();
@@ -88,10 +102,9 @@ public class Main {
                         break;
                     }
 
-                    Charger createdCharger = new Charger(slotsAmount);
+                    Charger createdCharger = new Charger(slotsAmount, chargerName);
                     chargers.add(createdCharger);
                     System.out.println("Charger has been created.");
-
                 }
                 // 2. włączyć robota
                 // robot jak jest już włączony to walidacja, że przecież jest już włączony
@@ -224,7 +237,7 @@ public class Main {
 
                 case 7 -> {
                     if (robots.isEmpty()) {
-                        System.out.println("The list of robots is empty. There has been no any robot created.");
+                        System.out.println("The list of robots is empty.");
                         break;
                     }
 
@@ -300,7 +313,7 @@ public class Main {
 
     private static void showListOfChargers(List<Charger> chargers) {
         for (int i = 0; i < chargers.size(); i++) {
-            System.out.println(i + ". " + chargers.get(i));
+            System.out.println(i + ". " + chargers.get(i).toString());
         }
     }
 
