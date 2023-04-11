@@ -10,11 +10,14 @@ public class Charger {
 
     private int freeSlots;
 
+    private String name;
+
     // możliwośc podłączenie ładowarki do robota
     private List<Robot> pluggedRobots = new ArrayList<>();
 
-    public Charger(int freeSlots) {
+    public Charger(int freeSlots, String name) {
         this.freeSlots = freeSlots;
+        this.name = name;
     }
 
     public void plugInRobot(Robot robot) throws NotEnoughFreeEnergySlotsException {
@@ -47,5 +50,12 @@ public class Charger {
         return pluggedRobots;
     }
 
+    public String getName() {
+        return name;
+    }
 
+    @Override
+    public String toString() {
+        return "Charger " + name;
+    }
 }
