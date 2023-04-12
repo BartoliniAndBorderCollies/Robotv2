@@ -128,6 +128,7 @@ public class Main {
                     // logika gdy robot został znaleziony
                     robot.turnOn();
                     System.out.println("Robot has been turned on.");
+                    //TODO: odłączyć ładowanie
                 }
 
                 // 3. wyłączyć robota
@@ -191,7 +192,8 @@ public class Main {
                         }
                     }
                     //TODO: dont skip turn for following actions: 5, 6, 7
-                    //TODO: if robot is on and chargeRobot() -> error
+                    //TODO: if you want to move robot unplug it from the charger
+                    //TODO: if robot is not found show the message: This robot does not exist.
 
 
                     // znalezienie robota z listy robotów - for loop
@@ -279,6 +281,10 @@ public class Main {
                     String robotName = getUserInput(scanner, "Enter the name of robot which you want to move: ");
                     Robot robot = findRobot(robots, robotName);
                     if (isRobotIsNull(robot)) break;
+                    if (!robot.isOn()) {
+                        System.out.println("Turn robot on first.");
+                        break;
+                    }
 
                     screenPrinter.showCommands();
                     String command = scanner.nextLine();
