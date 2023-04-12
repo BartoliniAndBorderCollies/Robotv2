@@ -94,7 +94,6 @@ public class Main {
 
                     int slotsAmount;
                     System.out.println("How many AC power plugs and sockets you want to have in your charger?");
-                    //TODO: it is possible to put negative number and 0
 
                     try {
                         slotsAmount = scanner.nextInt();
@@ -149,7 +148,7 @@ public class Main {
                 // jeśli robot jest wyłączony to informacja, żeby najpierw stworzyć ładowarkę
                 // jeśli robot jest wyłączony i ma ładowarkę to zacząć ładować - powiadomić użytkownika
 
-                case 5 -> { //TODO: robot is charged every 10%, 95% not being charged
+                case 5 -> {
                     if (isAnyChargerCreated(chargers)) break;
 
                     int userInput;
@@ -172,7 +171,6 @@ public class Main {
                     if (userInputExceedTheListBounds(chargers, userInput)) break;
 
                     Charger charger = chargers.get(userInput);
-
 
                     String robotName = getUserInput(scanner, "Which robot you want to connect to charger?");
 

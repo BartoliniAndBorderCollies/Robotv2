@@ -25,7 +25,7 @@ public class Charger {
             pluggedRobots.add(robot);
             return;
         }
-            throw new NotEnoughFreeEnergySlotsException();
+        throw new NotEnoughFreeEnergySlotsException();
     }
 
     public void chargeRobots() {
@@ -33,10 +33,15 @@ public class Charger {
         for (int i = 0; i < pluggedRobots.size(); i++) {
             Robot robot = pluggedRobots.get(i);
             try {
-                robot.setEnergyLevel(robot.getEnergyLevel() + 10);
+                if (robot.getEnergyLevel() > 90) {
+                    robot.setEnergyLevel(100);
+                } else {
+                    robot.setEnergyLevel(robot.getEnergyLevel() + 10);
+                }
             } catch (MaximumEnergyLevelException e) {
                 System.out.println(e.getMessage());
             }
+
         }
     }
 
