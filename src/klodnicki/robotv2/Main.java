@@ -95,11 +95,16 @@ public class Main {
                     int slotsAmount;
                     System.out.println("How many AC power plugs and sockets you want to have in your charger?");
                     //TODO: it is possible to put negative number and 0
+
                     try {
                         slotsAmount = scanner.nextInt();
                     } catch (InputMismatchException e) {
                         System.out.println("Answer must be a number.");
                         scanner.nextLine();
+                        break;
+                    }
+                    if(slotsAmount<=0) {
+                        System.out.println("Answer must be a positive number.");
                         break;
                     }
 
@@ -371,4 +376,3 @@ public class Main {
         return scanner.nextLine();
     }
 }
-//TODO: upgrade the code so that the same blocks of codes will be replaced by methods.
