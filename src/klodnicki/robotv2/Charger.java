@@ -41,7 +41,6 @@ public class Charger {
             } catch (MaximumEnergyLevelException e) {
                 System.out.println(e.getMessage());
             }
-
         }
     }
 

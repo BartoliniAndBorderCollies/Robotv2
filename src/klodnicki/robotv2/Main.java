@@ -102,7 +102,7 @@ public class Main {
                         scanner.nextLine();
                         break;
                     }
-                    if(slotsAmount<=0) {
+                    if (slotsAmount <= 0) {
                         System.out.println("Answer must be a positive number.");
                         break;
                     }
@@ -176,6 +176,10 @@ public class Main {
 
                     for (int i = 0; i < robots.size(); i++) {
                         if (robots.get(i).getName().equals(robotName)) {
+                            if (robots.get(i).isOn()) {
+                                System.out.println("Turn off the robot first.");
+                                break;
+                            }
                             try {
                                 charger.plugInRobot(robots.get(i));
                             } catch (NotEnoughFreeEnergySlotsException e) {
@@ -184,10 +188,10 @@ public class Main {
                             System.out.println("Robot " + robotName + " has been plugged in. ");
                             break;
 
-                        } else {
-                            System.out.println("This robot does not exist. ");
                         }
-                    }//TODO: dont skip turn for following actions: 5, 6, 7
+                    }
+                    //TODO: dont skip turn for following actions: 5, 6, 7
+                    //TODO: if robot is on and chargeRobot() -> error
 
 
                     // znalezienie robota z listy robotów - for loop

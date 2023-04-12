@@ -60,4 +60,8 @@ public class Robot {
         }
         this.energyLevel = energyLevel;
     }
+
+    public boolean isOn() {
+        return isOn;
+    }
 }
