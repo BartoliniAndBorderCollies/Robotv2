@@ -62,4 +62,8 @@ public class Charger {
     public String toString() {
         return "Charger " + name;
     }
+
+    public List<Robot> getPluggedRobots() {
+        return pluggedRobots;
+    }
 }

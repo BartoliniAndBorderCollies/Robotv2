@@ -125,15 +125,31 @@ public class Main {
 
                     // sprawdzenie czy robot został znaleziony
                     if (isRobotIsNull(robot)) break;
+
+                    //sprawdzenie czy robot nie znajduje się na liscie podłączonych do ładowania robotów.
+
+                    boolean isRobotOnTheChargersList = false;
+
+                    for (int i = 0; i < chargers.size(); i++) {
+
+                        if (chargers.get(i).getPluggedRobots().contains(robot)) {
+                            isRobotOnTheChargersList = true;
+                            break;
+                        }
+                    }
+                    if (isRobotOnTheChargersList) {
+                        System.out.println("Unplug robot from the charger first.");
+                        break;
+                    }
                     // logika gdy robot został znaleziony
                     robot.turnOn();
                     System.out.println("Robot has been turned on.");
-                    //TODO: odłączyć ładowanie
                 }
 
                 // 3. wyłączyć robota
                 // jeśli robot jest już wyłączony to powiadomić, że przecież jest wyłączony
                 // jeśli robot jest włączony to zmienia status na wyłączony - komunikat dla użytkownika
+
                 case 4 -> {
                     String robotName = getUserInput(scanner, "Give the name of the robot which you want to turn off?");
 
