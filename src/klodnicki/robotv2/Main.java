@@ -33,7 +33,7 @@ public class Main {
             // Nr tury
             // przywitanie i krótkie menu co można wykonać
 
-            turnCounter.count();
+
             screenPrinter.showMenu(turnCounter);
 
             // użytkownik wydaje komendy
@@ -207,8 +207,6 @@ public class Main {
 
                         }
                     }
-                    //TODO: dont skip turn for following actions: 5, 6, 7
-                    //TODO: if you want to move robot unplug it from the charger
                     //TODO: if robot is not found show the message: This robot does not exist.
 
 
@@ -337,6 +335,9 @@ public class Main {
             //tutaj trzeba stworzyć ładowanie robotów wszystkich które są w worku z podłączonymi ładowarkami
             for (int i = 0; i < chargers.size(); i++) {
                 chargers.get(i).chargeRobots();
+            }
+            if(response != 5 && response != 6 && response != 7) {
+                turnCounter.count();
             }
         } while (repeat);
     }
