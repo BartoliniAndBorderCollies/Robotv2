@@ -50,6 +50,7 @@ public class Main {
 
             switch (response) {
                 case 1 -> {
+                    turnCounter.count();
 
                     System.out.println("Give name to the robot.");
                     String robotName = scanner.nextLine();
@@ -77,6 +78,7 @@ public class Main {
                 // jesli ładowarka nie jest stworzona to ją stworzyć - komunikat dla użytkownika
 
                 case 2 -> {
+                    turnCounter.count();
                     System.out.println("Give name to the charger.");
                     String chargerName = scanner.nextLine();
                     boolean nameAlreadyExist = false;
@@ -116,6 +118,7 @@ public class Main {
                 // jeśli robot jest wyłączony to zmienia status na włączony - komunikat dla użytkownika
 
                 case 3 -> {
+                    turnCounter.count();
                     // wyświetl komuniakt
                     // Pobranie wartości od usera
                     String robotName = getUserInput(scanner, "Give the name of the robot which you want to turn on.");
@@ -151,6 +154,7 @@ public class Main {
                 // jeśli robot jest włączony to zmienia status na wyłączony - komunikat dla użytkownika
 
                 case 4 -> {
+                    turnCounter.count();
                     String robotName = getUserInput(scanner, "Give the name of the robot which you want to turn off?");
 
                     Robot robot = findRobot(robots, robotName);
@@ -288,6 +292,7 @@ public class Main {
                 //koniec petli
 
                 case 8 -> {
+                    turnCounter.count();
                     String robotName = getUserInput(scanner, "Enter the name of robot which you want to move: ");
                     Robot robot = findRobot(robots, robotName);
                     if (isRobotIsNull(robot)) break;
@@ -317,7 +322,10 @@ public class Main {
                 }
                 //7. skip the turn
                 // jeśli robot nie jest podłączony do ładowarki - nic się nie dzieje, zwykły komunikat next turn
-                case 9 -> screenPrinter.printSkipTurn();
+                case 9 -> {
+                    turnCounter.count();
+                    screenPrinter.printSkipTurn();
+                }
 
 
                 //8/ zamknięcie aplikacji
@@ -332,9 +340,7 @@ public class Main {
             for (int i = 0; i < chargers.size(); i++) {
                 chargers.get(i).chargeRobots();
             }
-            if (response != 5 && response != 6 && response != 7) {
-                turnCounter.count();
-            }
+
         } while (repeat);
     }
 
