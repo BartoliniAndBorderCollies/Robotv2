@@ -191,24 +191,22 @@ public class Main {
 
                     String robotName = getUserInput(scanner, "Which robot you want to connect to charger?");
 
-                    for (int i = 0; i < robots.size(); i++) {
-                        if (robots.get(i).getName().equals(robotName)) {
-                            if (robots.get(i).isOn()) {
-                                System.out.println("Turn off the robot first.");
-                                break;
-                            }
-                            try {
-                                charger.plugInRobot(robots.get(i));
-                            } catch (NotEnoughFreeEnergySlotsException e) {
-                                System.out.println(e.getMessage());
-                            }
-                            System.out.println("Robot " + robotName + " has been plugged in. ");
+                    Robot robot = findRobot(robots, robotName);
+
+                    if (isRobotIsNull(robot)) break;
+
+                    if (robot.getName().equals(robotName)) {
+                        if (robot.isOn()) {
+                            System.out.println("Turn off the robot first.");
                             break;
-
                         }
+                        try {
+                            charger.plugInRobot(robot);
+                        } catch (NotEnoughFreeEnergySlotsException e) {
+                            System.out.println(e.getMessage());
+                        }
+                        System.out.println("Robot " + robotName + " has been plugged in. ");
                     }
-                    //TODO: if robot is not found show the message: This robot does not exist.
-
 
                     // znalezienie robota z listy robotów - for loop
                     // podłączenie znalezionego robota do ładowarki. metoda plugIn
@@ -268,8 +266,6 @@ public class Main {
                     for (int i = 0; i < robots.size(); i++) {
                         System.out.println(i + ". " + robots.get(i).getName() + " " + robots.get(i).getEnergyLevel() + "%.");
                     }
-
-
                 }
 
                 //poczatek petli
@@ -336,7 +332,7 @@ public class Main {
             for (int i = 0; i < chargers.size(); i++) {
                 chargers.get(i).chargeRobots();
             }
-            if(response != 5 && response != 6 && response != 7) {
+            if (response != 5 && response != 6 && response != 7) {
                 turnCounter.count();
             }
         } while (repeat);
