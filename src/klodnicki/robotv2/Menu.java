@@ -21,6 +21,30 @@ public class Menu {
 
     public void pressButton(int number) {
         // walidacja number
-        menuCommands[number].execute();
+        menuCommands[number-1].execute();
     }
+
+    public void welcome(){
+        System.out.println("""
+                Welcome to Robot command center.
+                    What do you want to do? Type the answer:
+                """);
+    }
+    public void showCommands() {
+        System.out.println("""
+                What movement you want to do? Type the command:
+                - step left,
+                - step right,
+                - left hand,
+                - right hand,
+                - jump.
+                """);
+    }
+
+
+
 }
+
+
+
+

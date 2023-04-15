@@ -64,4 +64,9 @@ public class Robot {
     public boolean isOn() {
         return isOn;
     }
+
+    @Override
+    public String toString() {
+        return "Robot "+ name;
+    }
 }

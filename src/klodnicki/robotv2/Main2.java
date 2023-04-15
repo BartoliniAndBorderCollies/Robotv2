@@ -7,6 +7,8 @@ import java.util.Scanner;
 public class Main2 {
     public static void main(String[] args) {
         // DESIGN PATTERN COMMAND
+        Workshop workshop = new Workshop();
+
 
         MenuCommand[] mainMenuCommands = {
                 // new RobotRelatedCommands()
@@ -16,18 +18,27 @@ public class Main2 {
                 new TurnOffTheRobot(),
                 new PlugInRobot(),
                 new UnplugRobot(),
-                new GetListOfRobots(),
+                new GetListOfRobots(workshop),
                 new MoveRobot(),
                 new SkipTurn(),
                 new CloseApplication(),
-
         };
 
+        boolean repeat = true;
+        Scanner userInput = new Scanner(System.in);
         Menu mainMenu = new Menu(mainMenuCommands);
-        Scanner scanner = new Scanner(System.in);
+        TurnCounter turnCounter = new TurnCounter();
 
-        mainMenu.show();
-        mainMenu.pressButton(scanner.nextInt());
+
+        do {
+            turnCounter.count();
+            System.out.println("Turn: " + turnCounter.getTurn());
+            mainMenu.welcome();
+            mainMenu.show();
+            mainMenu.pressButton(userInput.nextInt()); //TODO: ArrayIndexOutOfBoundsException | InputMismatchException
+
+        } while (repeat);
 
     }
+
 }

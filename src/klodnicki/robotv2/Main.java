@@ -19,7 +19,7 @@ public class Main {
         List<Charger> chargers = new ArrayList<>();
 
         TurnCounter turnCounter = new TurnCounter();
-        ScreenPrinter screenPrinter = new ScreenPrinter();
+
         Scanner scanner = new Scanner(System.in);
 
         int response = 0;
@@ -34,7 +34,7 @@ public class Main {
             // przywitanie i krótkie menu co można wykonać
 
 
-            screenPrinter.showMenu(turnCounter);
+            //screenPrinter.showMenu(turnCounter);
 
             // użytkownik wydaje komendy
 
@@ -301,7 +301,7 @@ public class Main {
                         break;
                     }
 
-                    screenPrinter.showCommands();
+                    //screenPrinter.showCommands();
                     String command = scanner.nextLine();
                     boolean foundCommand = false;
 
@@ -324,7 +324,7 @@ public class Main {
                 // jeśli robot nie jest podłączony do ładowarki - nic się nie dzieje, zwykły komunikat next turn
                 case 9 -> {
                     turnCounter.count();
-                    screenPrinter.printSkipTurn();
+                    //screenPrinter.printSkipTurn();
                 }
 
 
