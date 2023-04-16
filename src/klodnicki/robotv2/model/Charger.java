@@ -1,4 +1,4 @@
-package klodnicki.robotv2;
+package klodnicki.robotv2.model;
 
 import klodnicki.robotv2.exception.MaximumEnergyLevelException;
 import klodnicki.robotv2.exception.NotEnoughFreeEnergySlotsException;

@@ -1,5 +1,6 @@
-package klodnicki.robotv2;
+package klodnicki.robotv2.model;
 
+import klodnicki.robotv2.RobotMovement;
 import klodnicki.robotv2.exception.MaximumEnergyLevelException;
 import klodnicki.robotv2.exception.TooLowEnergyException;
 import klodnicki.robotv2.exception.RobotNotTurnedOnException;

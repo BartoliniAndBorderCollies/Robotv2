@@ -3,8 +3,8 @@ package klodnicki.robotv2.command;
 import klodnicki.robotv2.Workshop;
 
 public class GetListOfRobots implements MenuCommand{
-    
-    Workshop workshop;
+
+    private Workshop workshop;
 
     public GetListOfRobots(Workshop workshop) {
         this.workshop = workshop;
