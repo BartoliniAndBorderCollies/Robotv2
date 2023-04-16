@@ -10,17 +10,16 @@ import java.util.Scanner;
 
 public class MenuController {
 
-    private RobotService robotService;
-    private ChargerService chargerService;
-
+    private RobotService robotService = new RobotService();
+    private ChargerService chargerService = new ChargerService();
+    private RobotController robotController = new RobotController();
     Scanner scanner = new Scanner(System.in);
     Workshop workshop = new Workshop();
-
 
     MenuCommand[] mainMenuCommands = {
             // new RobotRelatedCommands()
 
-            new CreateRobot(),
+            new CreateRobot(workshop, robotService, robotController),
             new CreateCharger(),
             new TurnOnTheRobot(workshop, scanner),
             new TurnOffTheRobot(),
