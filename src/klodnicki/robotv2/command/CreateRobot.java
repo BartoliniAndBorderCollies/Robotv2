@@ -28,7 +28,7 @@ public class CreateRobot implements MenuCommand {
     @Override
     public void execute() {
 
-        robotService.createRobot(robotController.getRobotNameFromTheUser());
-        robotService.robotCreated();
+        robotService.createRobot(robotController.getRobotNameFromTheUserToCreateRobot());
+        robotService.robotCreatedInfo();
     }
 }
