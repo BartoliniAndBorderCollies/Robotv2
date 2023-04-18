@@ -2,12 +2,10 @@ package klodnicki.robotv2.command;
 
 import klodnicki.robotv2.controller.RobotController;
 import klodnicki.robotv2.model.Robot;
-import klodnicki.robotv2.Workshop;
 import klodnicki.robotv2.service.ChargerService;
 import klodnicki.robotv2.service.RobotService;
 
 import java.util.List;
-import java.util.Scanner;
 
 public class TurnOnTheRobot implements MenuCommand {
 

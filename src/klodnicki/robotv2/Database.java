@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-// taka nasza klasa "serwisowa" -> service
-public class Workshop {
+// taka nasza klasa bazodanowa
+public class Database {
     private List<Robot> robots = new ArrayList<>();
     private List<Charger> chargers;
 
@@ -43,7 +43,7 @@ public class Workshop {
         return robot;
     }
 
-    public boolean isRobotIsNull(Robot robot) {
+    public boolean isRobotNull(Robot robot) {
         if (robot == null) {
             System.out.println("Robot has not been found.");
             return true;
@@ -68,6 +68,11 @@ public class Workshop {
     }
 
 
+    public void add(Robot robot) {
+        robots.add(robot);
+    }
 
-
+    public void add(Charger charger) {
+        chargers.add(charger);
+    }
 }

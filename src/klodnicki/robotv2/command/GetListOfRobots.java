@@ -1,13 +1,13 @@
 package klodnicki.robotv2.command;
 
-import klodnicki.robotv2.Workshop;
+import klodnicki.robotv2.Database;
 
 public class GetListOfRobots implements MenuCommand{
 
-    private Workshop workshop;
+    private Database database;
 
-    public GetListOfRobots(Workshop workshop) {
-        this.workshop = workshop;
+    public GetListOfRobots(Database database) {
+        this.database = database;
     }
 
     @Override
@@ -17,6 +17,6 @@ public class GetListOfRobots implements MenuCommand{
 
     @Override
     public void execute() {
-        workshop.showListOfRobotsAndEnergyLevel();
+        database.showListOfRobotsAndEnergyLevel();
     }
 }

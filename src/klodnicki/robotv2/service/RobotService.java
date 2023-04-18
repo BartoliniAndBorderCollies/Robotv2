@@ -1,21 +1,19 @@
 package klodnicki.robotv2.service;
 
-import klodnicki.robotv2.controller.MenuController;
+import klodnicki.robotv2.Database;
 import klodnicki.robotv2.model.Robot;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class RobotService {
+    private final Database database = new Database();
 
-    private List<Robot> robots = new ArrayList<>();
-    MenuController menuController;
-
-    public Robot createRobot(String robotName) {
+    // Tutaj jest rzeczywiste tworzenie tego robota
+    public void create(String robotName) {
+        // tutaj najpierw walidacja
+        // cała "logika biznesowa" -> walidacja
         Robot robot = new Robot(robotName);
-        robots.add(robot);
-        return robot;
+        database.add(robot);
     }
 
     public void robotCreatedInfo() {
@@ -45,9 +43,4 @@ public class RobotService {
         }
         return false;
     }
-
-
-
-
-
 }
