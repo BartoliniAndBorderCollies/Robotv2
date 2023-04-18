@@ -1,5 +1,6 @@
 package klodnicki.robotv2.service;
 
+import klodnicki.robotv2.controller.MenuController;
 import klodnicki.robotv2.model.Robot;
 
 import java.util.ArrayList;
@@ -9,9 +10,7 @@ import java.util.Scanner;
 public class RobotService {
 
     private List<Robot> robots = new ArrayList<>();
-
-
-
+    MenuController menuController;
 
     public Robot createRobot(String robotName) {
         Robot robot = new Robot(robotName);
@@ -37,6 +36,14 @@ public class RobotService {
             }
         }
         return robot;
+    }
+
+    public boolean isRobotIsNull(Robot robot) {
+        if (robot == null) {
+            System.out.println("Robot has not been found.");
+            return true;
+        }
+        return false;
     }
 
 

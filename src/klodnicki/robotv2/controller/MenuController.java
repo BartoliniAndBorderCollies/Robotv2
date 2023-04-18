@@ -3,25 +3,32 @@ package klodnicki.robotv2.controller;
 import klodnicki.robotv2.Menu;
 import klodnicki.robotv2.Workshop;
 import klodnicki.robotv2.command.*;
+import klodnicki.robotv2.model.Robot;
 import klodnicki.robotv2.service.ChargerService;
 import klodnicki.robotv2.service.RobotService;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class MenuController {
+    private String name;
 
     private RobotService robotService = new RobotService();
-    private ChargerService chargerService = new ChargerService();
     private RobotController robotController = new RobotController();
-    Scanner scanner = new Scanner(System.in);
-    Workshop workshop = new Workshop();
+    private Scanner scanner = new Scanner(System.in);
+    private Workshop workshop = new Workshop();
+    private List<Robot> robots = new ArrayList<>();
+    private Robot robot = new Robot(name);
+    private ChargerService chargerService = new ChargerService(robot);
+
 
     MenuCommand[] mainMenuCommands = {
             // new RobotRelatedCommands()
 
             new CreateRobot(workshop, robotService, robotController),
             new CreateCharger(),
-            new TurnOnTheRobot(workshop, scanner),
+            new TurnOnTheRobot(robots, robot, robotService, robotController, chargerService),
             new TurnOffTheRobot(),
             new PlugInRobot(),
             new UnplugRobot(),
