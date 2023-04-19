@@ -1,5 +1,6 @@
 package klodnicki.robotv2.command;
 
+import klodnicki.robotv2.Database;
 import klodnicki.robotv2.controller.RobotController;
 import klodnicki.robotv2.model.Robot;
 import klodnicki.robotv2.service.ChargerService;
@@ -14,6 +15,7 @@ public class TurnOnTheRobot implements MenuCommand {
     private RobotService robotService;
     private RobotController robotController;
     private ChargerService chargerService;
+    private Database database;
 
 
     public TurnOnTheRobot(List<Robot> robots, Robot robot, RobotService robotService, RobotController robotController, ChargerService chargerService) {
@@ -35,7 +37,7 @@ public class TurnOnTheRobot implements MenuCommand {
 
 
         robotController.getRobotNameFromTheUserToTurnRobotOn();
-        robotService.findRobot(robots, robotController.getRobotNameFromTheUserToTurnRobotOn());
+        database.findRobot(robotController.getRobotNameFromTheUserToTurnRobotOn());
         //sprawdzenie czy robot nie jest nullem
         if(robotService.isRobotIsNull(robot)) {
             //TODO: go back to menu.

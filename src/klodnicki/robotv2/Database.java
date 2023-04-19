@@ -31,24 +31,16 @@ public class Database {
         return scanner.nextLine();
     }
 
-    public Robot findRobot(List<Robot> robots, String robotName) {
-        Robot robot = null;
+    public Robot findRobot(String robotName) {
+        Robot robot = null; //TODO: optional to do
 
-        for (int i = 0; i < robots.size(); i++) {
-            if (robots.get(i).getName().equals(robotName)) {
-                robot = robots.get(i);
+        for (Robot value : robots) {
+            if (value.getName().equals(robotName)) {
+                robot = value;
                 break;
             }
         }
         return robot;
-    }
-
-    public boolean isRobotNull(Robot robot) {
-        if (robot == null) {
-            System.out.println("Robot has not been found.");
-            return true;
-        }
-        return false;
     }
 
     public void isRobotOnTheChargersList() {
@@ -75,4 +67,10 @@ public class Database {
     public void add(Charger charger) {
         chargers.add(charger);
     }
+
+
+    public List<Robot> getRobots() {
+        return robots;
+    }
+
 }
