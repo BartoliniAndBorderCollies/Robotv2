@@ -10,7 +10,7 @@ import java.util.Scanner;
 // taka nasza klasa bazodanowa
 public class Database {
     private List<Robot> robots = new ArrayList<>();
-    private List<Charger> chargers;
+    private List<Charger> chargers = new ArrayList<>();
 
     private Scanner scanner;
 
@@ -42,6 +42,21 @@ public class Database {
         }
         return robot;
     }
+
+
+    public Charger findCharger(String chargerName) {
+        Charger charger = null; //TODO: optional to do
+
+        for (Charger value : chargers) {
+            if (value.getName().equals(chargerName)){
+                charger = value;
+                break;
+            }
+        }
+        return charger;
+    }
+
+
 
     public void isRobotOnTheChargersList() {
         boolean isRobotOnTheChargersList = false;

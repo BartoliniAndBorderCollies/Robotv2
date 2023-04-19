@@ -10,7 +10,7 @@ public class ChargerController {
 
     public void createCharger() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("How many energy plugs you want to create? Give the charger name.");
+        System.out.println("How many energy plugs you want to create? Give the charger name.");//TODO: split into 2
         chargerService.create(scanner.nextInt(), scanner.nextLine());
     }
 }

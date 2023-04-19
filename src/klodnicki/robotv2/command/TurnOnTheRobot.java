@@ -36,16 +36,16 @@ public class TurnOnTheRobot implements MenuCommand {
     public void execute() {
 
 
-        robotController.getRobotNameFromTheUserToTurnRobotOn();
-        database.findRobot(robotController.getRobotNameFromTheUserToTurnRobotOn());
-        //sprawdzenie czy robot nie jest nullem
-        if(robotService.isRobotIsNull(robot)) {
-            //TODO: go back to menu.
-        };
-        //sprawdzenie czy robot nie jest na liscie ładowanych robotów
-        if(chargerService.isRobotOnTheChargersList()) {
-            //TODO: go back to menu.
-        };
+//        robotController.getRobotNameFromTheUserToTurnRobotOn();
+//        database.findRobot(robotController.getRobotNameFromTheUserToTurnRobotOn());
+//        //sprawdzenie czy robot nie jest nullem
+//        if(robotService.isRobotIsNull(robot)) {
+//            //TODO: go back to menu.
+//        };
+//        //sprawdzenie czy robot nie jest na liscie ładowanych robotów
+//        if(chargerService.isRobotOnTheChargersList()) {
+//            //TODO: go back to menu.
+//        };
 
         robot.turnOn();
         robotService.robotTurnedOnInfo();
