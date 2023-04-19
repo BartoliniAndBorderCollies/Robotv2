@@ -1,5 +1,6 @@
 package klodnicki.robotv2.service;
 
+import klodnicki.robotv2.Database;
 import klodnicki.robotv2.model.Charger;
 import klodnicki.robotv2.model.Robot;
 
@@ -9,6 +10,8 @@ import java.util.List;
 public class ChargerService {
 
     List<Charger> chargers = new ArrayList<>();
+
+    private final Database database = new Database();
 
     private Robot robot;
 
@@ -28,6 +31,15 @@ public class ChargerService {
             }
         }
         return false;
+    }
+
+    public void create(int freeSlots, String chargerName) {
+
+        //walidacja jeśli w worku z ładowarkami ładowarka o takim imieniu już jest
+
+        Charger charger = new Charger(freeSlots, chargerName);
+        database.add(charger);
+
     }
 
 

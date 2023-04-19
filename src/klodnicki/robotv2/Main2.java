@@ -1,6 +1,7 @@
 package klodnicki.robotv2;
 
 import klodnicki.robotv2.command.*;
+import klodnicki.robotv2.controller.ChargerController;
 import klodnicki.robotv2.controller.MenuController;
 import klodnicki.robotv2.controller.RobotController;
 import klodnicki.robotv2.model.Menu;
@@ -19,7 +20,7 @@ public class Main2 {
                 // new RobotRelatedCommands()
 
                 new CreateRobot(new RobotController()),
-                new CreateCharger(),
+                new CreateCharger(new ChargerController()),
 //                new TurnOnTheRobot(robots, robot, robotService, robotController, chargerService),
                 new TurnOffTheRobot(),
                 new PlugInRobot(),

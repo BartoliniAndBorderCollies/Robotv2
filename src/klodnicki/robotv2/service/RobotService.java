@@ -11,13 +11,11 @@ public class RobotService {
     // Tutaj jest rzeczywiste tworzenie tego robota
     public void create(String robotName) {
         // tutaj najpierw walidacja
-
         Robot foundRobot = database.findRobot(robotName);
 
         if(foundRobot != null) {
             System.out.println("This name already exist.");
         }
-
         // cała "logika biznesowa" -> walidacja
         Robot robot = new Robot(robotName);
         database.add(robot);
