@@ -6,8 +6,6 @@ import klodnicki.robotv2.model.Robot;
 public class RobotService {
     private final Database database = new Database();
 
-    private MenuController menuController;
-
     // Tutaj jest rzeczywiste tworzenie tego robota
     public void create(String robotName) {
         // tutaj najpierw walidacja
@@ -19,6 +17,10 @@ public class RobotService {
         // cała "logika biznesowa" -> walidacja
         Robot robot = new Robot(robotName);
         database.add(robot);
+    }
+
+    public void showListOfRobotsAndEnergyLevel() {
+        database.showListOfRobotsAndEnergyLevel();
     }
 
     public void robotCreatedInfo() {

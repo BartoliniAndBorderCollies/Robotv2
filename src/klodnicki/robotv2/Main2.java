@@ -19,13 +19,13 @@ public class Main2 {
         MenuCommand[] mainMenuCommands = {
                 // new RobotRelatedCommands()
 
-                new CreateRobot(new RobotController()),
+                new CreateRobot(new RobotController()), // TODO: czemu w nawiasie jest new
                 new CreateCharger(new ChargerController()),
 //                new TurnOnTheRobot(robots, robot, robotService, robotController, chargerService),
                 new TurnOffTheRobot(),
-                new PlugInRobot(),
+                new PlugInRobot(new ChargerController()),
                 new UnplugRobot(),
-//                new GetListOfRobots(workshop),
+                new GetListOfRobots(new RobotController()),
                 new MoveRobot(),
                 new SkipTurn(),
                 new CloseApplication(),

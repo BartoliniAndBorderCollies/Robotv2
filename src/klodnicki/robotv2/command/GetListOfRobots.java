@@ -1,14 +1,15 @@
 package klodnicki.robotv2.command;
 
-import klodnicki.robotv2.Database;
+import klodnicki.robotv2.controller.RobotController;
 
-public class GetListOfRobots implements MenuCommand{
+public class GetListOfRobots implements MenuCommand {
 
-    private Database database;
+    private final RobotController robotController;
 
-    public GetListOfRobots(Database database) {
-        this.database = database;
+    public GetListOfRobots(RobotController robotController) {
+        this.robotController = robotController;
     }
+
 
     @Override
     public String getName() {
@@ -17,6 +18,6 @@ public class GetListOfRobots implements MenuCommand{
 
     @Override
     public void execute() {
-        database.showListOfRobotsAndEnergyLevel();
+        robotController.showListOfRobotsAndEnergyLevel();
     }
 }
