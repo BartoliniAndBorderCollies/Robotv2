@@ -19,7 +19,7 @@ public class Robot {
     }
 
     // robot ma wykonywać ruch
-    public void move(RobotMovement robotMovement) throws TooLowEnergyException, RobotNotTurnedOnException {
+    public String move(RobotMovement robotMovement) throws TooLowEnergyException, RobotNotTurnedOnException {
         if (energyLevel < robotMovement.getMoveCost()) {
             throw new TooLowEnergyException(energyLevel, robotMovement.getMoveCost());
         }
@@ -27,7 +27,7 @@ public class Robot {
             throw new RobotNotTurnedOnException();
         }
         energyLevel -= robotMovement.getMoveCost();
-        System.out.println(robotMovement.getAction());
+        return robotMovement.getAction();
     }
 
     // robota można włączyć

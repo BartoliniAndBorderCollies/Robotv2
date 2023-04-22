@@ -4,7 +4,7 @@ import klodnicki.robotv2.controller.ChargerController;
 
 public class PlugInRobot implements MenuCommand{
 
-    private ChargerController chargerController;
+    private final ChargerController chargerController;
 
     public PlugInRobot(ChargerController chargerController) {
         this.chargerController = chargerController;
@@ -17,8 +17,6 @@ public class PlugInRobot implements MenuCommand{
 
     @Override
     public void execute() {
-
         chargerController.plugIn();
-
     }
 }

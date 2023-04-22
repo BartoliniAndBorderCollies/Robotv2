@@ -2,11 +2,11 @@ package klodnicki.robotv2.command;
 
 import klodnicki.robotv2.controller.RobotController;
 
-public class GetListOfRobots implements MenuCommand {
+public class GetListOfRobotsAndTheirEnergy implements MenuCommand {
 
     private final RobotController robotController;
 
-    public GetListOfRobots(RobotController robotController) {
+    public GetListOfRobotsAndTheirEnergy(RobotController robotController) {
         this.robotController = robotController;
     }
 

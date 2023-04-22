@@ -5,6 +5,7 @@ import klodnicki.robotv2.controller.ChargerController;
 import klodnicki.robotv2.controller.MenuController;
 import klodnicki.robotv2.controller.RobotController;
 import klodnicki.robotv2.model.Menu;
+import klodnicki.robotv2.service.ChargerService;
 import klodnicki.robotv2.view.MenuView;
 
 public class Main2 {
@@ -15,18 +16,22 @@ public class Main2 {
         // USER -> używa -> CONTROLLER -> przekierowuje zapytanie do -> SERVICE -> bazuje/działa na -> MODEL -> SERVICE zwraca odpowiedź do -> CONTROLLER -> updateuje widok -> VIEW -> pokazuje się -> USER
 
         // JDBC -> Bazy danych
+        ChargerService chargerService = new ChargerService();
+        ChargerController chargerController = new ChargerController(chargerService);
+        RobotController robotController = new RobotController();
+
 
         MenuCommand[] mainMenuCommands = {
                 // new RobotRelatedCommands()
 
-                new CreateRobot(new RobotController()), // TODO: czemu w nawiasie jest new
-                new CreateCharger(new ChargerController()),
+                new CreateRobot(robotController),
+                new CreateCharger(chargerController),
 //                new TurnOnTheRobot(robots, robot, robotService, robotController, chargerService),
                 new TurnOffTheRobot(),
-                new PlugInRobot(new ChargerController()),
+                new PlugInRobot(chargerController),
                 new UnplugRobot(),
-                new GetListOfRobots(new RobotController()),
-                new MoveRobot(),
+                new GetListOfRobotsAndTheirEnergy(robotController),
+                new MoveRobot(robotController),
                 new SkipTurn(),
                 new CloseApplication(),
         };

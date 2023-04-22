@@ -1,7 +1,12 @@
 package klodnicki.robotv2.service;
 import klodnicki.robotv2.Database;
-import klodnicki.robotv2.controller.MenuController;
+import klodnicki.robotv2.RobotMovement;
+import klodnicki.robotv2.exception.RobotNotTurnedOnException;
+import klodnicki.robotv2.exception.TooLowEnergyException;
 import klodnicki.robotv2.model.Robot;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class RobotService {
     private final Database database = new Database();
@@ -19,8 +24,9 @@ public class RobotService {
         database.add(robot);
     }
 
-    public void showListOfRobotsAndEnergyLevel() {
-        database.showListOfRobotsAndEnergyLevel();
+    public List<Robot> getListOfRobots() {
+//        database.showListOfRobotsAndEnergyLevel();
+        return database.getRobots();
     }
 
     public void robotCreatedInfo() {
@@ -37,4 +43,27 @@ public class RobotService {
         }
         return false;
     }
+
+    public List<String> prepareListOfRobotNamesWithEnergy() {
+        List<Robot> robots = database.getRobots();
+        List<String> rows = new ArrayList<>();
+        for (Robot robot : robots) {
+            rows.add(robot.getName() + ". Energy = " + robot.getEnergyLevel());
+        }
+        return rows;
+    }
+
+    public String move(String chosenRobot, String chosenMovement) {
+        for (RobotMovement movement : RobotMovement.values()) {
+            if (movement.getName().equals(chosenMovement)) {
+                try {
+                return database.findRobot(chosenRobot).move(movement);
+            } catch (RobotNotTurnedOnException | TooLowEnergyException e) {
+                return e.getMessage();
+            }
+            }
+        }
+        return "Unknown command.";
+    }
+
 }

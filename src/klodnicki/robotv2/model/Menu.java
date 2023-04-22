@@ -25,18 +25,6 @@ public class Menu {
                 """);
     }
 
-    public void showCommands() {
-        System.out.println("""
-                What movement you want to do? Type the command:
-                - step left,
-                - step right,
-                - left hand,
-                - right hand,
-                - jump.
-                """);
-    }
-
-
 }
 
 

@@ -12,8 +12,6 @@ public class Database {
     private List<Robot> robots = new ArrayList<>();
     private List<Charger> chargers = new ArrayList<>();
 
-    private Scanner scanner;
-
 
     public void showListOfRobotsAndEnergyLevel () {
         for (int i =0; i< robots.size(); i++) {

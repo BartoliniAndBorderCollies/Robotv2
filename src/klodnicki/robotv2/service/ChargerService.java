@@ -43,6 +43,7 @@ public class ChargerService {
 
     public void plugIn(String chargerName, String robotName){
         Charger foundCharger = database.findCharger(chargerName);
+        //TODO: exeption to do
 //        if(foundCharger == null){
 //            System.out.println("Charger has not been found.");
 //        }
