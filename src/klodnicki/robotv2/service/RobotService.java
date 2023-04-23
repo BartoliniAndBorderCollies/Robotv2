@@ -2,6 +2,7 @@ package klodnicki.robotv2.service;
 
 import klodnicki.robotv2.Database;
 import klodnicki.robotv2.RobotMovement;
+import klodnicki.robotv2.exception.ObjectNotFoundException;
 import klodnicki.robotv2.exception.RobotNotTurnedOnException;
 import klodnicki.robotv2.exception.TooLowEnergyException;
 import klodnicki.robotv2.model.Robot;
@@ -15,7 +16,7 @@ public class RobotService {
     // Tutaj jest rzeczywiste tworzenie tego robota
     public void create(String robotName) {
         // tutaj najpierw walidacja
-        Robot foundRobot = database.findRobot(robotName); //TODO:
+        Robot foundRobot = findRobot(robotName);
 
         if (foundRobot != null) {
             System.out.println("This name already exist.");
@@ -54,11 +55,11 @@ public class RobotService {
         return rows;
     }
 
-    public String move(String chosenRobot, String chosenMovement) {
+    public String move(String robotName, String movementName) {
         for (RobotMovement movement : RobotMovement.values()) {
-            if (movement.getName().equals(chosenMovement)) {
+            if (movement.getName().equals(movementName)) {
                 try {
-                    return database.findRobot(chosenRobot).move(movement);
+                    return findRobot(robotName).move(movement);
                 } catch (RobotNotTurnedOnException | TooLowEnergyException e) {
                     return e.getMessage();
                 }
@@ -68,7 +69,7 @@ public class RobotService {
     }
 
     public void turnOff(String robotName) {
-        Robot foundRobot = database.findRobot(robotName); //TODO:
+        Robot foundRobot = findRobot(robotName);
 
         try {
             foundRobot.turnOff();
@@ -78,8 +79,13 @@ public class RobotService {
     }
 
     public void turnOn(String robotName) {
-        Robot foundRobot = database.findRobot(robotName);
+
+        Robot foundRobot = findRobot(robotName);
         foundRobot.turnOn();
+    }
+
+    public Robot findRobot(String name) throws ObjectNotFoundException{
+        return database.findRobot(name).orElseThrow(() -> new ObjectNotFoundException(Robot.class));
     }
 
 }

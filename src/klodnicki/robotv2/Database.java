@@ -1,5 +1,6 @@
 package klodnicki.robotv2;
 
+import klodnicki.robotv2.exception.ObjectNotFoundException;
 import klodnicki.robotv2.model.Charger;
 import klodnicki.robotv2.model.Robot;
 
@@ -14,8 +15,8 @@ public class Database {
     private List<Charger> chargers = new ArrayList<>();
 
 
-    public void showListOfRobotsAndEnergyLevel () {
-        for (int i =0; i< robots.size(); i++) {
+    public void showListOfRobotsAndEnergyLevel() {
+        for (int i = 0; i < robots.size(); i++) {
             System.out.println("List of robots and energy level.");
             System.out.println(i + ". " + robots.get(i).getName() + " " + robots.get(i).getEnergyLevel() + "%.");
         }
@@ -26,9 +27,8 @@ public class Database {
         return scanner.nextLine();
     }
 
-    public Robot findRobot(String robotName) {
+    public Optional<Robot> findRobot(String robotName) {
         Robot robot = null;
-
 
         for (Robot value : robots) {
             if (value.getName().equals(robotName)) {
@@ -36,7 +36,7 @@ public class Database {
                 break;
             }
         }
-        return robot;
+        return Optional.ofNullable(robot);
     }
 
 
@@ -44,14 +44,13 @@ public class Database {
         Charger charger = null; //TODO: optional to do
 
         for (Charger value : chargers) {
-            if (value.getName().equals(chargerName)){
+            if (value.getName().equals(chargerName)) {
                 charger = value;
                 break;
             }
         }
         return charger;
     }
-
 
 
     public void isRobotOnTheChargersList() {

@@ -6,6 +6,7 @@ import klodnicki.robotv2.controller.MenuController;
 import klodnicki.robotv2.controller.RobotController;
 import klodnicki.robotv2.model.Menu;
 import klodnicki.robotv2.service.ChargerService;
+import klodnicki.robotv2.service.RobotService;
 import klodnicki.robotv2.view.MenuView;
 
 public class Main2 {
@@ -16,7 +17,8 @@ public class Main2 {
         // USER -> używa -> CONTROLLER -> przekierowuje zapytanie do -> SERVICE -> bazuje/działa na -> MODEL -> SERVICE zwraca odpowiedź do -> CONTROLLER -> updateuje widok -> VIEW -> pokazuje się -> USER
 
         // JDBC -> Bazy danych
-        ChargerService chargerService = new ChargerService();
+        RobotService robotService = new RobotService();
+        ChargerService chargerService = new ChargerService(robotService);
         ChargerController chargerController = new ChargerController(chargerService);
         RobotController robotController = new RobotController();
 
