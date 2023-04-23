@@ -68,7 +68,6 @@ public class RobotService {
     }
 
     public void turnOff(String robotName) {
-
         Robot foundRobot = database.findRobot(robotName); //TODO:
 
         try {
@@ -76,6 +75,11 @@ public class RobotService {
         } catch (NullPointerException e) {
             System.out.println("Robot has not been found.");
         }
+    }
+
+    public void turnOn(String robotName) {
+        Robot foundRobot = database.findRobot(robotName);
+        foundRobot.turnOn();
     }
 
 }

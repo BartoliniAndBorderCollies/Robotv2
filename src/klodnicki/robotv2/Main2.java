@@ -26,7 +26,7 @@ public class Main2 {
 
                 new CreateRobot(robotController),
                 new CreateCharger(chargerController),
-//                new TurnOnTheRobot(robots, robot, robotService, robotController, chargerService),
+                new TurnOnTheRobot(robotController),
                 new TurnOffTheRobot(robotController),
                 new PlugInRobot(chargerController),
                 new UnplugRobot(),
@@ -47,6 +47,6 @@ public class Main2 {
             menuController.updateMenuView();
             menuController.askUserForInput();
             // logika na input
-        } while(true);
+        } while (true);
     }
 }

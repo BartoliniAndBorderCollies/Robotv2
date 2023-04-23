@@ -12,7 +12,6 @@ import java.util.Scanner;
 public class RobotController {
     private final RobotService robotService = new RobotService();
 
-    // Kontroler to dosłownie joystick, klawiatura
     public void createRobot() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Give the robot name.");
@@ -50,9 +49,17 @@ public class RobotController {
     public void turnOff(){
         Scanner scanner = new Scanner(System.in);
         System.out.println(robotService.prepareListOfRobotNamesWithEnergy());
-        System.out.println("Type the name of robot you want to turn off?");
+        System.out.println("Type the name of robot you want to turn off:");
         String robotToTurnOff = scanner.nextLine();
         robotService.turnOff(robotToTurnOff);
+    }
+
+    public void turnOn() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println(robotService.prepareListOfRobotNamesWithEnergy());
+        System.out.println("Type the name of robot you want to turn on:");
+        String robotToTurnOn = scanner.nextLine();
+        robotService.turnOn(robotToTurnOn);
     }
 
 
