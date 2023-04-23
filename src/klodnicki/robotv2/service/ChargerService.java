@@ -59,6 +59,13 @@ public class ChargerService {
         }
     }
 
+    public void unplug(String chargerName, String robotName) {
+        Charger foundCharger = database.findCharger(chargerName); //TODO: optional to do
+        Robot foundRobot = database.findRobot(robotName);
+
+        foundCharger.unplugRobot(foundRobot);
+    }
+
 
 }
 

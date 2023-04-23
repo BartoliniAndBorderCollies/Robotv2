@@ -29,7 +29,7 @@ public class Main2 {
                 new TurnOnTheRobot(robotController),
                 new TurnOffTheRobot(robotController),
                 new PlugInRobot(chargerController),
-                new UnplugRobot(),
+                new UnplugRobot(chargerController),
                 new GetListOfRobotsAndTheirEnergy(robotController),
                 new MoveRobot(robotController),
                 new SkipTurn(),

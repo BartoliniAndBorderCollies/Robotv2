@@ -13,8 +13,12 @@ public class ChargerController {
 
     public void createCharger() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("How many energy plugs you want to create? Give the charger name.");//TODO: split into 2
-        chargerService.create(scanner.nextInt(), scanner.nextLine());
+        System.out.println("How many energy plugs you want to create?");
+        int energySlots = scanner.nextInt();
+        System.out.println("Give the name for the charger.");
+        String chargerName = scanner.nextLine();
+        scanner.nextLine();
+        chargerService.create(energySlots, chargerName);
     }
 
     public void plugIn() {
@@ -24,6 +28,15 @@ public class ChargerController {
         System.out.println("Which robot you want to connect to charger?");
         String robotName = scanner.nextLine();
         chargerService.plugIn(chargerName, robotName);
+    }
+
+    public void unplug() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Which charger you want to choose to unplug robot?");
+        String chargerName = scanner.nextLine();
+        System.out.println("Which robot you want to unplug from the charger?");
+        String robotName = scanner.nextLine();
+        chargerService.unplug(chargerName, robotName);
     }
 
 }
