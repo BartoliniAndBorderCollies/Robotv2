@@ -7,6 +7,7 @@ import klodnicki.robotv2.model.Robot;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class ChargerService {
     private final Database database = new Database();
@@ -47,7 +48,7 @@ public class ChargerService {
 //        if(foundCharger == null){
 //            System.out.println("Charger has not been found.");
 //        }
-        Robot foundRobot = database.findRobot(robotName);
+        Robot foundRobot = database.findRobot(robotName);//TODO:
 //        if(foundRobot == null) {
 //            System.out.println("Robot has not been found.");
 //        }

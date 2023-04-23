@@ -27,7 +27,7 @@ public class Main2 {
                 new CreateRobot(robotController),
                 new CreateCharger(chargerController),
 //                new TurnOnTheRobot(robots, robot, robotService, robotController, chargerService),
-                new TurnOffTheRobot(),
+                new TurnOffTheRobot(robotController),
                 new PlugInRobot(chargerController),
                 new UnplugRobot(),
                 new GetListOfRobotsAndTheirEnergy(robotController),

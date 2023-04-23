@@ -5,6 +5,7 @@ import klodnicki.robotv2.model.Robot;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
 // taka nasza klasa bazodanowa
@@ -26,7 +27,8 @@ public class Database {
     }
 
     public Robot findRobot(String robotName) {
-        Robot robot = null; //TODO: optional to do
+        Robot robot = null;
+
 
         for (Robot value : robots) {
             if (value.getName().equals(robotName)) {

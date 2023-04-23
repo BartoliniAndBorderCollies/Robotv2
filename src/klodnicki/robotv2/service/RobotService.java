@@ -1,4 +1,5 @@
 package klodnicki.robotv2.service;
+
 import klodnicki.robotv2.Database;
 import klodnicki.robotv2.RobotMovement;
 import klodnicki.robotv2.exception.RobotNotTurnedOnException;
@@ -14,9 +15,9 @@ public class RobotService {
     // Tutaj jest rzeczywiste tworzenie tego robota
     public void create(String robotName) {
         // tutaj najpierw walidacja
-        Robot foundRobot = database.findRobot(robotName);
+        Robot foundRobot = database.findRobot(robotName); //TODO:
 
-        if(foundRobot != null) {
+        if (foundRobot != null) {
             System.out.println("This name already exist.");
         }
         // cała "logika biznesowa" -> walidacja
@@ -57,13 +58,24 @@ public class RobotService {
         for (RobotMovement movement : RobotMovement.values()) {
             if (movement.getName().equals(chosenMovement)) {
                 try {
-                return database.findRobot(chosenRobot).move(movement);
-            } catch (RobotNotTurnedOnException | TooLowEnergyException e) {
-                return e.getMessage();
-            }
+                    return database.findRobot(chosenRobot).move(movement);
+                } catch (RobotNotTurnedOnException | TooLowEnergyException e) {
+                    return e.getMessage();
+                }
             }
         }
         return "Unknown command.";
+    }
+
+    public void turnOff(String robotName) {
+
+        Robot foundRobot = database.findRobot(robotName); //TODO:
+
+        try {
+            foundRobot.turnOff();
+        } catch (NullPointerException e) {
+            System.out.println("Robot has not been found.");
+        }
     }
 
 }
