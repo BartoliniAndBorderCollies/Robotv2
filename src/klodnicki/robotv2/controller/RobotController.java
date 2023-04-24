@@ -1,6 +1,7 @@
 package klodnicki.robotv2.controller;
 
 import klodnicki.robotv2.RobotMovement;
+import klodnicki.robotv2.exception.ObjectNotFoundException;
 import klodnicki.robotv2.exception.RobotNotTurnedOnException;
 import klodnicki.robotv2.exception.TooLowEnergyException;
 import klodnicki.robotv2.model.Robot;
@@ -15,7 +16,11 @@ public class RobotController {
     public void createRobot() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Give the robot name.");
-        robotService.create(scanner.nextLine());
+        try {
+            robotService.create(scanner.nextLine());
+        }catch (ObjectNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public void showListOfRobotsAndEnergyLevel() {
@@ -43,7 +48,11 @@ public class RobotController {
             System.out.println(move.getName());
         }
         String chosenMovement = scanner.nextLine();
-        robotService.move(chosenRobot, chosenMovement);
+        try {
+            robotService.move(chosenRobot, chosenMovement);
+        }catch (ObjectNotFoundException | RobotNotTurnedOnException | TooLowEnergyException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public void turnOff(){
@@ -51,7 +60,11 @@ public class RobotController {
         System.out.println(robotService.prepareListOfRobotNamesWithEnergy());
         System.out.println("Type the name of robot you want to turn off:");
         String robotToTurnOff = scanner.nextLine();
-        robotService.turnOff(robotToTurnOff);
+        try {
+            robotService.turnOff(robotToTurnOff);
+        } catch (ObjectNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public void turnOn() {
@@ -59,7 +72,11 @@ public class RobotController {
         System.out.println(robotService.prepareListOfRobotNamesWithEnergy());
         System.out.println("Type the name of robot you want to turn on:");
         String robotToTurnOn = scanner.nextLine();
-        robotService.turnOn(robotToTurnOn);
+        try {
+            robotService.turnOn(robotToTurnOn);
+        } catch (ObjectNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
 

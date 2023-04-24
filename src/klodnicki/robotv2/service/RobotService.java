@@ -14,7 +14,7 @@ public class RobotService {
     private final Database database = new Database();
 
     // Tutaj jest rzeczywiste tworzenie tego robota
-    public void create(String robotName) {
+    public void create(String robotName) throws ObjectNotFoundException {
         // tutaj najpierw walidacja
         Robot foundRobot = findRobot(robotName);
 
@@ -55,36 +55,28 @@ public class RobotService {
         return rows;
     }
 
-    public String move(String robotName, String movementName) {
+    public String move(String robotName, String movementName) throws ObjectNotFoundException, RobotNotTurnedOnException, TooLowEnergyException {
         for (RobotMovement movement : RobotMovement.values()) {
             if (movement.getName().equals(movementName)) {
-                try {
-                    return findRobot(robotName).move(movement);
-                } catch (RobotNotTurnedOnException | TooLowEnergyException e) {
-                    return e.getMessage();
-                }
+                return findRobot(robotName).move(movement);
             }
         }
         return "Unknown command.";
     }
 
-    public void turnOff(String robotName) {
+    public void turnOff(String robotName) throws ObjectNotFoundException {
         Robot foundRobot = findRobot(robotName);
 
-        try {
-            foundRobot.turnOff();
-        } catch (NullPointerException e) {
-            System.out.println("Robot has not been found.");
-        }
+        foundRobot.turnOff();
     }
 
-    public void turnOn(String robotName) {
+    public void turnOn(String robotName) throws ObjectNotFoundException {
 
         Robot foundRobot = findRobot(robotName);
         foundRobot.turnOn();
     }
 
-    public Robot findRobot(String name) throws ObjectNotFoundException{
+    public Robot findRobot(String name) throws ObjectNotFoundException {
         return database.findRobot(name).orElseThrow(() -> new ObjectNotFoundException(Robot.class));
     }
 

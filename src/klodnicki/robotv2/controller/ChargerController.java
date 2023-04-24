@@ -1,5 +1,7 @@
 package klodnicki.robotv2.controller;
 
+import klodnicki.robotv2.exception.NotEnoughFreeEnergySlotsException;
+import klodnicki.robotv2.exception.ObjectNotFoundException;
 import klodnicki.robotv2.service.ChargerService;
 
 import java.util.Scanner;
@@ -27,7 +29,11 @@ public class ChargerController {
         String chargerName = scanner.nextLine();
         System.out.println("Which robot you want to connect to charger?");
         String robotName = scanner.nextLine();
-        chargerService.plugIn(chargerName, robotName);
+        try {
+            chargerService.plugIn(chargerName, robotName);
+        }catch (ObjectNotFoundException | NotEnoughFreeEnergySlotsException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public void unplug() {
@@ -36,7 +42,11 @@ public class ChargerController {
         String chargerName = scanner.nextLine();
         System.out.println("Which robot you want to unplug from the charger?");
         String robotName = scanner.nextLine();
-        chargerService.unplug(chargerName, robotName);
+        try {
+            chargerService.unplug(chargerName, robotName);
+        } catch (ObjectNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
 }

@@ -2,6 +2,7 @@ package klodnicki.robotv2.service;
 
 import klodnicki.robotv2.Database;
 import klodnicki.robotv2.exception.NotEnoughFreeEnergySlotsException;
+import klodnicki.robotv2.exception.ObjectNotFoundException;
 import klodnicki.robotv2.model.Charger;
 import klodnicki.robotv2.model.Robot;
 
@@ -14,7 +15,6 @@ public class ChargerService {
     }
 
 //    private Robot robot;
-
 
 
 //    public boolean isRobotOnTheChargersList() {
@@ -43,20 +43,14 @@ public class ChargerService {
         database.add(charger);
     }
 
-    public void plugIn(String chargerName, String robotName){
+    public void plugIn(String chargerName, String robotName) throws ObjectNotFoundException, NotEnoughFreeEnergySlotsException {
         Charger foundCharger = database.findCharger(chargerName);
-
-
         Robot foundRobot = robotService.findRobot(robotName);
+        foundCharger.plugInRobot(foundRobot);
 
-        try {
-            foundCharger.plugInRobot(foundRobot);
-        } catch (NotEnoughFreeEnergySlotsException e) {
-            System.out.println(e.getMessage());
-        }
     }
 
-    public void unplug(String chargerName, String robotName) {
+    public void unplug(String chargerName, String robotName) throws ObjectNotFoundException {
         Charger foundCharger = database.findCharger(chargerName); //TODO: optional to do
         Robot foundRobot = robotService.findRobot(robotName);
 
