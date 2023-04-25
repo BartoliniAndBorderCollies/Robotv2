@@ -17,14 +17,6 @@ public class Menu {
     public MenuCommand[] getMenuCommands() {
         return menuCommands;
     }
-
-    public void welcome() {
-        System.out.println("""
-                Welcome to Robot command center.
-                    What do you want to do? Type the answer:
-                """);
-    }
-
 }
 
 

@@ -10,4 +10,10 @@ public class MenuView {
             System.out.printf("%d. %s\n", i + 1, menuCommands[i].getName());
         }
     }
+    public void welcome() {
+        System.out.println("""
+                Welcome to Robot command center.
+                    What do you want to do? Type the answer:
+                """);
+    }
 }

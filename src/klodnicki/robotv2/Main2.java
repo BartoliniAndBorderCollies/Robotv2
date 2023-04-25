@@ -44,7 +44,7 @@ public class Main2 {
         // przekazanie service
         MenuController menuController = new MenuController(mainMenu, menuView);
 
-        // showWelcome()
+        menuView.welcome();
 
         do {
             menuController.updateMenuView();
