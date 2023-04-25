@@ -34,7 +34,7 @@ public class RobotController {
 //        // v2:
         List<String> rows = robotService.prepareListOfRobotNamesWithEnergy();
         for (String row : rows) {
-            System.out.println(row);
+            System.out.println(row); //TODO: jak jest lista pusta to nic nie zwraca
         }
     }
 
@@ -43,7 +43,7 @@ public class RobotController {
         System.out.println("Below is the list of robots:");
         System.out.println(robotService.prepareListOfRobotNamesWithEnergy());
         System.out.println("Type the name of robot which you want to move:");
-        String chosenRobot = scanner.nextLine();
+        String chosenRobot = scanner.nextLine(); //TODO: można wybrać robota z poza listy i nic sie nie dzieje
         System.out.println("Type the move you want to make:");
         for (RobotMovement move : RobotMovement.values()) {
             System.out.println(move.getName());

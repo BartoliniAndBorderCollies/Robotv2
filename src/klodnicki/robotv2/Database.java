@@ -40,8 +40,8 @@ public class Database {
     }
 
 
-    public Charger findCharger(String chargerName) {
-        Charger charger = null; //TODO: optional to do
+    public Optional<Charger> findCharger(String chargerName) {
+        Charger charger = null;
 
         for (Charger value : chargers) {
             if (value.getName().equals(chargerName)) {
@@ -49,7 +49,7 @@ public class Database {
                 break;
             }
         }
-        return charger;
+        return Optional.ofNullable(charger);
     }
 
 

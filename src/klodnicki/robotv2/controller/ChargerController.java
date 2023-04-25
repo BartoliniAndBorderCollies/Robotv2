@@ -11,6 +11,9 @@ public class ChargerController {
     private final ChargerService chargerService;
     private final RobotService robotService;
 
+    //TODO: brakuje menu głownego
+    //TODO: brakuje liczenia tur
+
 
     public ChargerController(ChargerService chargerService, RobotService robotService) {
         this.chargerService = chargerService;
