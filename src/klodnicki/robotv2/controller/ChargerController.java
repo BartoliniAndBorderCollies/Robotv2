@@ -14,13 +14,14 @@ public class ChargerController {
     }
 
     public void createCharger() {
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in); //TODO: InputMismatchException - jak pyta ile gniazdek a odpowiadasz stringiem
         System.out.println("How many energy plugs you want to create?");
         int energySlots = scanner.nextInt();
         System.out.println("Give the name for the charger.");
         String chargerName = scanner.nextLine();
         scanner.nextLine();
         chargerService.create(energySlots, chargerName);
+        System.out.println("Charger " + chargerName + "has been created."); //TODO: czemu nie wyswietla nazwy chargera?
     }
 
     public void plugIn() {
@@ -31,6 +32,7 @@ public class ChargerController {
         String robotName = scanner.nextLine();
         try {
             chargerService.plugIn(chargerName, robotName);
+            System.out.println("Robot" + robotName + "has been plugged in.");
         }catch (ObjectNotFoundException | NotEnoughFreeEnergySlotsException e) {
             System.out.println(e.getMessage());
         }

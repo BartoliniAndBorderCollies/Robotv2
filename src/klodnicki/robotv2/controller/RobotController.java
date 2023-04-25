@@ -18,6 +18,7 @@ public class RobotController {
         System.out.println("Give the robot name.");
         try {
             robotService.create(scanner.nextLine());
+            System.out.println("Robot has been created.");
         }catch (ObjectNotFoundException e) {
             System.out.println(e.getMessage());
         }
@@ -62,6 +63,7 @@ public class RobotController {
         String robotToTurnOff = scanner.nextLine();
         try {
             robotService.turnOff(robotToTurnOff);
+            System.out.println("Robot " + robotToTurnOff + " has been turned off.");
         } catch (ObjectNotFoundException e) {
             System.out.println(e.getMessage());
         }
@@ -74,10 +76,9 @@ public class RobotController {
         String robotToTurnOn = scanner.nextLine();
         try {
             robotService.turnOn(robotToTurnOn);
+            System.out.println("Robot " + robotToTurnOn + " has been turned on.");
         } catch (ObjectNotFoundException e) {
             System.out.println(e.getMessage());
         }
     }
-
-
 }

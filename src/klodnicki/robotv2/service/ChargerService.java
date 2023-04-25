@@ -53,7 +53,6 @@ public class ChargerService {
     public void unplug(String chargerName, String robotName) throws ObjectNotFoundException {
         Charger foundCharger = database.findCharger(chargerName); //TODO: optional to do
         Robot foundRobot = robotService.findRobot(robotName);
-
         foundCharger.unplugRobot(foundRobot);
     }
 

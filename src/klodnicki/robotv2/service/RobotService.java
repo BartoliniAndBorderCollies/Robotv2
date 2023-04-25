@@ -14,13 +14,14 @@ public class RobotService {
     private final Database database = new Database();
 
     // Tutaj jest rzeczywiste tworzenie tego robota
-    public void create(String robotName) throws ObjectNotFoundException {
+    public void create(String robotName) throws ObjectNotFoundException { //TODO: do poprawki
         // tutaj najpierw walidacja
-        Robot foundRobot = findRobot(robotName);
-
-        if (foundRobot != null) {
-            System.out.println("This name already exist.");
-        }
+//        Robot foundRobot = findRobot(robotName);
+//
+//
+//        if (foundRobot != null) {
+//            System.out.println("This name already exist.");
+//        }
         // cała "logika biznesowa" -> walidacja
         Robot robot = new Robot(robotName);
         database.add(robot);
