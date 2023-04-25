@@ -1,6 +1,5 @@
 package klodnicki.robotv2;
 
-import klodnicki.robotv2.exception.ObjectNotFoundException;
 import klodnicki.robotv2.model.Charger;
 import klodnicki.robotv2.model.Robot;
 
@@ -65,10 +64,8 @@ public class Database {
         }
         if (isRobotOnTheChargersList) {
             System.out.println("Unplug robot from the charger first.");
-            //TODO: go back to main menu
         }
     }
-
 
     public void add(Robot robot) {
         robots.add(robot);

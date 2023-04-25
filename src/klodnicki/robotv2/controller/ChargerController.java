@@ -5,13 +5,14 @@ import klodnicki.robotv2.exception.ObjectNotFoundException;
 import klodnicki.robotv2.model.Charger;
 import klodnicki.robotv2.service.ChargerService;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class ChargerController {
     private final ChargerService chargerService;
     private final RobotController robotController;
 
-    //TODO: brakuje menu głownego
+
     //TODO: brakuje liczenia tur
 
 
@@ -21,9 +22,15 @@ public class ChargerController {
     }
 
     public void createCharger() {
-        Scanner scanner = new Scanner(System.in); //TODO: InputMismatchException - jak pyta ile gniazdek a odpowiadasz stringiem
+        Scanner scanner = new Scanner(System.in);
+        int energySlots = 0;
         System.out.println("How many energy plugs you want to create?");
-        int energySlots = scanner.nextInt();
+        try {
+            energySlots = scanner.nextInt();
+        } catch (InputMismatchException e) {
+            System.out.println("Must be a number.");
+            return;
+        }
         scanner.nextLine();
         System.out.println("Give the name for the charger.");
         String chargerName = scanner.nextLine();
