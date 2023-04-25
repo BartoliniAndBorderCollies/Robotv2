@@ -50,9 +50,6 @@ public class Charger {
     }
 
     // możliwość zwracania robotów
-    public List<Robot> getRobots() {
-        return pluggedRobots;
-    }
 
     public String getName() {
         return name;
