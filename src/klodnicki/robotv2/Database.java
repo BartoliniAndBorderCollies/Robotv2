@@ -83,4 +83,7 @@ public class Database {
         return robots;
     }
 
+    public List<Charger> getChargers() {
+        return chargers;
+    }
 }

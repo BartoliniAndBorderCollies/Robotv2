@@ -19,7 +19,7 @@ public class Main2 {
         // JDBC -> Bazy danych
         RobotService robotService = new RobotService();
         ChargerService chargerService = new ChargerService(robotService);
-        ChargerController chargerController = new ChargerController(chargerService);
+        ChargerController chargerController = new ChargerController(chargerService, robotService);
         RobotController robotController = new RobotController();
 
 
