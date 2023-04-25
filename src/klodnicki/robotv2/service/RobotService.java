@@ -11,7 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RobotService {
-    private final Database database = new Database();
+    private final Database database;
+
+    public RobotService(Database database) {
+        this.database = database;
+    }
 
     // Tutaj jest rzeczywiste tworzenie tego robota
     public void create(String robotName) throws ObjectNotFoundException { //TODO: do poprawki
@@ -51,7 +55,7 @@ public class RobotService {
         List<Robot> robots = database.getRobots();
         List<String> rows = new ArrayList<>();
         for (Robot robot : robots) {
-            rows.add(robot.getName() + ". Energy = " + robot.getEnergyLevel());
+            rows.add("Robot name: " + robot.getName() + ". Energy level = " + robot.getEnergyLevel());
         }
         return rows;
     }

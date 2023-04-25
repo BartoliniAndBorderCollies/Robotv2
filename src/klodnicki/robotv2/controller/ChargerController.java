@@ -2,47 +2,52 @@ package klodnicki.robotv2.controller;
 
 import klodnicki.robotv2.exception.NotEnoughFreeEnergySlotsException;
 import klodnicki.robotv2.exception.ObjectNotFoundException;
+import klodnicki.robotv2.model.Charger;
 import klodnicki.robotv2.service.ChargerService;
-import klodnicki.robotv2.service.RobotService;
 
 import java.util.Scanner;
 
 public class ChargerController {
     private final ChargerService chargerService;
-    private final RobotService robotService;
+    private final RobotController robotController;
 
     //TODO: brakuje menu głownego
     //TODO: brakuje liczenia tur
 
 
-    public ChargerController(ChargerService chargerService, RobotService robotService) {
+    public ChargerController(ChargerService chargerService, RobotController robotController) {
         this.chargerService = chargerService;
-        this.robotService = robotService;
+        this.robotController = robotController;
     }
 
     public void createCharger() {
         Scanner scanner = new Scanner(System.in); //TODO: InputMismatchException - jak pyta ile gniazdek a odpowiadasz stringiem
         System.out.println("How many energy plugs you want to create?");
         int energySlots = scanner.nextInt();
+        scanner.nextLine();
         System.out.println("Give the name for the charger.");
         String chargerName = scanner.nextLine();
-        scanner.nextLine();
         chargerService.create(energySlots, chargerName);
-        System.out.println("Charger " + chargerName + "has been created."); //TODO: czemu nie wyswietla nazwy chargera?
+        System.out.println("Charger " + chargerName + " has been created.");
     }
 
     public void plugIn() {
         Scanner scanner = new Scanner(System.in);
+
+        for (Charger charger : chargerService.getListOfChargers()) {
+            System.out.println(charger.toString());
+        }
+
         System.out.println("Which charger you want to choose to plug robot in?");
-        System.out.println(chargerService.getListOfChargers()); //TODO: nie widzi, Szymon miał rację
         String chargerName = scanner.nextLine();
-        System.out.println("Which robot you want to connect to charger?"); //TODO: nie widzi, Szymon miał znowu rację
-        System.out.println(robotService.prepareListOfRobotNamesWithEnergy());
+
+        robotController.showListOfRobotsAndEnergyLevel();
+        System.out.println("Which robot you want to connect to charger?");
         String robotName = scanner.nextLine();
         try {
             chargerService.plugIn(chargerName, robotName);
-            System.out.println("Robot" + robotName + "has been plugged in.");
-        }catch (ObjectNotFoundException | NotEnoughFreeEnergySlotsException e) {
+            System.out.println("Robot " + robotName + " has been plugged in.");
+        } catch (ObjectNotFoundException | NotEnoughFreeEnergySlotsException e) {
             System.out.println(e.getMessage());
         }
     }
@@ -53,8 +58,15 @@ public class ChargerController {
         System.out.println(chargerService.getListOfChargers());
         String chargerName = scanner.nextLine();
         System.out.println("Which robot you want to unplug from the charger?");
-        System.out.println(chargerService.findCharger(chargerName));
+
+        try {
+            System.out.println(chargerService.findCharger(chargerName));
+        } catch (ObjectNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+
         String robotName = scanner.nextLine();
+
         try {
             chargerService.unplug(chargerName, robotName);
         } catch (ObjectNotFoundException e) {

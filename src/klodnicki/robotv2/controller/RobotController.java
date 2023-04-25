@@ -4,14 +4,17 @@ import klodnicki.robotv2.RobotMovement;
 import klodnicki.robotv2.exception.ObjectNotFoundException;
 import klodnicki.robotv2.exception.RobotNotTurnedOnException;
 import klodnicki.robotv2.exception.TooLowEnergyException;
-import klodnicki.robotv2.model.Robot;
 import klodnicki.robotv2.service.RobotService;
 
 import java.util.List;
 import java.util.Scanner;
 
 public class RobotController {
-    private final RobotService robotService = new RobotService();
+    private final RobotService robotService;
+
+    public RobotController(RobotService robotService) {
+        this.robotService = robotService;
+    }
 
     public void createRobot() {
         Scanner scanner = new Scanner(System.in);
@@ -81,4 +84,6 @@ public class RobotController {
             System.out.println(e.getMessage());
         }
     }
+
+
 }

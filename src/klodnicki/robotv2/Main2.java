@@ -17,10 +17,11 @@ public class Main2 {
         // USER -> używa -> CONTROLLER -> przekierowuje zapytanie do -> SERVICE -> bazuje/działa na -> MODEL -> SERVICE zwraca odpowiedź do -> CONTROLLER -> updateuje widok -> VIEW -> pokazuje się -> USER
 
         // JDBC -> Bazy danych
-        RobotService robotService = new RobotService();
-        ChargerService chargerService = new ChargerService(robotService);
-        ChargerController chargerController = new ChargerController(chargerService, robotService);
-        RobotController robotController = new RobotController();
+        Database database = new Database();
+        RobotService robotService = new RobotService(database);
+        ChargerService chargerService = new ChargerService(database, robotService);
+        RobotController robotController = new RobotController(robotService);
+        ChargerController chargerController = new ChargerController(chargerService, robotController);
 
 
         MenuCommand[] mainMenuCommands = {
