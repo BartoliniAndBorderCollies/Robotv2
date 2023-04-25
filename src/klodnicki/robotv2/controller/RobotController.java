@@ -22,22 +22,18 @@ public class RobotController {
         try {
             robotService.create(scanner.nextLine());
             System.out.println("Robot has been created.");
-        }catch (ObjectNotFoundException e) {
+        } catch (ObjectNotFoundException e) {
             System.out.println(e.getMessage());
         }
     }
 
     public void showListOfRobotsAndEnergyLevel() {
-//        // TODO: Choose your hero
-//        // pobrać listę robotów
-//        List<Robot> listOfRobots = robotService.getListOfRobots();
-//        // Wyświetl listę robotów razem z ich energią
-//        System.out.println(listOfRobots.get(0).getName() + ". Energy = " + listOfRobots.get(0).getEnergyLevel());
-//
-//        // v2:
         List<String> rows = robotService.prepareListOfRobotNamesWithEnergy();
         for (String row : rows) {
-            System.out.println(row); //TODO: jak jest lista pusta to nic nie zwraca
+            System.out.println(row);
+        }
+        if (rows.isEmpty()) {
+            System.out.println("There is no robots on the list.");
         }
     }
 
@@ -54,12 +50,12 @@ public class RobotController {
         String chosenMovement = scanner.nextLine();
         try {
             robotService.move(chosenRobot, chosenMovement);
-        }catch (ObjectNotFoundException | RobotNotTurnedOnException | TooLowEnergyException e) {
+        } catch (ObjectNotFoundException | RobotNotTurnedOnException | TooLowEnergyException e) {
             System.out.println(e.getMessage());
         }
     }
 
-    public void turnOff(){
+    public void turnOff() {
         Scanner scanner = new Scanner(System.in);
         System.out.println(robotService.prepareListOfRobotNamesWithEnergy());
         System.out.println("Type the name of robot you want to turn off:");
