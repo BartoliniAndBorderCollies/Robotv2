@@ -88,7 +88,12 @@ public class RobotController {
     }
 
     public boolean isOn(String robotName) {
-        return robotService.isOn(robotName);
+        try {
+            robotService.isOn(robotName);
+        } catch (ObjectNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+        return true;
     }
 
 

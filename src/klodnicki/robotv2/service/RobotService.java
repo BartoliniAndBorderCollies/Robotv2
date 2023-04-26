@@ -9,6 +9,7 @@ import klodnicki.robotv2.model.Robot;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class RobotService {
     private final Database database;
@@ -70,8 +71,10 @@ public class RobotService {
         return database.findRobot(name).orElseThrow(() -> new ObjectNotFoundException(Robot.class));
     }
 
-    public boolean isOn(String robotName) {
-        return database.isOn(robotName);
+
+    public boolean isOn(String robotName) throws ObjectNotFoundException{
+        Robot robot = findRobot(robotName);
+        return robot.isOn();
     }
 
 }

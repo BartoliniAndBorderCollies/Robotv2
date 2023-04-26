@@ -84,8 +84,4 @@ public class Database {
         return chargers;
     }
 
-    public boolean isOn(String robotName) {
-        Optional<Robot> robot = findRobot(robotName);
-        return robot.get().isOn();
-    }
 }
