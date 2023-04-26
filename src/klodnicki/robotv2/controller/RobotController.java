@@ -4,6 +4,7 @@ import klodnicki.robotv2.RobotMovement;
 import klodnicki.robotv2.exception.ObjectNotFoundException;
 import klodnicki.robotv2.exception.RobotNotTurnedOnException;
 import klodnicki.robotv2.exception.TooLowEnergyException;
+import klodnicki.robotv2.model.Robot;
 import klodnicki.robotv2.service.RobotService;
 
 import java.util.List;
@@ -84,6 +85,10 @@ public class RobotController {
         } catch (ObjectNotFoundException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public boolean isOn(String robotName) {
+        return robotService.isOn(robotName);
     }
 
 

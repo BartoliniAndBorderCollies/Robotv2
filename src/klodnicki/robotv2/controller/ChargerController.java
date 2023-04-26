@@ -44,13 +44,22 @@ public class ChargerController {
         for (Charger charger : chargerService.getListOfChargers()) {
             System.out.println(charger.toString());
         }
+        if(chargerService.getListOfChargers().isEmpty()) {
+            System.out.println("There is no charger on the list.");
+            return;
+        }
 
         System.out.println("Which charger you want to choose to plug robot in?");
         String chargerName = scanner.nextLine();
-
         robotController.showListOfRobotsAndEnergyLevel();
         System.out.println("Which robot you want to connect to charger?");
         String robotName = scanner.nextLine();
+
+        if(robotController.isOn(robotName)) {
+            System.out.println("Robot must be turned off.");
+            return;
+        }
+
         try {
             chargerService.plugIn(chargerName, robotName);
             System.out.println("Robot " + robotName + " has been plugged in.");
