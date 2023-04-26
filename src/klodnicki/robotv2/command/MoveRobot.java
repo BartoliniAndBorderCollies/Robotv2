@@ -18,6 +18,7 @@ public class MoveRobot implements MenuCommand{
     @Override
     public void execute() {
         robotController.moveRobot();
+        //TODO: jeśli lista robotów jest pusta to powiadom
 
     }
 }

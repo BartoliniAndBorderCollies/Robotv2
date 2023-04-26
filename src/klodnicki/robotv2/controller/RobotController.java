@@ -38,6 +38,11 @@ public class RobotController {
     }
 
     public void moveRobot() {
+        if(robotService.prepareListOfRobotNamesWithEnergy().isEmpty()) {
+            System.out.println("There is no robot on the list.");
+            return;
+        }
+
         Scanner scanner = new Scanner(System.in);
         System.out.println("Below is the list of robots:");
         System.out.println(robotService.prepareListOfRobotNamesWithEnergy());

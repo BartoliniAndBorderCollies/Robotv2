@@ -71,7 +71,7 @@ public class ChargerController {
         System.out.println("Which robot you want to unplug from the charger?");
 
         try {
-            System.out.println(chargerService.findCharger(chargerName));
+            System.out.println(chargerService.findCharger(chargerName)); //TODO: nie zwraca robota lecz listę ładowarek
         } catch (ObjectNotFoundException e) {
             System.out.println(e.getMessage());
         }
