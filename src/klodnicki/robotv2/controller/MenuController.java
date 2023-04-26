@@ -38,11 +38,9 @@ public class MenuController {
         } catch (InputMismatchException e) {
             System.out.println("Answer must be an integer number.");
         }
-        try {
-            menu.pressButton(input);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Not found appropriate number.");
-        }
+
+        menu.pressButton(input);
+
 
     }
 }
