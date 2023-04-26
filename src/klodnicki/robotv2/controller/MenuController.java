@@ -3,6 +3,7 @@ package klodnicki.robotv2.controller;
 import klodnicki.robotv2.model.Menu;
 import klodnicki.robotv2.view.MenuView;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class MenuController {
@@ -24,12 +25,6 @@ public class MenuController {
         this.menuView = menuView;
     }
 
-    public void start() {
-//        mainMenu.welcome();
-//        menu.show();
-//        menu.pressButton(scanner.nextInt()); //TODO: ArrayIndexOutOfBoundsException | InputMismatchException
-    }
-
     public void updateMenuView() {
         menuView.displayMenu(menu.getMenuCommands());
     }
@@ -37,9 +32,13 @@ public class MenuController {
     public void askUserForInput() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Choose command:");
-        int input = scanner.nextInt();
-        // walidacja za pomocą MenuService
-
+        int input = 0;
+        try {
+            input = scanner.nextInt();
+        } catch (InputMismatchException e) {
+            System.out.println("Answer must be a number.");
+        }
         menu.pressButton(input);
+
     }
 }
