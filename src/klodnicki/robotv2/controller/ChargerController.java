@@ -51,7 +51,11 @@ public class ChargerController {
 
         System.out.println("Which charger you want to choose to plug robot in?");
         String chargerName = scanner.nextLine();
-        robotController.showListOfRobotsAndEnergyLevel();
+
+        if(robotController.showListOfRobotsAndEnergyLevel().isEmpty()) {
+            return;
+        }
+
         System.out.println("Which robot you want to connect to charger?");
         String robotName = scanner.nextLine();
 

@@ -28,7 +28,7 @@ public class RobotController {
         }
     }
 
-    public void showListOfRobotsAndEnergyLevel() {
+    public List<String> showListOfRobotsAndEnergyLevel() {
         List<String> rows = robotService.prepareListOfRobotNamesWithEnergy();
         for (String row : rows) {
             System.out.println(row);
@@ -36,6 +36,7 @@ public class RobotController {
         if (rows.isEmpty()) {
             System.out.println("There is no robots on the list.");
         }
+        return rows;
     }
 
     public void moveRobot() {
