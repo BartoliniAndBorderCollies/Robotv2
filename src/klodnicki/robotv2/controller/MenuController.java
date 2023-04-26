@@ -38,7 +38,11 @@ public class MenuController {
         } catch (InputMismatchException e) {
             System.out.println("Answer must be a number.");
         }
-        menu.pressButton(input);
+        try {
+            menu.pressButton(input);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Not found appropriate number.");
+        }
 
     }
 }
