@@ -60,6 +60,10 @@ public class ChargerController {
     }
 
     public void unplug() {
+        if(chargerService.getListOfChargers().isEmpty()) {
+            System.out.println("There is no chargers on the list.");
+            return;
+        }
         Scanner scanner = new Scanner(System.in);
         System.out.println("Which charger you want to choose to unplug robot?");
         System.out.println(chargerService.getListOfChargers());

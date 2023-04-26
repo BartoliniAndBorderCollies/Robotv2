@@ -36,7 +36,7 @@ public class MenuController {
         try {
             input = scanner.nextInt();
         } catch (InputMismatchException e) {
-            System.out.println("Answer must be a number.");
+            System.out.println("Answer must be an integer number.");
         }
         try {
             menu.pressButton(input);
