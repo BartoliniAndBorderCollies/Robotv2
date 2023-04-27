@@ -13,14 +13,6 @@ public class Database {
     private List<Robot> robots = new ArrayList<>();
     private List<Charger> chargers = new ArrayList<>();
 
-
-    public void showListOfRobotsAndEnergyLevel() {
-        for (int i = 0; i < robots.size(); i++) {
-            System.out.println("List of robots and energy level.");
-            System.out.println(i + ". " + robots.get(i).getName() + " " + robots.get(i).getEnergyLevel() + "%.");
-        }
-    }
-
     public String getUserInput(Scanner scanner, String message) {
         System.out.println(message);
         return scanner.nextLine();
@@ -83,5 +75,7 @@ public class Database {
     public List<Charger> getChargers() {
         return chargers;
     }
+
+
 
 }

@@ -77,17 +77,23 @@ public class ChargerController {
             System.out.println("There is no chargers on the list.");
             return;
         }
+
         Scanner scanner = new Scanner(System.in);
         System.out.println("Which charger you want to choose to unplug robot?");
         System.out.println(chargerService.getListOfChargers());
         String chargerName = scanner.nextLine();
         System.out.println("Which robot you want to unplug from the charger?");
-
         try {
-            System.out.println(chargerService.findCharger(chargerName)); //TODO: nie zwraca robota lecz listę ładowarek
+            chargerService.getPluggedRobots(chargerName);
         } catch (ObjectNotFoundException e) {
             System.out.println(e.getMessage());
-        }
+        } //TODO: To be continued.
+
+//        try {
+//            System.out.println(chargerService.findCharger(chargerName)); //TODO: nie zwraca robota lecz listę ładowarek
+//        } catch (ObjectNotFoundException e) {
+//            System.out.println(e.getMessage());
+//        }
 
         String robotName = scanner.nextLine();
 
