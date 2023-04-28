@@ -81,6 +81,16 @@ public class ChargerController {
         System.out.println("Which charger you want to choose to unplug robot?");
         System.out.println(chargerService.getListOfChargers());
         String chargerName = scanner.nextLine();
+
+        try {
+            if (chargerService.getPluggedRobots(chargerName).isEmpty()) {
+                System.out.println("There is no robot connected to this charger: " + chargerName);
+                return;
+            }
+        } catch (ObjectNotFoundException eee) {
+            eee.getMessage();
+        }
+
         System.out.println("Which robot you want to unplug from the charger?");
 
         try {
