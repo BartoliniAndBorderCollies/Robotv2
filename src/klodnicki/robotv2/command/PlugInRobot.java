@@ -17,6 +17,6 @@ public class PlugInRobot implements MenuCommand{
 
     @Override
     public void execute() {
-        chargerController.plugIn(); //TODO: its not possible to plug robot in. all the time info that robot must be turn off
+        chargerController.plugIn();
     }
 }

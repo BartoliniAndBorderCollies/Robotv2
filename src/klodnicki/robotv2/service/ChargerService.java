@@ -69,8 +69,7 @@ public class ChargerService {
     }
 
     public List<Robot> getPluggedRobots(String chargerName) throws ObjectNotFoundException{
-        Charger charger = database.findCharger(chargerName).orElseThrow(() -> new ObjectNotFoundException(Charger.class));
-        return charger.getPluggedRobots();
+        return findCharger(chargerName).getPluggedRobots();
     }
 
 

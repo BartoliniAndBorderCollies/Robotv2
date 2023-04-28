@@ -90,11 +90,11 @@ public class RobotController {
 
     public boolean isOn(String robotName) {
         try {
-            robotService.isOn(robotName);
+            return robotService.isOn(robotName);
         } catch (ObjectNotFoundException e) {
             System.out.println(e.getMessage());
         }
-        return true;
+        return false;
     }
 
 

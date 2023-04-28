@@ -83,6 +83,7 @@ public class ChargerController {
         System.out.println(chargerService.getListOfChargers());
         String chargerName = scanner.nextLine();
         System.out.println("Which robot you want to unplug from the charger?");
+
         try {
             chargerService.getPluggedRobots(chargerName);
         } catch (ObjectNotFoundException e) {
