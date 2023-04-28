@@ -44,7 +44,7 @@ public class ChargerController {
         for (Charger charger : chargerService.getListOfChargers()) {
             System.out.println(charger.toString());
         }
-        if(chargerService.getListOfChargers().isEmpty()) {
+        if (chargerService.getListOfChargers().isEmpty()) {
             System.out.println("There is no charger on the list.");
             return;
         }
@@ -52,14 +52,14 @@ public class ChargerController {
         System.out.println("Which charger you want to choose to plug robot in?");
         String chargerName = scanner.nextLine();
 
-        if(robotController.showListOfRobotsAndEnergyLevel().isEmpty()) {
+        if (robotController.showListOfRobotsAndEnergyLevel().isEmpty()) {
             return;
         }
 
         System.out.println("Which robot you want to connect to charger?");
         String robotName = scanner.nextLine();
 
-        if(robotController.isOn(robotName)) {
+        if (robotController.isOn(robotName)) {
             System.out.println("Robot must be turned off.");
             return;
         }
@@ -73,11 +73,10 @@ public class ChargerController {
     }
 
     public void unplug() {
-        if(chargerService.getListOfChargers().isEmpty()) {
+        if (chargerService.getListOfChargers().isEmpty()) {
             System.out.println("There is no chargers on the list.");
             return;
         }
-
         Scanner scanner = new Scanner(System.in);
         System.out.println("Which charger you want to choose to unplug robot?");
         System.out.println(chargerService.getListOfChargers());
@@ -85,24 +84,19 @@ public class ChargerController {
         System.out.println("Which robot you want to unplug from the charger?");
 
         try {
-            chargerService.getPluggedRobots(chargerName);
+            System.out.println((chargerService.getPluggedRobots(chargerName)));
         } catch (ObjectNotFoundException e) {
             System.out.println(e.getMessage());
-        } //TODO: To be continued.
-
-//        try {
-//            System.out.println(chargerService.findCharger(chargerName)); //TODO: nie zwraca robota lecz listę ładowarek
-//        } catch (ObjectNotFoundException e) {
-//            System.out.println(e.getMessage());
-//        }
+        }
 
         String robotName = scanner.nextLine();
 
         try {
             chargerService.unplug(chargerName, robotName);
-        } catch (ObjectNotFoundException e) {
-            System.out.println(e.getMessage());
+            System.out.println("Robot" + robotName + " has been unplugged.");
+        } catch (ObjectNotFoundException ee) {
+            System.out.println(ee.getMessage());
         }
     }
-
 }
+
