@@ -2,6 +2,7 @@ package klodnicki.robotv2.service;
 
 import com.sun.jdi.ObjectCollectedException;
 import klodnicki.robotv2.Database;
+import klodnicki.robotv2.exception.MaximumEnergyLevelException;
 import klodnicki.robotv2.exception.NotEnoughFreeEnergySlotsException;
 import klodnicki.robotv2.exception.ObjectNotFoundException;
 import klodnicki.robotv2.model.Charger;
@@ -70,6 +71,13 @@ public class ChargerService {
 
     public List<Robot> getPluggedRobots(String chargerName) throws ObjectNotFoundException{
         return findCharger(chargerName).getPluggedRobots();
+    }
+
+    public void chargeRobots() throws MaximumEnergyLevelException {
+        List<Charger> chargers = getListOfChargers();
+        for (Charger charger : chargers) {
+            charger.chargeRobots(); //TODO: tu straciłem 40 włosów
+        }
     }
 
 

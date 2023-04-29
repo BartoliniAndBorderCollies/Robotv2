@@ -19,6 +19,5 @@ public class UnplugRobot implements MenuCommand{
     @Override
     public void execute() {
         chargerController.unplug();
-
     }
 }

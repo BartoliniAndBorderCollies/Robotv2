@@ -2,6 +2,7 @@ package klodnicki.robotv2.model;
 
 import klodnicki.robotv2.exception.MaximumEnergyLevelException;
 import klodnicki.robotv2.exception.NotEnoughFreeEnergySlotsException;
+import klodnicki.robotv2.exception.ObjectNotFoundException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,27 +22,22 @@ public class Charger {
     }
 
     public void plugInRobot(Robot robot) throws NotEnoughFreeEnergySlotsException {
-        if (freeSlots > pluggedRobots.size()) {
-            pluggedRobots.add(robot);
-            chargeRobots();
-            return;
+
+        if (freeSlots <= pluggedRobots.size()) {
+            throw new NotEnoughFreeEnergySlotsException();
         }
-        throw new NotEnoughFreeEnergySlotsException();
+        pluggedRobots.add(robot);
     }
 
-    public void chargeRobots() {
+    public void chargeRobots() throws MaximumEnergyLevelException {
 
-        for (int i = 0; i < pluggedRobots.size(); i++) {
-            Robot robot = pluggedRobots.get(i);
-            try {
+        for (Robot robot : pluggedRobots) {
+
                 if (robot.getEnergyLevel() > 90) {
                     robot.setEnergyLevel(100);
                 } else {
                     robot.setEnergyLevel(robot.getEnergyLevel() + 10);
                 }
-            } catch (MaximumEnergyLevelException e) {
-                System.out.println(e.getMessage());
-            }
         }
     }
 

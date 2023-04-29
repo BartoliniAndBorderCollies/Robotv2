@@ -4,7 +4,6 @@ import klodnicki.robotv2.command.*;
 import klodnicki.robotv2.controller.ChargerController;
 import klodnicki.robotv2.controller.MenuController;
 import klodnicki.robotv2.controller.RobotController;
-import klodnicki.robotv2.model.Charger;
 import klodnicki.robotv2.model.Menu;
 import klodnicki.robotv2.service.ChargerService;
 import klodnicki.robotv2.service.RobotService;
@@ -29,15 +28,15 @@ public class Main2 {
         MenuCommand[] mainMenuCommands = {
                 // new RobotRelatedCommands()
 
-                new CreateRobot(robotController),
+                new CreateRobot(robotController, chargerController),
                 new CreateCharger(chargerController),
-                new TurnOnTheRobot(robotController),
-                new TurnOffTheRobot(robotController),
+                new TurnOnTheRobot(robotController, chargerController),
+                new TurnOffTheRobot(robotController, chargerController),
                 new PlugInRobot(chargerController),
                 new UnplugRobot(chargerController),
                 new GetListOfRobotsAndTheirEnergy(robotController),
-                new MoveRobot(robotController),
-                new SkipTurn(),
+                new MoveRobot(robotController, chargerController),
+                new SkipTurn(chargerController),
                 new CloseApplication(),
         };
         Menu mainMenu = new Menu(mainMenuCommands);

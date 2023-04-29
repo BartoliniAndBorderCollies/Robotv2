@@ -1,21 +1,19 @@
 package klodnicki.robotv2.controller;
 
 import klodnicki.robotv2.TurnCounter;
+import klodnicki.robotv2.exception.MaximumEnergyLevelException;
 import klodnicki.robotv2.exception.NotEnoughFreeEnergySlotsException;
 import klodnicki.robotv2.exception.ObjectNotFoundException;
 import klodnicki.robotv2.model.Charger;
 import klodnicki.robotv2.service.ChargerService;
 
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 public class ChargerController {
     private final ChargerService chargerService;
     private final RobotController robotController;
-
-
-    //TODO: brakuje liczenia tur
-
 
     public ChargerController(ChargerService chargerService, RobotController robotController) {
         this.chargerService = chargerService;
@@ -110,6 +108,14 @@ public class ChargerController {
             TurnCounter.count();
         } catch (ObjectNotFoundException ee) {
             System.out.println(ee.getMessage());
+        }
+    }
+
+    public void chargeRobots() {
+        try {
+            chargerService.chargeRobots();
+        }catch (MaximumEnergyLevelException e) {
+            System.out.println(e.getMessage());
         }
     }
 }

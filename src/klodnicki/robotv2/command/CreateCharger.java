@@ -4,7 +4,7 @@ import klodnicki.robotv2.controller.ChargerController;
 
 public class CreateCharger implements MenuCommand {
 
-    private ChargerController chargerController;
+    private final ChargerController chargerController;
 
     public CreateCharger(ChargerController chargerController) {
         this.chargerController = chargerController;
@@ -18,5 +18,6 @@ public class CreateCharger implements MenuCommand {
     @Override
     public void execute() {
         chargerController.createCharger();
+        chargerController.chargeRobots();
     }
 }
