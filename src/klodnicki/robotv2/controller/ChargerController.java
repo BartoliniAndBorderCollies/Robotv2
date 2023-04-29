@@ -1,5 +1,6 @@
 package klodnicki.robotv2.controller;
 
+import klodnicki.robotv2.TurnCounter;
 import klodnicki.robotv2.exception.NotEnoughFreeEnergySlotsException;
 import klodnicki.robotv2.exception.ObjectNotFoundException;
 import klodnicki.robotv2.model.Charger;
@@ -36,6 +37,7 @@ public class ChargerController {
         String chargerName = scanner.nextLine();
         chargerService.create(energySlots, chargerName);
         System.out.println("Charger " + chargerName + " has been created.");
+        TurnCounter.count();
     }
 
     public void plugIn() {
@@ -67,6 +69,7 @@ public class ChargerController {
         try {
             chargerService.plugIn(chargerName, robotName);
             System.out.println("Robot " + robotName + " has been plugged in.");
+            TurnCounter.count();
         } catch (ObjectNotFoundException | NotEnoughFreeEnergySlotsException e) {
             System.out.println(e.getMessage());
         }
@@ -104,6 +107,7 @@ public class ChargerController {
         try {
             chargerService.unplug(chargerName, robotName);
             System.out.println("Robot" + robotName + " has been unplugged.");
+            TurnCounter.count();
         } catch (ObjectNotFoundException ee) {
             System.out.println(ee.getMessage());
         }

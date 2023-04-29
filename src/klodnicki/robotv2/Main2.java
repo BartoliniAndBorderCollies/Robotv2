@@ -49,7 +49,7 @@ public class Main2 {
         menuView.welcome();
 
         do {
-            turnCounter.count();
+
             System.out.println("Turn: " + turnCounter.getTurn());
             menuController.updateMenuView();
             menuController.askUserForInput();

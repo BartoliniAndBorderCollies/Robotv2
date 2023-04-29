@@ -6,10 +6,10 @@ import java.util.List;
 public class TurnCounter {
 
     // numer tury
-    private int turn = 0;
+    private static int turn = 0;
 
     // liczenie która to tura
-    public void count() {
+    public static void count() {
         turn++;
     }
 

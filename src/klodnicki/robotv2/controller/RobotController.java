@@ -1,6 +1,7 @@
 package klodnicki.robotv2.controller;
 
 import klodnicki.robotv2.RobotMovement;
+import klodnicki.robotv2.TurnCounter;
 import klodnicki.robotv2.exception.ObjectNotFoundException;
 import klodnicki.robotv2.exception.RobotNotTurnedOnException;
 import klodnicki.robotv2.exception.TooLowEnergyException;
@@ -23,6 +24,7 @@ public class RobotController {
         try {
             robotService.create(scanner.nextLine());
             System.out.println("Robot has been created.");
+            TurnCounter.count();
         } catch (ObjectNotFoundException e) {
             System.out.println(e.getMessage());
         }
@@ -58,6 +60,7 @@ public class RobotController {
         String chosenMovement = scanner.nextLine();
         try {
             System.out.println(robotService.move(chosenRobot, chosenMovement));
+            TurnCounter.count();
 
         } catch (ObjectNotFoundException | RobotNotTurnedOnException | TooLowEnergyException e) {
             System.out.println(e.getMessage());
@@ -72,6 +75,7 @@ public class RobotController {
         try {
             robotService.turnOff(robotToTurnOff);
             System.out.println("Robot " + robotToTurnOff + " has been turned off.");
+            TurnCounter.count();
         } catch (ObjectNotFoundException e) {
             System.out.println(e.getMessage());
         }
@@ -85,6 +89,7 @@ public class RobotController {
         try {
             robotService.turnOn(robotToTurnOn);
             System.out.println("Robot " + robotToTurnOn + " has been turned on.");
+            TurnCounter.count();
         } catch (ObjectNotFoundException e) {
             System.out.println(e.getMessage());
         }

@@ -12,5 +12,6 @@ public class SkipTurn implements MenuCommand{
     @Override
     public void execute() {
         System.out.println("Next turn is beginning.");
+        TurnCounter.count();
     }
 }
