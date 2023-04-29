@@ -50,7 +50,7 @@ public class Main2 {
 
         do {
 
-            System.out.println("Turn: " + turnCounter.getTurn());
+            System.out.println("Turn: " + TurnCounter.getTurn());
             menuController.updateMenuView();
             menuController.askUserForInput();
 

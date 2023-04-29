@@ -13,7 +13,7 @@ public class TurnCounter {
         turn++;
     }
 
-    public int getTurn() {
+    public static int getTurn() {
         return turn;
     }
 }
