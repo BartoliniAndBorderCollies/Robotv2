@@ -1,5 +1,6 @@
 package klodnicki.robotv2.controller;
 
+import klodnicki.robotv2.model.Charger;
 import klodnicki.robotv2.model.Menu;
 import klodnicki.robotv2.view.MenuView;
 
@@ -27,6 +28,7 @@ public class MenuController {
 
     public void updateMenuView() {
         menuView.displayMenu(menu.getMenuCommands());
+
     }
 
     public void askUserForInput() {

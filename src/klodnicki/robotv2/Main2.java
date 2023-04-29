@@ -4,6 +4,7 @@ import klodnicki.robotv2.command.*;
 import klodnicki.robotv2.controller.ChargerController;
 import klodnicki.robotv2.controller.MenuController;
 import klodnicki.robotv2.controller.RobotController;
+import klodnicki.robotv2.model.Charger;
 import klodnicki.robotv2.model.Menu;
 import klodnicki.robotv2.service.ChargerService;
 import klodnicki.robotv2.service.RobotService;
@@ -22,6 +23,7 @@ public class Main2 {
         ChargerService chargerService = new ChargerService(database, robotService);
         RobotController robotController = new RobotController(robotService);
         ChargerController chargerController = new ChargerController(chargerService, robotController);
+        TurnCounter turnCounter = new TurnCounter();
 
 
         MenuCommand[] mainMenuCommands = {
@@ -47,8 +49,11 @@ public class Main2 {
         menuView.welcome();
 
         do {
+            turnCounter.count();
+            System.out.println("Turn: " + turnCounter.getTurn());
             menuController.updateMenuView();
             menuController.askUserForInput();
+
             // logika na input
         } while (true);
     }

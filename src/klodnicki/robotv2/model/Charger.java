@@ -23,6 +23,7 @@ public class Charger {
     public void plugInRobot(Robot robot) throws NotEnoughFreeEnergySlotsException {
         if (freeSlots > pluggedRobots.size()) {
             pluggedRobots.add(robot);
+            chargeRobots();
             return;
         }
         throw new NotEnoughFreeEnergySlotsException();
