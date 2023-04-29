@@ -40,7 +40,7 @@ public class RobotController {
     }
 
     public void moveRobot() {
-        if(robotService.prepareListOfRobotNamesWithEnergy().isEmpty()) {
+        if (robotService.prepareListOfRobotNamesWithEnergy().isEmpty()) {
             System.out.println("There is no robot on the list.");
             return;
         }
@@ -49,14 +49,16 @@ public class RobotController {
         System.out.println("Below is the list of robots:");
         System.out.println(robotService.prepareListOfRobotNamesWithEnergy());
         System.out.println("Type the name of robot which you want to move:");
-        String chosenRobot = scanner.nextLine(); //TODO: można wybrać robota z poza listy i nic sie nie dzieje
+        String chosenRobot = scanner.nextLine();
+
         System.out.println("Type the move you want to make:");
         for (RobotMovement move : RobotMovement.values()) {
             System.out.println(move.getName());
         }
         String chosenMovement = scanner.nextLine();
         try {
-            robotService.move(chosenRobot, chosenMovement);
+            System.out.println(robotService.move(chosenRobot, chosenMovement));
+
         } catch (ObjectNotFoundException | RobotNotTurnedOnException | TooLowEnergyException e) {
             System.out.println(e.getMessage());
         }
@@ -96,6 +98,4 @@ public class RobotController {
         }
         return false;
     }
-
-
 }

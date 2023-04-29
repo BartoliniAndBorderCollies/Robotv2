@@ -32,11 +32,6 @@ public class RobotService {
         database.add(robot);
     }
 
-    public List<Robot> getListOfRobots() {
-//        database.showListOfRobotsAndEnergyLevel();
-        return database.getRobots();
-    }
-
     public List<String> prepareListOfRobotNamesWithEnergy() {
         List<Robot> robots = database.getRobots();
         List<String> rows = new ArrayList<>();
@@ -71,10 +66,8 @@ public class RobotService {
         return database.findRobot(name).orElseThrow(() -> new ObjectNotFoundException(Robot.class));
     }
 
-
     public boolean isOn(String robotName) throws ObjectNotFoundException{
         Robot robot = findRobot(robotName);
         return robot.isOn();
     }
-
 }
