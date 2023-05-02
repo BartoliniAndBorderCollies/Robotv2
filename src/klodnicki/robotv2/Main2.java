@@ -19,7 +19,6 @@ public class Main2 {
         RobotController robotController = new RobotController(robotService);
         ChargerController chargerController = new ChargerController(chargerService, robotController);
 
-
         MenuCommand[] mainMenuCommands = {
 
                 new CreateRobot(robotController, chargerController),

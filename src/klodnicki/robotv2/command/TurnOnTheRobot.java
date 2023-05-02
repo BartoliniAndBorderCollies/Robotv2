@@ -13,7 +13,6 @@ public class TurnOnTheRobot implements MenuCommand {
         this.chargerController = chargerController;
     }
 
-
     @Override
     public String getName() {
         return "Turn on the robot";
@@ -22,6 +21,6 @@ public class TurnOnTheRobot implements MenuCommand {
     @Override
     public void execute() {
         robotController.turnOn();
-        chargerController.chargeRobots();
+        chargerController.unplug();
     }
 }
