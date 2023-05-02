@@ -6,17 +6,10 @@ import klodnicki.robotv2.model.Robot;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Scanner;
 
-// taka nasza klasa bazodanowa
 public class Database {
-    private List<Robot> robots = new ArrayList<>();
-    private List<Charger> chargers = new ArrayList<>();
-
-    public String getUserInput(Scanner scanner, String message) {
-        System.out.println(message);
-        return scanner.nextLine();
-    }
+    private final List<Robot> robots = new ArrayList<>();
+    private final List<Charger> chargers = new ArrayList<>();
 
     public Optional<Robot> findRobot(String robotName) {
         Robot robot = null;
@@ -30,7 +23,6 @@ public class Database {
         return Optional.ofNullable(robot);
     }
 
-
     public Optional<Charger> findCharger(String chargerName) {
         Charger charger = null;
 
@@ -43,22 +35,6 @@ public class Database {
         return Optional.ofNullable(charger);
     }
 
-
-    public void isRobotOnTheChargersList() {
-        boolean isRobotOnTheChargersList = false;
-
-        for (int i = 0; i < chargers.size(); i++) {
-
-            if (chargers.get(i).getPluggedRobots().contains(robots.get(i))) {
-                isRobotOnTheChargersList = true;
-                break;
-            }
-        }
-        if (isRobotOnTheChargersList) {
-            System.out.println("Unplug robot from the charger first.");
-        }
-    }
-
     public void add(Robot robot) {
         robots.add(robot);
     }
@@ -67,7 +43,6 @@ public class Database {
         chargers.add(charger);
     }
 
-
     public List<Robot> getRobots() {
         return robots;
     }
@@ -75,7 +50,4 @@ public class Database {
     public List<Charger> getChargers() {
         return chargers;
     }
-
-
-
 }

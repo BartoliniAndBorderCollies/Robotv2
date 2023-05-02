@@ -10,6 +10,5 @@ public class CloseApplication implements MenuCommand{
     public void execute() {
         System.out.println("Closing application");
         System.exit(0);
-
     }
 }

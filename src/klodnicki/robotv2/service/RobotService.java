@@ -9,7 +9,6 @@ import klodnicki.robotv2.model.Robot;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class RobotService {
     private final Database database;
@@ -18,16 +17,8 @@ public class RobotService {
         this.database = database;
     }
 
-    // Tutaj jest rzeczywiste tworzenie tego robota
-    public void create(String robotName) throws ObjectNotFoundException { //TODO: do poprawki
-        // tutaj najpierw walidacja
-//        Robot foundRobot = findRobot(robotName);
-//
-//
-//        if (foundRobot != null) {
-//            System.out.println("This name already exist.");
-//        }
-        // cała "logika biznesowa" -> walidacja
+    public void create(String robotName) throws ObjectNotFoundException {
+
         Robot robot = new Robot(robotName);
         database.add(robot);
     }

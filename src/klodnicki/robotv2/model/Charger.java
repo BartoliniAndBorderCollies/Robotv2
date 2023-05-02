@@ -2,18 +2,13 @@ package klodnicki.robotv2.model;
 
 import klodnicki.robotv2.exception.MaximumEnergyLevelException;
 import klodnicki.robotv2.exception.NotEnoughFreeEnergySlotsException;
-import klodnicki.robotv2.exception.ObjectNotFoundException;
 
 import java.util.ArrayList;
 import java.util.List;
-
 public class Charger {
-
     private int freeSlots;
-
     private String name;
 
-    // możliwośc podłączenie ładowarki do robota
     private List<Robot> pluggedRobots = new ArrayList<>();
 
     public Charger(int freeSlots, String name) {
@@ -41,12 +36,9 @@ public class Charger {
         }
     }
 
-    // możliwość odłączenia ładowarki
     public void unplugRobot(Robot robot) {
         pluggedRobots.remove(robot);
     }
-
-    // możliwość zwracania robotów
 
     public String getName() {
         return name;

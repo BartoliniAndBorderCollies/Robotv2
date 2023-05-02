@@ -2,7 +2,6 @@ package klodnicki.robotv2.command;
 
 import klodnicki.robotv2.controller.ChargerController;
 
-
 public class UnplugRobot implements MenuCommand{
 
     private final ChargerController chargerController;

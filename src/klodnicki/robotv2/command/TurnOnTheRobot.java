@@ -23,6 +23,5 @@ public class TurnOnTheRobot implements MenuCommand {
     public void execute() {
         robotController.turnOn();
         chargerController.chargeRobots();
-
     }
 }

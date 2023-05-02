@@ -22,6 +22,5 @@ public class TurnOffTheRobot implements MenuCommand {
     public void execute() {
         robotController.turnOff();
         chargerController.chargeRobots();
-
     }
 }

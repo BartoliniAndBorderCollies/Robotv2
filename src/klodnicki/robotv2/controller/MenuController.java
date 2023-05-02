@@ -1,6 +1,5 @@
 package klodnicki.robotv2.controller;
 
-import klodnicki.robotv2.model.Charger;
 import klodnicki.robotv2.model.Menu;
 import klodnicki.robotv2.view.MenuView;
 
@@ -9,17 +8,8 @@ import java.util.Scanner;
 
 public class MenuController {
 
-    // Na pewno potrzeba:
     private final Menu menu;
     private final MenuView menuView;
-
-//    private RobotService robotService = new RobotService();
-//    private RobotController robotController = new RobotController();
-//    private Scanner scanner = new Scanner(System.in);
-//    private Workshop workshop = new Workshop();
-//    private List<Robot> robots = new ArrayList<>();
-////    private Robot robot = new Robot(name);
-//    private ChargerService chargerService = new ChargerService(robot);
 
     public MenuController(Menu menu, MenuView menuView) {
         this.menu = menu;
@@ -28,7 +18,6 @@ public class MenuController {
 
     public void updateMenuView() {
         menuView.displayMenu(menu.getMenuCommands());
-
     }
 
     public void askUserForInput() {
@@ -40,9 +29,6 @@ public class MenuController {
         } catch (InputMismatchException e) {
             System.out.println("Answer must be an integer number.");
         }
-
         menu.pressButton(input);
-
-
     }
 }

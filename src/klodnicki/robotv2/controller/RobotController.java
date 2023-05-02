@@ -5,7 +5,6 @@ import klodnicki.robotv2.TurnCounter;
 import klodnicki.robotv2.exception.ObjectNotFoundException;
 import klodnicki.robotv2.exception.RobotNotTurnedOnException;
 import klodnicki.robotv2.exception.TooLowEnergyException;
-import klodnicki.robotv2.model.Robot;
 import klodnicki.robotv2.service.RobotService;
 
 import java.util.List;

@@ -6,7 +6,5 @@ public class ObjectNotFoundException extends DatabaseException {
 
     public ObjectNotFoundException (Class<?> clazz) {
         super(String.format(MESSAGE, clazz.getName()));
-
     }
-
 }

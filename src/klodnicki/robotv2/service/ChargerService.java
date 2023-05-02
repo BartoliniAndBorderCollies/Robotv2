@@ -1,6 +1,5 @@
 package klodnicki.robotv2.service;
 
-import com.sun.jdi.ObjectCollectedException;
 import klodnicki.robotv2.Database;
 import klodnicki.robotv2.exception.MaximumEnergyLevelException;
 import klodnicki.robotv2.exception.NotEnoughFreeEnergySlotsException;
@@ -19,30 +18,7 @@ public class ChargerService {
         this.robotService = robotService;
     }
 
-//    private Robot robot;
-
-
-//    public boolean isRobotOnTheChargersList() {
-//        boolean isRobotOnTheChargersList = false;
-//
-//        for (int i = 0; i < chargers.size(); i++) {
-//
-//            if (chargers.get(i).getPluggedRobots().contains(robot)) {
-//                isRobotOnTheChargersList = true;
-//                System.out.println("Unplug the robot first");
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
-
     public void create(int freeSlots, String chargerName) {
-        //walidacja jeśli w worku z ładowarkami ładowarka o takim imieniu już jest
-//        Charger foundCharger = database.findCharger(chargerName);
-//        if (foundCharger != null) {
-//
-//            System.out.println("This charger name already exist.");
-//        }
 
         Charger charger = new Charger(freeSlots, chargerName);
         database.add(charger);
@@ -52,7 +28,6 @@ public class ChargerService {
         Charger foundCharger = findCharger(chargerName);
         Robot foundRobot = robotService.findRobot(robotName);
         foundCharger.plugInRobot(foundRobot);
-
     }
 
     public void unplug(String chargerName, String robotName) throws ObjectNotFoundException {
@@ -76,11 +51,9 @@ public class ChargerService {
     public void chargeRobots() throws MaximumEnergyLevelException {
         List<Charger> chargers = getListOfChargers();
         for (Charger charger : chargers) {
-            charger.chargeRobots(); //TODO: tu straciłem 40 włosów
+            charger.chargeRobots();
         }
     }
-
-
 }
 
 

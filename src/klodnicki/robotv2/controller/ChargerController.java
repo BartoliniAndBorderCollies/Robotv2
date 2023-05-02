@@ -8,7 +8,6 @@ import klodnicki.robotv2.model.Charger;
 import klodnicki.robotv2.service.ChargerService;
 
 import java.util.InputMismatchException;
-import java.util.List;
 import java.util.Scanner;
 
 public class ChargerController {
@@ -22,7 +21,7 @@ public class ChargerController {
 
     public void createCharger() {
         Scanner scanner = new Scanner(System.in);
-        int energySlots = 0;
+        int energySlots;
         System.out.println("How many energy plugs you want to create?");
         try {
             energySlots = scanner.nextInt();

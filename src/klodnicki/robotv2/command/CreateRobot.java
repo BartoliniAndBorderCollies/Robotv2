@@ -5,7 +5,6 @@ import klodnicki.robotv2.controller.RobotController;
 
 public class CreateRobot implements MenuCommand {
     private final RobotController robotController;
-
     private final ChargerController chargerController;
 
     public CreateRobot(RobotController robotController, ChargerController chargerController) {

@@ -6,6 +6,5 @@ public class RobotNotTurnedOnException extends Exception{
 
     public RobotNotTurnedOnException() {
         super(MESSAGE);
-
     }
 }

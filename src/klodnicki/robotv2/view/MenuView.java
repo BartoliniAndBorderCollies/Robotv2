@@ -1,9 +1,11 @@
 package klodnicki.robotv2.view;
 
+import klodnicki.robotv2.TurnCounter;
 import klodnicki.robotv2.command.MenuCommand;
 
 public class MenuView {
     public void displayMenu(MenuCommand[] menuCommands) {
+        System.out.println("Turn: " + TurnCounter.getTurn());
         for (int i = 0; i < menuCommands.length; i++) {
             // 1. Create Robot
             // 2. Create charger
