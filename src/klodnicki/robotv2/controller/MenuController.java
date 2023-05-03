@@ -1,5 +1,6 @@
 package klodnicki.robotv2.controller;
 
+import klodnicki.robotv2.TurnCounter;
 import klodnicki.robotv2.model.Menu;
 import klodnicki.robotv2.view.MenuView;
 
@@ -10,13 +11,16 @@ public class MenuController {
 
     private final Menu menu;
     private final MenuView menuView;
+    private final TurnCounter turnCounter;
 
-    public MenuController(Menu menu, MenuView menuView) {
+    public MenuController(Menu menu, MenuView menuView, TurnCounter turnCounter) {
         this.menu = menu;
         this.menuView = menuView;
+        this.turnCounter = turnCounter;
     }
 
     public void updateMenuView() {
+        System.out.println("Turn: " + turnCounter.getTurn());
         menuView.displayMenu(menu.getMenuCommands());
     }
 

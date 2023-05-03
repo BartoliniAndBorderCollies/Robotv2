@@ -6,9 +6,11 @@ import klodnicki.robotv2.controller.ChargerController;
 public class SkipTurn implements MenuCommand{
 
     private final ChargerController chargerController;
+    private final TurnCounter turnCounter;
 
-    public SkipTurn(ChargerController chargerController) {
+    public SkipTurn(ChargerController chargerController, TurnCounter turnCounter) {
         this.chargerController = chargerController;
+        this.turnCounter = turnCounter;
     }
 
     @Override
@@ -19,7 +21,7 @@ public class SkipTurn implements MenuCommand{
     @Override
     public void execute() {
         System.out.println("Next turn is beginning.");
-        TurnCounter.count();
+        turnCounter.count();
         chargerController.chargeRobots();
     }
 }

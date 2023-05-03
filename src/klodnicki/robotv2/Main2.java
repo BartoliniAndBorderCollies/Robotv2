@@ -29,12 +29,12 @@ public class Main2 {
                 new UnplugRobot(chargerController),
                 new GetListOfRobotsAndTheirEnergy(robotController),
                 new MoveRobot(robotController, chargerController),
-                new SkipTurn(chargerController),
+                new SkipTurn(chargerController, turnCounter),
                 new CloseApplication(),
         };
         Menu mainMenu = new Menu(mainMenuCommands);
         MenuView menuView = new MenuView();
-        MenuController menuController = new MenuController(mainMenu, menuView);
+        MenuController menuController = new MenuController(mainMenu, menuView, turnCounter);
 
         menuView.welcome();
 
