@@ -14,9 +14,13 @@ public class ChargerController {
     private final ChargerService chargerService;
     private final RobotController robotController;
 
-    public ChargerController(ChargerService chargerService, RobotController robotController) {
+    private final TurnCounter turnCounter;
+
+    public ChargerController(ChargerService chargerService, RobotController robotController, TurnCounter turnCounter) {
         this.chargerService = chargerService;
         this.robotController = robotController;
+        this.turnCounter = turnCounter;
+
     }
 
     public void createCharger() {
@@ -34,7 +38,7 @@ public class ChargerController {
         String chargerName = scanner.nextLine();
         chargerService.create(energySlots, chargerName);
         System.out.println("Charger " + chargerName + " has been created.");
-        TurnCounter.count();
+        turnCounter.count();
     }
 
     public void plugIn() {
@@ -66,7 +70,7 @@ public class ChargerController {
         try {
             chargerService.plugIn(chargerName, robotName);
             System.out.println("Robot " + robotName + " has been plugged in.");
-            TurnCounter.count();
+            turnCounter.count();
         } catch (ObjectNotFoundException | NotEnoughFreeEnergySlotsException e) {
             System.out.println(e.getMessage());
         }
@@ -104,7 +108,7 @@ public class ChargerController {
         try {
             chargerService.unplug(chargerName, robotName);
             System.out.println("Robot" + robotName + " has been unplugged.");
-            TurnCounter.count();
+            turnCounter.count();
         } catch (ObjectNotFoundException ee) {
             System.out.println(ee.getMessage());
         }

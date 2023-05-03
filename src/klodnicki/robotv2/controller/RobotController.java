@@ -12,9 +12,11 @@ import java.util.Scanner;
 
 public class RobotController {
     private final RobotService robotService;
+    private final TurnCounter turnCounter;
 
-    public RobotController(RobotService robotService) {
+    public RobotController(RobotService robotService, TurnCounter turnCounter) {
         this.robotService = robotService;
+        this.turnCounter = turnCounter;
     }
 
     public void createRobot() {
@@ -23,7 +25,7 @@ public class RobotController {
         try {
             robotService.create(scanner.nextLine());
             System.out.println("Robot has been created.");
-            TurnCounter.count();
+            turnCounter.count();
         } catch (ObjectNotFoundException e) {
             System.out.println(e.getMessage());
         }
@@ -59,7 +61,7 @@ public class RobotController {
         String chosenMovement = scanner.nextLine();
         try {
             System.out.println(robotService.move(chosenRobot, chosenMovement));
-            TurnCounter.count();
+            turnCounter.count();
 
         } catch (ObjectNotFoundException | RobotNotTurnedOnException | TooLowEnergyException e) {
             System.out.println(e.getMessage());
@@ -74,7 +76,7 @@ public class RobotController {
         try {
             robotService.turnOff(robotToTurnOff);
             System.out.println("Robot " + robotToTurnOff + " has been turned off.");
-            TurnCounter.count();
+            turnCounter.count();
         } catch (ObjectNotFoundException e) {
             System.out.println(e.getMessage());
         }
@@ -88,7 +90,7 @@ public class RobotController {
         try {
             robotService.turnOn(robotToTurnOn);
             System.out.println("Robot " + robotToTurnOn + " has been turned on.");
-            TurnCounter.count();
+            turnCounter.count();
         } catch (ObjectNotFoundException e) {
             System.out.println(e.getMessage());
         }

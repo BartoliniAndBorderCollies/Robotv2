@@ -16,8 +16,8 @@ public class Main2 {
         RobotService robotService = new RobotService(database);
         ChargerService chargerService = new ChargerService(database, robotService);
         TurnCounter turnCounter = new TurnCounter();
-        RobotController robotController = new RobotController(robotService);
-        ChargerController chargerController = new ChargerController(chargerService, robotController);
+        RobotController robotController = new RobotController(robotService, turnCounter);
+        ChargerController chargerController = new ChargerController(chargerService, robotController, turnCounter);
 
         MenuCommand[] mainMenuCommands = {
 

@@ -2,13 +2,13 @@ package klodnicki.robotv2;
 
 public class TurnCounter {
 
-    private static int turn = 0;
+    private int turn = 0;
 
-    public static void count() {
+    public void count() {
         turn++;
     }
 
-    public static int getTurn() {
+    public int getTurn() {
         return turn;
     }
 }
