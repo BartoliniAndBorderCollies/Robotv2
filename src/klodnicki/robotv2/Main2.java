@@ -14,14 +14,9 @@ import java.awt.event.ActionEvent;
 
 public class Main2 {
 
-//    private static JTextField textField;
-//    private static JTextField passwordField;
-//
-//    private static JLabel successLabel;
     public static void main(String[] args) {
 
         GUI gui = new GUI();
-        gui.showLogin();
 
         Database database = new Database();
         RobotService robotService = new RobotService(database);
