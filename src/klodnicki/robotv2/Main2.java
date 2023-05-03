@@ -7,10 +7,22 @@ import klodnicki.robotv2.controller.RobotController;
 import klodnicki.robotv2.model.Menu;
 import klodnicki.robotv2.service.ChargerService;
 import klodnicki.robotv2.service.RobotService;
+import klodnicki.robotv2.view.GUI;
 import klodnicki.robotv2.view.MenuView;
 
-public class Main2 {
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class Main2 implements ActionListener {
+
+//    private static JTextField textField;
+//    private static JTextField passwordField;
+//
+//    private static JLabel successLabel;
     public static void main(String[] args) {
+
+        GUI gui = new GUI();
+        gui.showLogin();
 
         Database database = new Database();
         RobotService robotService = new RobotService(database);
@@ -43,5 +55,16 @@ public class Main2 {
             menuController.askUserForInput();
 
         } while (true);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent actionEvent) {
+//        String user = textField.getText();
+//        String password = passwordField.getText();
+//
+//        if(user.equals("lala") && password.equals("password")) {
+//            successLabel.setText("Login successful.");
+//        }
+
     }
 }
