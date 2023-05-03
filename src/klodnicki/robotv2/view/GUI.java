@@ -3,48 +3,82 @@ package klodnicki.robotv2.view;
 import klodnicki.robotv2.Main2;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class GUI {
+public class GUI implements ActionListener {
 
-    public void showLogin() {
+    private JLabel welcomeLabel = new JLabel("Welcome to robot command center. You must login to continue.");
+    private JFrame frame = new JFrame();
+    private JPanel panel = new JPanel();
+    private JLabel userLabel = new JLabel("User name:");
+    private JLabel passwordLabel = new JLabel("Password:");
+    private JTextField textField = new JTextField();
+    private JPasswordField passwordField = new JPasswordField();
+    private JButton buttonLogin = new JButton("Login");
+    private JButton buttonCreateAccount = new JButton("Create account");
+    private JCheckBox showPassword = new JCheckBox("Show Password");
+    private JLabel successLabel = new JLabel("");
 
-        JFrame frame = new JFrame();
-        JPanel panel = new JPanel();
-        JLabel welcomeLabel = new JLabel("Welcome to robot command center. You must login to continue.");
-        JLabel userLabel = new JLabel("User name:");
-        JLabel passwordLabel = new JLabel("password:");
-        JLabel successLabel = new JLabel("");
-        JTextField textField = new JTextField();
-        JPasswordField passwordField = new JPasswordField();
-        JButton button = new JButton("Login");
-        JButton buttonCreateAccount = new JButton("Create account");
 
+    public GUI(){
+        setupFrame();
+        setLocationAndSize();
+        addComponents();
+        addActionEvent();
+    }
+
+    public void setLocationAndSize() {
         frame.setSize(500, 300);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
-        frame.add(panel);
+        welcomeLabel.setBounds(50, 20, 500, 25);
+        userLabel.setBounds(100, 50, 80, 25);
+        passwordLabel.setBounds(100, 80, 80, 25);
+        successLabel.setBounds(100, 200, 80, 25);
+        buttonLogin.setBounds(190, 130, 80, 25);
+        buttonCreateAccount.setBounds(300, 130, 150, 25);
+        textField.setBounds(200, 50, 165, 25);
+        passwordField.setBounds(200, 80, 165, 25);
+        showPassword.setBounds(225, 100, 150, 30);
+    }
 
-        panel.setLayout(null);
+    public void addComponents(){
+        frame.add(panel);
         panel.add(userLabel);
         panel.add(textField);
         panel.add(welcomeLabel);
         panel.add(passwordLabel);
         panel.add(passwordField);
-        panel.add(button);
+        panel.add(buttonLogin);
         panel.add(buttonCreateAccount);
         panel.add(successLabel);
+        panel.add(showPassword);
+    }
 
-        welcomeLabel.setBounds(50, 20, 500, 25);
-        userLabel.setBounds(100, 50, 80, 25);
-        passwordLabel.setBounds(100, 80, 80, 25);
-        successLabel.setBounds(100, 110, 80, 25);
+    public void setupFrame() {
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+        panel.setLayout(null);
+    }
 
-        button.setBounds(190, 130, 80, 25);
-        buttonCreateAccount.setBounds(300, 130, 150, 25);
-        button.addActionListener(new Main2());
-        buttonCreateAccount.addActionListener(new Main2());
+    public void showLogin() {
 
-        textField.setBounds(200, 50, 165, 25);
-        passwordField.setBounds(200, 80, 165, 25);
+
+    }
+
+    public void addActionEvent() {
+        buttonLogin.addActionListener(this);
+        buttonCreateAccount.addActionListener(this);
+        showPassword.addActionListener(this);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent actionEvent) {
+        if (actionEvent.getSource() == buttonCreateAccount) {
+            System.out.println("test");
+        }
+        if(actionEvent.getSource() == buttonLogin) {
+            System.out.println("kapusta");
+        }
     }
 }

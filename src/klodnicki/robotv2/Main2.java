@@ -11,9 +11,8 @@ import klodnicki.robotv2.view.GUI;
 import klodnicki.robotv2.view.MenuView;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class Main2 implements ActionListener {
+public class Main2 {
 
 //    private static JTextField textField;
 //    private static JTextField passwordField;
@@ -55,16 +54,5 @@ public class Main2 implements ActionListener {
             menuController.askUserForInput();
 
         } while (true);
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent actionEvent) {
-//        String user = textField.getText();
-//        String password = passwordField.getText();
-//
-//        if(user.equals("lala") && password.equals("password")) {
-//            successLabel.setText("Login successful.");
-//        }
-
     }
 }
