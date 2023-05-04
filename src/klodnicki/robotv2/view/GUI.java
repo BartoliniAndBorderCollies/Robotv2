@@ -67,6 +67,44 @@ public class GUI extends JFrame implements ActionListener {
         buttonLogin.addActionListener(this);
         buttonReset.addActionListener(this);
         showPassword.addActionListener(this);
+        buttonCreate.addActionListener(this);
+    }
+
+    public static void createAccount() {
+        JFrame frameAccount = new JFrame();
+        JPanel panelAccount = new JPanel();
+        JLabel userAccountLabel = new JLabel("New user name:");
+        JLabel passwordAccountLabel = new JLabel("New password:");
+        JLabel confirmPasswordAccountLabel = new JLabel("Confirm password");
+        JTextField userAccountField = new JTextField();
+        JPasswordField passwordAccountField = new JPasswordField();
+        JPasswordField confirmPasswordAccountField = new JPasswordField();
+        JButton createButton = new JButton("Create account");
+        JCheckBox showPasswordAccount = new JCheckBox("Show Password");
+
+        frameAccount.add(panelAccount);
+        panelAccount.add(userAccountLabel);
+        panelAccount.add(passwordAccountLabel);
+        panelAccount.add(confirmPasswordAccountLabel);
+        panelAccount.add(userAccountField);
+        panelAccount.add(passwordAccountField);
+        panelAccount.add(confirmPasswordAccountField);
+        panelAccount.add(createButton);
+        panelAccount.add(showPasswordAccount);
+
+        frameAccount.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frameAccount.setVisible(true);
+        panelAccount.setLayout(null);
+
+        frameAccount.setSize(500, 500);
+        userAccountLabel.setBounds(100, 50, 80, 25);
+        passwordAccountLabel.setBounds(100, 80, 80, 25);
+        confirmPasswordAccountLabel.setBounds(100, 110, 80, 25);
+        userAccountField.setBounds(100, 130, 165, 25);
+        passwordAccountField.setBounds(100, 180, 165, 25);
+        confirmPasswordAccountField.setBounds(100, 210, 165, 25);
+        createButton.setBounds(175, 250, 80, 25);
+        showPasswordAccount.setBounds(100, 230,80,25);
     }
 
     @Override
@@ -94,5 +132,13 @@ public class GUI extends JFrame implements ActionListener {
                 passwordField.setEchoChar('*');
             }
         }
+
+        if(e.getSource() == createAccount) {
+            createAccount();
+//            if(e.getSource() == createButton) {
+//                JOptionPane.showMessageDialog(this, "Account has been successful created.");
+//            }
+        }
+
     }
 }
