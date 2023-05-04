@@ -17,6 +17,8 @@ public class GUI extends JFrame implements ActionListener {
     private final JButton buttonReset = new JButton("Reset");
     private final JCheckBox showPassword = new JCheckBox("Show Password");
     private final JLabel successLabel = new JLabel("");
+    private final JLabel createAccount = new JLabel("No account? Click below");
+    private final JButton buttonCreate = new JButton("Create account");
 
     public GUI(){
         setupFrame();
@@ -31,11 +33,13 @@ public class GUI extends JFrame implements ActionListener {
         userLabel.setBounds(100, 50, 80, 25);
         passwordLabel.setBounds(100, 80, 80, 25);
         successLabel.setBounds(100, 200, 80, 25);
-        buttonLogin.setBounds(190, 160, 80, 25);
-        buttonReset.setBounds(300, 160, 150, 25);
+        buttonLogin.setBounds(175, 160, 80, 25);
+        buttonReset.setBounds(275, 160, 80, 25);
+        buttonCreate.setBounds(200,230, 120, 25);
         textField.setBounds(200, 50, 165, 25);
         passwordField.setBounds(200, 80, 165, 25);
         showPassword.setBounds(225, 120, 150, 30);
+        createAccount.setBounds(190, 200, 400, 25);
     }
 
     public void addComponents(){
@@ -49,6 +53,8 @@ public class GUI extends JFrame implements ActionListener {
         panel.add(buttonReset);
         panel.add(successLabel);
         panel.add(showPassword);
+        panel.add(createAccount);
+        panel.add(buttonCreate);
     }
 
     public void setupFrame() {
