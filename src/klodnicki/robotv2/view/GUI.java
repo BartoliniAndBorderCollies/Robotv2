@@ -20,6 +20,9 @@ public class GUI extends JFrame implements ActionListener {
     private final JLabel createAccount = new JLabel("No account? Click below");
     private final JButton buttonCreate = new JButton("Create account");
 
+    private final ImageIcon image = new ImageIcon("robot.jpg");
+
+
     public GUI(){
         setupFrame();
         setLocationAndSize();
@@ -58,8 +61,11 @@ public class GUI extends JFrame implements ActionListener {
     }
 
     public void setupFrame() {
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         frame.setVisible(true);
+        frame.setTitle("Robot application login");
+        frame.setResizable(false);
+        frame.setIconImage(image.getImage());
         panel.setLayout(null);
     }
 
