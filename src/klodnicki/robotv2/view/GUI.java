@@ -1,6 +1,7 @@
 package klodnicki.robotv2.view;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -19,7 +20,6 @@ public class GUI extends JFrame implements ActionListener {
     private final JLabel successLabel = new JLabel("");
     private final JLabel createAccount = new JLabel("No account? Click below");
     private final JButton buttonCreate = new JButton("Create account");
-
     private final ImageIcon image = new ImageIcon("robot.jpg");
 
 
@@ -66,6 +66,7 @@ public class GUI extends JFrame implements ActionListener {
         frame.setTitle("Robot application login");
         frame.setResizable(false);
         frame.setIconImage(image.getImage());
+//        frame.getContentPane().setBackground(new Color(50,50,50));
         panel.setLayout(null);
     }
 
@@ -77,6 +78,7 @@ public class GUI extends JFrame implements ActionListener {
     }
 
     public static void createAccount() {
+        //TODO: make it as a seperate class
         JFrame frameAccount = new JFrame();
         JPanel panelAccount = new JPanel();
         JLabel userAccountLabel = new JLabel("New user name:");
@@ -140,7 +142,7 @@ public class GUI extends JFrame implements ActionListener {
         }
 
         if(e.getSource() == createAccount) {
-            createAccount();
+            createAccount(); //TODO: To be continued.
 //            if(e.getSource() == createButton) {
 //                JOptionPane.showMessageDialog(this, "Account has been successful created.");
 //            }

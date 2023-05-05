@@ -3,6 +3,9 @@ package klodnicki.robotv2;
 import klodnicki.robotv2.model.Charger;
 import klodnicki.robotv2.model.Robot;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
