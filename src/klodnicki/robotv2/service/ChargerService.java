@@ -21,7 +21,7 @@ public class ChargerService {
     public void create(int freeSlots, String chargerName) {
 
         Charger charger = new Charger(freeSlots, chargerName);
-        database.add(charger);
+        database.create(charger);
     }
 
     public void plugIn(String chargerName, String robotName) throws ObjectNotFoundException, NotEnoughFreeEnergySlotsException {

@@ -3,7 +3,6 @@ package klodnicki.robotv2;
 import klodnicki.robotv2.model.Charger;
 import klodnicki.robotv2.model.Robot;
 
-import javax.xml.crypto.Data;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,15 +36,6 @@ public class Database {
         }
         return Optional.ofNullable(charger);
     }
-
-    public void add(Robot robot) {
-        robots.add(robot);
-    }
-
-    public void add(Charger charger) {
-        chargers.add(charger);
-    }
-
     public List<Robot> getRobots() {
         return robots;
     }
@@ -67,4 +57,17 @@ public class Database {
             e.printStackTrace();
         }
     }
+    public void create(Charger charger) {
+        try (Connection connection = DatabaseConnection.getConnection()) {
+            String insertQuery = "INSERT INTO chargers(free_slots, name) values(?, ?)";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(insertQuery)){
+                preparedStatement.setInt(1, charger.getFreeSlots());
+                preparedStatement.setString(2, charger.getName());
+                preparedStatement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     }

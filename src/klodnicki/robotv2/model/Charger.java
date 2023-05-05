@@ -52,4 +52,8 @@ public class Charger {
     public List<Robot> getPluggedRobots() {
         return pluggedRobots;
     }
+
+    public int getFreeSlots() {
+        return freeSlots;
+    }
 }
