@@ -3,12 +3,12 @@ package klodnicki.robotv2;
 import klodnicki.robotv2.model.Charger;
 import klodnicki.robotv2.model.Robot;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import javax.xml.crypto.Data;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
 
 public class Database {
     private final List<Robot> robots = new ArrayList<>();
@@ -54,8 +54,8 @@ public class Database {
         return chargers;
     }
 
-    public void saveNewRobotToDatabase(Robot robot) {
-        try (Connection connection = DatabaseConnection.getConnection()){
+    public void create(Robot robot) {
+        try (Connection connection = DatabaseConnection.getConnection()) {
             String insertQuery = "INSERT INTO robots(name, energy_level, is_on) values(?, ?, ?)";
             try (PreparedStatement preparedStatement = connection.prepareStatement(insertQuery)) {
                 preparedStatement.setString(1, robot.getName());
@@ -67,7 +67,4 @@ public class Database {
             e.printStackTrace();
         }
     }
-
-
-
-}
+    }

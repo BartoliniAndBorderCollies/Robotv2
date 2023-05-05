@@ -20,7 +20,7 @@ public class RobotService {
     public void create(String robotName) throws ObjectNotFoundException {
 
         Robot robot = new Robot(robotName);
-        database.add(robot);
+        database.create(robot);
     }
 
     public List<String> prepareListOfRobotNamesWithEnergy() {
