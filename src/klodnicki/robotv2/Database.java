@@ -53,4 +53,21 @@ public class Database {
     public List<Charger> getChargers() {
         return chargers;
     }
+
+    public void saveNewRobotToDatabase(Robot robot) {
+        try (Connection connection = DatabaseConnection.getConnection()){
+            String insertQuery = "INSERT INTO robots(name, energy_level, is_on) values(?, ?, ?)";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(insertQuery)) {
+                preparedStatement.setString(1, robot.getName());
+                preparedStatement.setInt(2, robot.getEnergyLevel());
+                preparedStatement.setBoolean(3, robot.isOn());
+                preparedStatement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
 }
