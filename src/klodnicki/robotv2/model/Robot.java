@@ -7,14 +7,20 @@ import klodnicki.robotv2.exception.RobotNotTurnedOnException;
 
 public class Robot {
 
-    private int energyLevel;
     private String name;
+    private int energyLevel;
     private boolean isOn;
 
     public Robot(String name) {
         this.name = name;
         energyLevel = 100;
         isOn = true;
+    }
+
+    public Robot(String name, int energyLevel, boolean isOn) {
+        this.name = name;
+        this.isOn = isOn;
+        this.energyLevel = energyLevel;
     }
 
     public String move(RobotMovement robotMovement) throws TooLowEnergyException, RobotNotTurnedOnException {
@@ -49,7 +55,7 @@ public class Robot {
     }
 
     public void setEnergyLevel(int energyLevel) throws MaximumEnergyLevelException {
-        if (energyLevel>100) {
+        if (energyLevel > 100) {
             throw new MaximumEnergyLevelException(name);
         }
         this.energyLevel = energyLevel;
@@ -61,6 +67,6 @@ public class Robot {
 
     @Override
     public String toString() {
-        return "Robot "+ name;
+        return "Robot " + name;
     }
 }

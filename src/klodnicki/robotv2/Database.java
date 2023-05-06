@@ -10,19 +10,26 @@ import java.util.Optional;
 
 
 public class Database {
-    private final List<Robot> robots = new ArrayList<>();
-    private final List<Charger> chargers = new ArrayList<>();
 
     public Optional<Robot> findRobot(String robotName) {
         Robot robot = null;
-
-        for (Robot value : robots) {
-            if (value.getName().equals(robotName)) {
-                robot = value;
-                break;
+        String foundRobotName = "";
+        int foundRobotEnergyLevel = 0;
+        boolean isFoundRobotOn = true;
+        String selectQuery = "select * from robots where name = ?";
+        try (PreparedStatement preparedStatement = DatabaseConnection.getConnection().prepareStatement(selectQuery)) {
+            preparedStatement.setString(1, robotName);
+            ResultSet resultSet = preparedStatement.executeQuery(selectQuery);
+            while (resultSet.next()) {
+               foundRobotName = resultSet.getString("name");
+               foundRobotEnergyLevel = resultSet.getInt("energy_level");
+               isFoundRobotOn = resultSet.getBoolean("is_on");
             }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        return Optional.ofNullable(robot);
+        return Optional.of(new Robot(foundRobotName, foundRobotEnergyLevel, isFoundRobotOn));
     }
 
     public Optional<Charger> findCharger(String chargerName) {
@@ -36,6 +43,7 @@ public class Database {
         }
         return Optional.ofNullable(charger);
     }
+
     public List<Robot> getRobots() {
         return robots;
     }
@@ -57,10 +65,11 @@ public class Database {
             e.printStackTrace();
         }
     }
+
     public void create(Charger charger) {
         try (Connection connection = DatabaseConnection.getConnection()) {
             String insertQuery = "INSERT INTO chargers(free_slots, name) values(?, ?)";
-            try (PreparedStatement preparedStatement = connection.prepareStatement(insertQuery)){
+            try (PreparedStatement preparedStatement = connection.prepareStatement(insertQuery)) {
                 preparedStatement.setInt(1, charger.getFreeSlots());
                 preparedStatement.setString(2, charger.getName());
                 preparedStatement.executeUpdate();
@@ -70,4 +79,4 @@ public class Database {
         }
     }
 
-    }
+}
