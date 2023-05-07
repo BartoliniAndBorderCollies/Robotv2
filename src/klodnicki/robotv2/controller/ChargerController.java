@@ -36,7 +36,7 @@ public class ChargerController {
         scanner.nextLine();
         System.out.println("Give the name for the charger.");
         String chargerName = scanner.nextLine();
-        chargerService.create(energySlots, chargerName);
+        chargerService.create(chargerName, energySlots);
         System.out.println("Charger " + chargerName + " has been created.");
         turnCounter.count();
     }

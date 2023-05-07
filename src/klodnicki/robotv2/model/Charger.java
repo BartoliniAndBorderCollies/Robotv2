@@ -6,14 +6,17 @@ import klodnicki.robotv2.exception.NotEnoughFreeEnergySlotsException;
 import java.util.ArrayList;
 import java.util.List;
 public class Charger {
-    private int freeSlots;
-    private String name;
+
+    private final String name;
+    private final int freeSlots;
+
 
     private List<Robot> pluggedRobots = new ArrayList<>();
 
-    public Charger(int freeSlots, String name) {
-        this.freeSlots = freeSlots;
+    public Charger(String name, int freeSlots) {
         this.name = name;
+        this.freeSlots = freeSlots;
+
     }
 
     public void plugInRobot(Robot robot) throws NotEnoughFreeEnergySlotsException {

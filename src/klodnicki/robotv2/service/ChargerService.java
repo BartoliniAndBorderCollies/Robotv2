@@ -18,9 +18,9 @@ public class ChargerService {
         this.robotService = robotService;
     }
 
-    public void create(int freeSlots, String chargerName) {
+    public void create(String chargerName, int freeSlots) {
 
-        Charger charger = new Charger(freeSlots, chargerName);
+        Charger charger = new Charger(chargerName, freeSlots);
         database.create(charger);
     }
 

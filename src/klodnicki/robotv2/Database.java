@@ -34,14 +34,21 @@ public class Database {
 
     public Optional<Charger> findCharger(String chargerName) {
         Charger charger = null;
+        String foundChargerName = "";
+        int foundFreeEnergySlots = 0;
 
-        for (Charger value : chargers) {
-            if (value.getName().equals(chargerName)) {
-                charger = value;
-                break;
+        String selectQuery = "select * from chargers where name = ?";
+        try(PreparedStatement preparedStatement = DatabaseConnection.getConnection().prepareStatement(selectQuery)) {
+            preparedStatement.setString(1, chargerName);
+            ResultSet resultSet = preparedStatement.executeQuery(selectQuery);
+            while(resultSet.next()) {
+                foundChargerName = resultSet.getString("name");
+                foundFreeEnergySlots = resultSet.getInt("energy_slots");
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        return Optional.ofNullable(charger);
+        return Optional.of(new Charger(foundChargerName, foundFreeEnergySlots));
     }
 
     public List<Robot> getRobots() {
