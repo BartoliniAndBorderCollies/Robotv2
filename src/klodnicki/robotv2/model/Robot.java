@@ -23,6 +23,8 @@ public class Robot {
         this.energyLevel = energyLevel;
     }
 
+
+
     public String move(RobotMovement robotMovement) throws TooLowEnergyException, RobotNotTurnedOnException {
         if (energyLevel < robotMovement.getMoveCost()) {
             throw new TooLowEnergyException(energyLevel, robotMovement.getMoveCost());

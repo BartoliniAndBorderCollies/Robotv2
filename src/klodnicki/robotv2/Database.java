@@ -21,9 +21,9 @@ public class Database {
             preparedStatement.setString(1, robotName);
             ResultSet resultSet = preparedStatement.executeQuery(selectQuery);
             while (resultSet.next()) {
-               foundRobotName = resultSet.getString("name");
-               foundRobotEnergyLevel = resultSet.getInt("energy_level");
-               isFoundRobotOn = resultSet.getBoolean("is_on");
+                foundRobotName = resultSet.getString("name");
+                foundRobotEnergyLevel = resultSet.getInt("energy_level");
+                isFoundRobotOn = resultSet.getBoolean("is_on");
             }
 
         } catch (SQLException e) {
@@ -38,12 +38,12 @@ public class Database {
         int foundFreeEnergySlots = 0;
 
         String selectQuery = "select * from chargers where name = ?";
-        try(PreparedStatement preparedStatement = DatabaseConnection.getConnection().prepareStatement(selectQuery)) {
+        try (PreparedStatement preparedStatement = DatabaseConnection.getConnection().prepareStatement(selectQuery)) {
             preparedStatement.setString(1, chargerName);
             ResultSet resultSet = preparedStatement.executeQuery(selectQuery);
-            while(resultSet.next()) {
+            while (resultSet.next()) {
                 foundChargerName = resultSet.getString("name");
-                foundFreeEnergySlots = resultSet.getInt("energy_slots");
+                foundFreeEnergySlots = resultSet.getInt("free_energy_slots");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -52,6 +52,20 @@ public class Database {
     }
 
     public List<Robot> getRobots() {
+        List<Robot> robots = new ArrayList<>();
+        String selectQueryAll = "select * from robots";
+        try(Statement statement = DatabaseConnection.getConnection().createStatement()) {
+            ResultSet resultSet = statement.executeQuery(selectQueryAll);
+            while (resultSet.next()) {
+                String foundRobotName = resultSet.getString("name");
+                int foundRobotEnergyLevel = resultSet.getInt("energy_level");
+                boolean isFoundRobotOn = resultSet.getBoolean("is_on");
+
+                robots.add(new Robot(foundRobotName, foundRobotEnergyLevel, isFoundRobotOn));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return robots;
     }
 
