@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-
 public class Database {
 
     public Optional<Robot> findRobot(String robotName) {
@@ -60,7 +59,6 @@ public class Database {
                 String foundRobotName = resultSet.getString("name");
                 int foundRobotEnergyLevel = resultSet.getInt("energy_level");
                 boolean isFoundRobotOn = resultSet.getBoolean("is_on");
-
                 robots.add(new Robot(foundRobotName, foundRobotEnergyLevel, isFoundRobotOn));
             }
         } catch (SQLException e) {
@@ -70,6 +68,18 @@ public class Database {
     }
 
     public List<Charger> getChargers() {
+        List<Charger> chargers = new ArrayList<>();
+        String selectQueryAll = "select * from chargers";
+        try (Statement statement = DatabaseConnection.getConnection().createStatement()) {
+            ResultSet resultSet = statement.executeQuery(selectQueryAll);
+            while (resultSet.next()) {
+                String foundChargerName = resultSet.getString("name");
+                int foundFreeEnergySlots = resultSet.getInt("free_energy_slots");
+                chargers.add(new Charger(foundChargerName, foundFreeEnergySlots));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return chargers;
     }
 
@@ -99,5 +109,4 @@ public class Database {
             e.printStackTrace();
         }
     }
-
 }
