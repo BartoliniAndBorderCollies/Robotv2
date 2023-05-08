@@ -83,9 +83,23 @@ public class Database {
         return chargers;
     }
 
+    public boolean doesRobotAlreadyExist (String robotName) {
+        List<Robot> listExistingRobots = getRobots();
+        List<String> listNamesOfRobots = new ArrayList<>();
+        for (Robot existingRobot : listExistingRobots) {
+            String existingRobotName = existingRobot.getName();
+            listNamesOfRobots.add(existingRobotName);
+        }
+        return listNamesOfRobots.contains(robotName);
+    }
+
     public void create(Robot robot) {
+        if (doesRobotAlreadyExist(robot.getName())) {
+            return;
+        }
         try (Connection connection = DatabaseConnection.getConnection()) {
             String insertQuery = "INSERT INTO robots(name, energy_level, is_on) values(?, ?, ?)";
+
             try (PreparedStatement preparedStatement = connection.prepareStatement(insertQuery)) {
                 preparedStatement.setString(1, robot.getName());
                 preparedStatement.setInt(2, robot.getEnergyLevel());

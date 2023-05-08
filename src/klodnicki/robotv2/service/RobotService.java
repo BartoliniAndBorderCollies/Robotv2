@@ -61,4 +61,8 @@ public class RobotService {
         Robot robot = findRobot(robotName);
         return robot.isOn();
     }
+
+    public boolean doesRobotAlreadyExist(String robotName) {
+        return database.doesRobotAlreadyExist(robotName);
+    }
 }

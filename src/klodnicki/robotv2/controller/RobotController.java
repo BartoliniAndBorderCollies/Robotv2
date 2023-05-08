@@ -22,8 +22,13 @@ public class RobotController {
     public void createRobot() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Give the robot name.");
+        String name = scanner.nextLine();
         try {
-            robotService.create(scanner.nextLine());
+            if (robotService.doesRobotAlreadyExist(name)) {
+                System.out.println("This robot already exist.");
+                return;
+            }
+            robotService.create(name);
             System.out.println("Robot has been created.");
             turnCounter.count();
         } catch (ObjectNotFoundException e) {
