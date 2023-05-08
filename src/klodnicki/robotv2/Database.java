@@ -99,10 +99,10 @@ public class Database {
 
     public void create(Charger charger) {
         try (Connection connection = DatabaseConnection.getConnection()) {
-            String insertQuery = "INSERT INTO chargers(free_slots, name) values(?, ?)";
+            String insertQuery = "INSERT INTO chargers(name, free_energy_slots) values(?, ?)";
             try (PreparedStatement preparedStatement = connection.prepareStatement(insertQuery)) {
-                preparedStatement.setInt(1, charger.getFreeSlots());
-                preparedStatement.setString(2, charger.getName());
+                preparedStatement.setString(1, charger.getName());
+                preparedStatement.setInt(2, charger.getFreeSlots());
                 preparedStatement.executeUpdate();
             }
         } catch (SQLException e) {
