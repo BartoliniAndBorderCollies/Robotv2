@@ -93,6 +93,16 @@ public class Database {
         return listNamesOfRobots.contains(robotName);
     }
 
+    public boolean doesChargerAlreadyExist (String chargerName) {
+        List<Charger> listExistingChargers = getChargers();
+        List<String> listNamesOfChargers = new ArrayList<>();
+        for(Charger existingCharger : listExistingChargers) {
+            String existingChargerName = existingCharger.getName();
+            listNamesOfChargers.add(existingChargerName);
+        }
+        return listNamesOfChargers.contains(chargerName);
+    }
+
     public void create(Robot robot) {
         if (doesRobotAlreadyExist(robot.getName())) {
             return;

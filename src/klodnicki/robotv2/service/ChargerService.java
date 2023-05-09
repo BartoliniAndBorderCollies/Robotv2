@@ -54,6 +54,10 @@ public class ChargerService {
             charger.chargeRobots();
         }
     }
+
+    public boolean doesChargerAlreadyExist(String chargerName) {
+        return database.doesChargerAlreadyExist(chargerName);
+    }
 }
 
 
