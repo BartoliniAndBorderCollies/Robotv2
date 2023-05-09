@@ -12,42 +12,43 @@ public class Database {
 
     public Optional<Robot> findRobot(String robotName) {
         Robot robot = null;
-        String foundRobotName = "";
-        int foundRobotEnergyLevel = 0;
-        boolean isFoundRobotOn = true;
+
         String selectQuery = "select * from robots where name = ?";
         try (PreparedStatement preparedStatement = DatabaseConnection.getConnection().prepareStatement(selectQuery)) {
             preparedStatement.setString(1, robotName);
             ResultSet resultSet = preparedStatement.executeQuery(selectQuery);
-            while (resultSet.next()) {
-                foundRobotName = resultSet.getString("name");
-                foundRobotEnergyLevel = resultSet.getInt("energy_level");
-                isFoundRobotOn = resultSet.getBoolean("is_on");
-            }
+            // nie znajdzie robota, czyli resultSet.next() zwróci false
+            // znajdzie dokładnie jednego robota
+            // znajdzie więcej niż jednego robota
 
+            if (resultSet.next()) {
+                String foundRobotName = resultSet.getString("name");
+                int foundRobotEnergyLevel = resultSet.getInt("energy_level");
+                boolean isFoundRobotOn = resultSet.getBoolean("is_on");
+                robot = new Robot(foundRobotName, foundRobotEnergyLevel, isFoundRobotOn);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return Optional.of(new Robot(foundRobotName, foundRobotEnergyLevel, isFoundRobotOn));
+        return Optional.ofNullable(robot);
     }
 
     public Optional<Charger> findCharger(String chargerName) {
         Charger charger = null;
-        String foundChargerName = "";
-        int foundFreeEnergySlots = 0;
 
         String selectQuery = "select * from chargers where name = ?";
         try (PreparedStatement preparedStatement = DatabaseConnection.getConnection().prepareStatement(selectQuery)) {
             preparedStatement.setString(1, chargerName);
             ResultSet resultSet = preparedStatement.executeQuery(selectQuery);
             while (resultSet.next()) {
-                foundChargerName = resultSet.getString("name");
-                foundFreeEnergySlots = resultSet.getInt("free_energy_slots");
+                String foundChargerName = resultSet.getString("name");
+                int foundFreeEnergySlots = resultSet.getInt("free_energy_slots");
+                charger = new Charger(foundChargerName, foundFreeEnergySlots);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return Optional.of(new Charger(foundChargerName, foundFreeEnergySlots));
+        return Optional.ofNullable(charger);
     }
 
     public List<Robot> getRobots() {
