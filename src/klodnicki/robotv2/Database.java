@@ -135,6 +135,28 @@ public class Database {
         }
     }
 
+    public void addRobotToPluggedRobots(String robotName) { //TODO: i will try to use findRobot();
+        try (Connection connection = DatabaseConnection.getConnection()) {
+            String selectQuery = "SELECT * from robots where name = ?";
+            try (PreparedStatement preparedStatementSelect = connection.prepareStatement(selectQuery)) {
+                preparedStatementSelect.setString(1, robotName);
+                ResultSet robotInfo = preparedStatementSelect.executeQuery(selectQuery);
+
+                String insertRobotToPluggedRobots = "INSERT INTO plugged_robots(name, energy_level, is_on) VALUES(?, ?, ?)";
+                if(robotInfo.next()) {
+                    try(PreparedStatement preparedStatementInsert = connection.prepareStatement(insertRobotToPluggedRobots)) {
+                        preparedStatementInsert.setString(1, robotInfo.getString("name"));
+                        preparedStatementInsert.setInt(2, robotInfo.getInt("energy_level"));
+                        preparedStatementInsert.setBoolean(3, robotInfo.getBoolean("is_on"));
+                        preparedStatementInsert.executeUpdate();
+                    }
+                }
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public List<Robot> getPluggedRobots() {
         List<Robot> pluggedRobots = new ArrayList<>();
         try (Connection connection = DatabaseConnection.getConnection()) {
