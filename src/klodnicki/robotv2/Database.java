@@ -54,7 +54,7 @@ public class Database {
     public List<Robot> getRobots() {
         List<Robot> robots = new ArrayList<>();
         String selectQueryAll = "select * from robots";
-        try(Statement statement = DatabaseConnection.getConnection().createStatement()) {
+        try (Statement statement = DatabaseConnection.getConnection().createStatement()) {
             ResultSet resultSet = statement.executeQuery(selectQueryAll);
             while (resultSet.next()) {
                 String foundRobotName = resultSet.getString("name");
@@ -84,7 +84,7 @@ public class Database {
         return chargers;
     }
 
-    public boolean doesRobotAlreadyExist (String robotName) {
+    public boolean doesRobotAlreadyExist(String robotName) {
         List<Robot> listExistingRobots = getRobots();
         List<String> listNamesOfRobots = new ArrayList<>();
         for (Robot existingRobot : listExistingRobots) {
@@ -94,10 +94,10 @@ public class Database {
         return listNamesOfRobots.contains(robotName);
     }
 
-    public boolean doesChargerAlreadyExist (String chargerName) {
+    public boolean doesChargerAlreadyExist(String chargerName) {
         List<Charger> listExistingChargers = getChargers();
         List<String> listNamesOfChargers = new ArrayList<>();
-        for(Charger existingCharger : listExistingChargers) {
+        for (Charger existingCharger : listExistingChargers) {
             String existingChargerName = existingCharger.getName();
             listNamesOfChargers.add(existingChargerName);
         }
@@ -133,5 +133,31 @@ public class Database {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public List<Robot> getPluggedRobots() {
+        List<Robot> pluggedRobots = new ArrayList<>();
+        try (Connection connection = DatabaseConnection.getConnection()) {
+
+            String selectRobotsId = "select id_robot from plugged_robots";
+            try (Statement statement = connection.createStatement()) {
+                ResultSet robotsIds = statement.executeQuery(selectRobotsId);
+
+                String selectRobot = "select * from robots where id = ?";
+                while (robotsIds.next()) {
+                    try (PreparedStatement preparedStatement = connection.prepareStatement(selectRobot)) {
+                        preparedStatement.setInt(1, robotsIds.getInt("id_robot"));
+                        ResultSet foundRobotInfo = preparedStatement.executeQuery();
+                        if (foundRobotInfo.next()) {
+                            pluggedRobots.add(new Robot(foundRobotInfo.getString("name"),
+                                    foundRobotInfo.getInt("energy_level"), foundRobotInfo.getBoolean("is_on")));
+                        }
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return pluggedRobots;
     }
 }
