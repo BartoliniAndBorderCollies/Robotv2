@@ -27,6 +27,7 @@ public class ChargerService {
     public void plugIn(String chargerName, String robotName) throws ObjectNotFoundException, NotEnoughFreeEnergySlotsException {
         Charger foundCharger = findCharger(chargerName);
         Robot foundRobot = robotService.findRobot(robotName);
+        robotService.addRobotToPluggedRobots(foundRobot);
         foundCharger.plugInRobot(foundRobot);
     }
 

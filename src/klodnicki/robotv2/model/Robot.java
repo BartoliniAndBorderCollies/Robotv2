@@ -67,6 +67,8 @@ public class Robot {
         return isOn;
     }
 
+
+
     @Override
     public String toString() {
         return "Robot " + name;

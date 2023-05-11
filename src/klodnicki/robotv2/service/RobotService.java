@@ -65,4 +65,9 @@ public class RobotService {
     public boolean doesRobotAlreadyExist(String robotName) {
         return database.doesRobotAlreadyExist(robotName);
     }
+
+    public void addRobotToPluggedRobots(Robot robot) {
+        database.addRobotToPluggedRobots(robot);
+    }
+
 }
