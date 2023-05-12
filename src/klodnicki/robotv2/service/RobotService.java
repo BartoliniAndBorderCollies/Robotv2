@@ -36,8 +36,9 @@ public class RobotService {
         for (RobotMovement movement : RobotMovement.values()) {
             if (movement.getName().equals(movementName)) {
                 Robot foundRobot = findRobot(robotName);
+                String movementDone = foundRobot.move(movement);
                 database.updateEnergyLevel(foundRobot);
-                return foundRobot.move(movement);
+                return movementDone;
             }
         }
         return "Unknown command.";
