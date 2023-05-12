@@ -16,13 +16,13 @@ public class Database {
         String selectQuery = "select * from robots where name = ?";
         try (PreparedStatement preparedStatement = DatabaseConnection.getConnection().prepareStatement(selectQuery)) {
             preparedStatement.setString(1, robotName);
-            ResultSet resultSet = preparedStatement.executeQuery(selectQuery);
+            ResultSet resultSet = preparedStatement.executeQuery();
             // nie znajdzie robota, czyli resultSet.next() zwróci false
             // znajdzie dokładnie jednego robota
             // znajdzie więcej niż jednego robota
 
             if (resultSet.next()) {
-                int foundRobotId = resultSet.getInt("id_robot"); //TODO: check in a table
+                int foundRobotId = resultSet.getInt("id");
                 String foundRobotName = resultSet.getString("name");
                 int foundRobotEnergyLevel = resultSet.getInt("energy_level");
                 boolean isFoundRobotOn = resultSet.getBoolean("is_on");
@@ -58,7 +58,7 @@ public class Database {
         try (Statement statement = DatabaseConnection.getConnection().createStatement()) {
             ResultSet resultSet = statement.executeQuery(selectQueryAll);
             while (resultSet.next()) {
-                int foundRobotId = resultSet.getInt("id_robot"); //TODO: check if this is correct
+                int foundRobotId = resultSet.getInt("id");
                 String foundRobotName = resultSet.getString("name");
                 int foundRobotEnergyLevel = resultSet.getInt("energy_level");
                 boolean isFoundRobotOn = resultSet.getBoolean("is_on");
