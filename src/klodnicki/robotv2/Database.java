@@ -189,4 +189,20 @@ public class Database {
         }
         return pluggedRobots;
     }
+
+    public void updateEnergyLevel(Robot robot) {
+        String updateEnergy = "UPDATE robots SET energy_level = ? WHERE id = ?";
+
+        try(PreparedStatement preparedStatementUpdateEnergy = DatabaseConnection.getConnection().prepareStatement
+                (updateEnergy)){
+            preparedStatementUpdateEnergy.setInt(1, robot.getEnergyLevel());
+            preparedStatementUpdateEnergy.setInt(2, robot.getId());
+            preparedStatementUpdateEnergy.executeUpdate();
+
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }

@@ -35,7 +35,9 @@ public class RobotService {
     public String move(String robotName, String movementName) throws ObjectNotFoundException, RobotNotTurnedOnException, TooLowEnergyException {
         for (RobotMovement movement : RobotMovement.values()) {
             if (movement.getName().equals(movementName)) {
-                return findRobot(robotName).move(movement);
+                Robot foundRobot = findRobot(robotName);
+                database.updateEnergyLevel(foundRobot);
+                return foundRobot.move(movement);
             }
         }
         return "Unknown command.";
