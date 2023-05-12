@@ -34,6 +34,7 @@ public class ChargerService {
     public void unplug(String chargerName, String robotName) throws ObjectNotFoundException {
         Charger foundCharger = findCharger(chargerName);
         Robot foundRobot = robotService.findRobot(robotName);
+        robotService.removeRobotFromPluggedRobots(foundRobot);
         foundCharger.unplugRobot(foundRobot);
     }
 

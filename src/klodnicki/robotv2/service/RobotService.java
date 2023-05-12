@@ -70,4 +70,8 @@ public class RobotService {
         database.addRobotToPluggedRobots(robot);
     }
 
+    public void removeRobotFromPluggedRobots(Robot robot) {
+        database.removeRobotFromPluggedRobots(robot);
+    }
+
 }

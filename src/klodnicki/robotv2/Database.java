@@ -22,10 +22,11 @@ public class Database {
             // znajdzie więcej niż jednego robota
 
             if (resultSet.next()) {
+                int foundRobotId = resultSet.getInt("id_robot"); //TODO: check in a table
                 String foundRobotName = resultSet.getString("name");
                 int foundRobotEnergyLevel = resultSet.getInt("energy_level");
                 boolean isFoundRobotOn = resultSet.getBoolean("is_on");
-                robot = new Robot(foundRobotName, foundRobotEnergyLevel, isFoundRobotOn);
+                robot = new Robot(foundRobotId, foundRobotName, foundRobotEnergyLevel, isFoundRobotOn);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -57,10 +58,11 @@ public class Database {
         try (Statement statement = DatabaseConnection.getConnection().createStatement()) {
             ResultSet resultSet = statement.executeQuery(selectQueryAll);
             while (resultSet.next()) {
+                int foundRobotId = resultSet.getInt("id_robot"); //TODO: check if this is correct
                 String foundRobotName = resultSet.getString("name");
                 int foundRobotEnergyLevel = resultSet.getInt("energy_level");
                 boolean isFoundRobotOn = resultSet.getBoolean("is_on");
-                robots.add(new Robot(foundRobotName, foundRobotEnergyLevel, isFoundRobotOn));
+                robots.add(new Robot(foundRobotId, foundRobotName, foundRobotEnergyLevel, isFoundRobotOn));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -149,6 +151,18 @@ public class Database {
         }
     }
 
+    public void removeRobotFromPluggedRobots(Robot robot) {
+        String removeRobotFromPluggedRobots = "DELETE from plugged_robots where id =?";
+
+        try(PreparedStatement preparedStatementRemove = DatabaseConnection.getConnection().prepareStatement
+                (removeRobotFromPluggedRobots)){
+            preparedStatementRemove.setInt(1, robot.getId());
+            preparedStatementRemove.executeQuery();
+
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     public List<Robot> getPluggedRobots() {
         List<Robot> pluggedRobots = new ArrayList<>();
@@ -164,7 +178,7 @@ public class Database {
                         preparedStatement.setInt(1, robotsIds.getInt("id_robot"));
                         ResultSet foundRobotInfo = preparedStatement.executeQuery();
                         if (foundRobotInfo.next()) {
-                            pluggedRobots.add(new Robot(foundRobotInfo.getString("name"),
+                            pluggedRobots.add(new Robot(foundRobotInfo.getInt("id_robot"), foundRobotInfo.getString("name"),
                                     foundRobotInfo.getInt("energy_level"), foundRobotInfo.getBoolean("is_on")));
                         }
                     }

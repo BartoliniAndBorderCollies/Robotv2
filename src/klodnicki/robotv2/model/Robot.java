@@ -6,7 +6,7 @@ import klodnicki.robotv2.exception.TooLowEnergyException;
 import klodnicki.robotv2.exception.RobotNotTurnedOnException;
 
 public class Robot {
-
+    private int id;
     private String name;
     private int energyLevel;
     private boolean isOn;
@@ -17,12 +17,12 @@ public class Robot {
         isOn = true;
     }
 
-    public Robot(String name, int energyLevel, boolean isOn) {
+    public Robot(int id, String name, int energyLevel, boolean isOn) {
+        this.id = id;
         this.name = name;
         this.isOn = isOn;
         this.energyLevel = energyLevel;
     }
-
 
 
     public String move(RobotMovement robotMovement) throws TooLowEnergyException, RobotNotTurnedOnException {
@@ -68,9 +68,20 @@ public class Robot {
     }
 
 
-
     @Override
     public String toString() {
         return "Robot " + name;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setOn(boolean on) {
+        isOn = on;
+    }
+
+    public int getId() {
+        return id;
     }
 }
