@@ -37,7 +37,7 @@ public class RobotService {
             if (movement.getName().equals(movementName)) {
                 Robot foundRobot = findRobot(robotName);
                 String movementDone = foundRobot.move(movement);
-                database.updateEnergyLevel(foundRobot);
+                updateEnergyLevel(foundRobot);
                 return movementDone;
             }
         }
@@ -54,6 +54,7 @@ public class RobotService {
 
         Robot foundRobot = findRobot(robotName);
         foundRobot.turnOn();
+        database.updatePowerOnStatus(foundRobot);
     }
 
     public Robot findRobot(String name) throws ObjectNotFoundException {
@@ -75,6 +76,10 @@ public class RobotService {
 
     public void removeRobotFromPluggedRobots(Robot robot) {
         database.removeRobotFromPluggedRobots(robot);
+    }
+
+    public void updateEnergyLevel(Robot robot) {
+        database.updateEnergyLevel(robot);
     }
 
 }

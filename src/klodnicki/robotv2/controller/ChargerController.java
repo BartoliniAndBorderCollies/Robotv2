@@ -121,7 +121,7 @@ public class ChargerController {
     public void chargeRobots() {
         try {
             chargerService.chargeRobots();
-        }catch (MaximumEnergyLevelException e) {
+        }catch (MaximumEnergyLevelException | ObjectNotFoundException e) {
             System.out.println(e.getMessage());
         }
     }

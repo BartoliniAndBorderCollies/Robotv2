@@ -50,11 +50,16 @@ public class ChargerService {
         return findCharger(chargerName).getPluggedRobots();
     }
 
-    public void chargeRobots() throws MaximumEnergyLevelException {
+    public void chargeRobots() throws MaximumEnergyLevelException, ObjectNotFoundException {
         List<Charger> chargers = getListOfChargers();
         for (Charger charger : chargers) {
             charger.chargeRobots();
+            for (Robot robot : getPluggedRobots(charger.getName())){ //TODO: check if does it work
+                //TODO: energy level does not increase
+                robotService.updateEnergyLevel(robot);
+            }
         }
+
     }
 
     public boolean doesChargerAlreadyExist(String chargerName) {

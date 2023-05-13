@@ -21,6 +21,5 @@ public class TurnOnTheRobot implements MenuCommand {
     @Override
     public void execute() {
         robotController.turnOn();
-        chargerController.unplug();
     }
 }
