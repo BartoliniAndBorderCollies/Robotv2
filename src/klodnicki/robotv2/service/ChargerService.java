@@ -27,7 +27,7 @@ public class ChargerService {
     public void plugIn(String chargerName, String robotName) throws ObjectNotFoundException, NotEnoughFreeEnergySlotsException {
         Charger foundCharger = findCharger(chargerName);
         Robot foundRobot = robotService.findRobot(robotName);
-        robotService.addRobotToPluggedRobots(foundRobot);
+        robotService.addRobotToPluggedRobots(foundCharger, foundRobot);
         foundCharger.plugInRobot(foundRobot);
     }
 
@@ -47,7 +47,7 @@ public class ChargerService {
     }
 
     public List<Robot> getPluggedRobots(String chargerName) throws ObjectNotFoundException{
-        return findCharger(chargerName).getPluggedRobots();
+        return findCharger(chargerName).getPluggedRobots(); //TODO: to database
     }
 
     public void chargeRobots() throws MaximumEnergyLevelException, ObjectNotFoundException {

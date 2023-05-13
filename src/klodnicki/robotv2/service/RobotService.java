@@ -5,6 +5,7 @@ import klodnicki.robotv2.RobotMovement;
 import klodnicki.robotv2.exception.ObjectNotFoundException;
 import klodnicki.robotv2.exception.RobotNotTurnedOnException;
 import klodnicki.robotv2.exception.TooLowEnergyException;
+import klodnicki.robotv2.model.Charger;
 import klodnicki.robotv2.model.Robot;
 
 import java.util.ArrayList;
@@ -70,8 +71,8 @@ public class RobotService {
         return database.doesRobotAlreadyExist(robotName);
     }
 
-    public void addRobotToPluggedRobots(Robot robot) {
-        database.addRobotToPluggedRobots(robot);
+    public void addRobotToPluggedRobots(Charger charger, Robot robot) {
+        database.addRobotToPluggedRobots(charger, robot);
     }
 
     public void removeRobotFromPluggedRobots(Robot robot) {

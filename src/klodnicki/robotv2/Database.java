@@ -42,9 +42,10 @@ public class Database {
             preparedStatement.setString(1, chargerName);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
+                int foundChargerId = resultSet.getInt("idchargers");
                 String foundChargerName = resultSet.getString("name");
                 int foundFreeEnergySlots = resultSet.getInt("free_energy_slots");
-                charger = new Charger(foundChargerName, foundFreeEnergySlots);
+                charger = new Charger(foundChargerId, foundChargerName, foundFreeEnergySlots);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -76,9 +77,10 @@ public class Database {
         try (Statement statement = DatabaseConnection.getConnection().createStatement()) {
             ResultSet resultSet = statement.executeQuery(selectQueryAll);
             while (resultSet.next()) {
+                int foundChargerId = resultSet.getInt("idchargers");
                 String foundChargerName = resultSet.getString("name");
                 int foundFreeEnergySlots = resultSet.getInt("free_energy_slots");
-                chargers.add(new Charger(foundChargerName, foundFreeEnergySlots));
+                chargers.add(new Charger(foundChargerId, foundChargerName, foundFreeEnergySlots));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -137,12 +139,12 @@ public class Database {
         }
     }
 
-    public void addRobotToPluggedRobots(Robot robot) {
+    public void addRobotToPluggedRobots(Charger charger, Robot robot) {
         String insertRobotToPluggedRobots = "INSERT INTO plugged_robots(id_charger, id_robot) VALUES(?, ?)";
 
         try (PreparedStatement preparedStatementInsert = DatabaseConnection.getConnection().prepareStatement
                 (insertRobotToPluggedRobots)) {
-            preparedStatementInsert.setInt(1, robot.getId());
+            preparedStatementInsert.setInt(1, charger.getId());
             preparedStatementInsert.setInt(2, robot.getId());
             preparedStatementInsert.executeUpdate();
         } catch (SQLException e) {

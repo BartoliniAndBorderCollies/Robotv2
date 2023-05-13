@@ -20,6 +20,6 @@ public class TurnOnTheRobot implements MenuCommand {
 
     @Override
     public void execute() {
-        robotController.turnOn();
+        robotController.turnOn(); //TODO: turning robot on should stop him being charged
     }
 }

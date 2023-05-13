@@ -26,6 +26,7 @@ public class ChargerController {
     public void createCharger() {
         Scanner scanner = new Scanner(System.in);
         int energySlots;
+
         System.out.println("How many energy plugs you want to create?");
         try {
             energySlots = scanner.nextInt();
