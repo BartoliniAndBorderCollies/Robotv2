@@ -46,8 +46,8 @@ public class RobotService {
 
     public void turnOff(String robotName) throws ObjectNotFoundException {
         Robot foundRobot = findRobot(robotName);
-
         foundRobot.turnOff();
+        database.updatePowerOnStatus(foundRobot);
     }
 
     public void turnOn(String robotName) throws ObjectNotFoundException {

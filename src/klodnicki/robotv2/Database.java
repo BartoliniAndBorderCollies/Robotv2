@@ -40,7 +40,7 @@ public class Database {
         String selectQuery = "select * from chargers where name = ?";
         try (PreparedStatement preparedStatement = DatabaseConnection.getConnection().prepareStatement(selectQuery)) {
             preparedStatement.setString(1, chargerName);
-            ResultSet resultSet = preparedStatement.executeQuery(selectQuery);
+            ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 String foundChargerName = resultSet.getString("name");
                 int foundFreeEnergySlots = resultSet.getInt("free_energy_slots");
@@ -138,13 +138,12 @@ public class Database {
     }
 
     public void addRobotToPluggedRobots(Robot robot) {
-        String insertRobotToPluggedRobots = "INSERT INTO plugged_robots(name, energy_level, is_on) VALUES(?, ?, ?)";
+        String insertRobotToPluggedRobots = "INSERT INTO plugged_robots(id_charger, id_robot) VALUES(?, ?)";
 
         try (PreparedStatement preparedStatementInsert = DatabaseConnection.getConnection().prepareStatement
                 (insertRobotToPluggedRobots)) {
-            preparedStatementInsert.setString(1, robot.getName());
-            preparedStatementInsert.setInt(2, robot.getEnergyLevel());
-            preparedStatementInsert.setBoolean(3, robot.isOn());
+            preparedStatementInsert.setInt(1, robot.getId());
+            preparedStatementInsert.setInt(2, robot.getId());
             preparedStatementInsert.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -203,6 +202,18 @@ public class Database {
             e.printStackTrace();
         }
     }
+    public void updatePowerOnStatus(Robot robot) {
+        String updatePowerStatus = "UPDATE robots SET is_on = ? WHERE id = ?";
 
+        try(PreparedStatement preparedStatementPowerStatus = DatabaseConnection.getConnection().prepareStatement
+                (updatePowerStatus)) {
+            preparedStatementPowerStatus.setBoolean(1, robot.isOn());
+            preparedStatementPowerStatus.setInt(2, robot.getId());
+            preparedStatementPowerStatus.executeUpdate();
+
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
