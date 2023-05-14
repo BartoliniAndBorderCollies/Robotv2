@@ -24,6 +24,13 @@ public class Charger {
         this.freeSlots = freeSlots;
     }
 
+    public Charger(int id, String name, int freeSlots, List<Robot> pluggedRobots) {
+        this.id = id;
+        this.name = name;
+        this.freeSlots = freeSlots;
+        this.pluggedRobots = pluggedRobots;
+    }
+
     public void plugInRobot(Robot robot) throws NotEnoughFreeEnergySlotsException {
 
         if (freeSlots <= pluggedRobots.size()) {

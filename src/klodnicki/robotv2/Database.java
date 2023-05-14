@@ -38,14 +38,32 @@ public class Database {
         Charger charger = null;
 
         String selectQuery = "select * from chargers where name = ?";
-        try (PreparedStatement preparedStatement = DatabaseConnection.getConnection().prepareStatement(selectQuery)) {
-            preparedStatement.setString(1, chargerName);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                int foundChargerId = resultSet.getInt("idchargers");
-                String foundChargerName = resultSet.getString("name");
-                int foundFreeEnergySlots = resultSet.getInt("free_energy_slots");
-                charger = new Charger(foundChargerId, foundChargerName, foundFreeEnergySlots);
+        try (Connection connection = DatabaseConnection.getConnection()) {
+            try (PreparedStatement preparedStatement = connection.prepareStatement(selectQuery)) {
+                preparedStatement.setString(1, chargerName);
+                ResultSet resultSet = preparedStatement.executeQuery();
+                if (resultSet.next()) {
+                    int foundChargerId = resultSet.getInt("idchargers");
+                    List<Robot> foundPluggedRobots = new ArrayList<>();
+                    String selectPluggedRobotsQuery = "select * from robots where id = ?";
+                    try (PreparedStatement pluggedRobotsPreparedStatement = connection.prepareStatement(selectPluggedRobotsQuery)) {
+                        pluggedRobotsPreparedStatement.setInt(1, foundChargerId);
+                        ResultSet pluggedRobotResultSet = pluggedRobotsPreparedStatement.executeQuery();
+                        while (pluggedRobotResultSet.next()) {
+                            int foundRobotId = pluggedRobotResultSet.getInt("id");
+                            String foundRobotName = pluggedRobotResultSet.getString("name");
+                            int foundRobotEnergyLevel = pluggedRobotResultSet.getInt("energy_level");
+                            boolean isFoundRobotOn = pluggedRobotResultSet.getBoolean("is_on");
+
+                            foundPluggedRobots.add(new Robot(foundRobotId, foundRobotName, foundRobotEnergyLevel, isFoundRobotOn));
+                        }
+                    }
+
+                    String foundChargerName = resultSet.getString("name");
+                    int foundFreeEnergySlots = resultSet.getInt("free_energy_slots");
+
+                    charger = new Charger(foundChargerId, foundChargerName, foundFreeEnergySlots, foundPluggedRobots);
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -155,12 +173,12 @@ public class Database {
     public void removeRobotFromPluggedRobots(Robot robot) {
         String removeRobotFromPluggedRobots = "DELETE from plugged_robots where id =?";
 
-        try(PreparedStatement preparedStatementRemove = DatabaseConnection.getConnection().prepareStatement
-                (removeRobotFromPluggedRobots)){
+        try (PreparedStatement preparedStatementRemove = DatabaseConnection.getConnection().prepareStatement
+                (removeRobotFromPluggedRobots)) {
             preparedStatementRemove.setInt(1, robot.getId());
             preparedStatementRemove.executeQuery();
 
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -194,26 +212,27 @@ public class Database {
     public void updateEnergyLevel(Robot robot) {
         String updateEnergy = "UPDATE robots SET energy_level = ? WHERE id = ?";
 
-        try(PreparedStatement preparedStatementUpdateEnergy = DatabaseConnection.getConnection().prepareStatement
-                (updateEnergy)){
+        try (PreparedStatement preparedStatementUpdateEnergy = DatabaseConnection.getConnection().prepareStatement
+                (updateEnergy)) {
             preparedStatementUpdateEnergy.setInt(1, robot.getEnergyLevel());
             preparedStatementUpdateEnergy.setInt(2, robot.getId());
             preparedStatementUpdateEnergy.executeUpdate();
 
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
     public void updatePowerOnStatus(Robot robot) {
         String updatePowerStatus = "UPDATE robots SET is_on = ? WHERE id = ?";
 
-        try(PreparedStatement preparedStatementPowerStatus = DatabaseConnection.getConnection().prepareStatement
+        try (PreparedStatement preparedStatementPowerStatus = DatabaseConnection.getConnection().prepareStatement
                 (updatePowerStatus)) {
             preparedStatementPowerStatus.setBoolean(1, robot.isOn());
             preparedStatementPowerStatus.setInt(2, robot.getId());
             preparedStatementPowerStatus.executeUpdate();
 
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
