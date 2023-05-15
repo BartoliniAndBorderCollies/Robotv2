@@ -44,25 +44,10 @@ public class Database {
                 ResultSet resultSet = preparedStatement.executeQuery();
                 if (resultSet.next()) {
                     int foundChargerId = resultSet.getInt("idchargers");
-                    List<Robot> foundPluggedRobots = new ArrayList<>();
-                    String selectPluggedRobotsQuery = "select * from robots where id = ?";
-                    try (PreparedStatement pluggedRobotsPreparedStatement = connection.prepareStatement(selectPluggedRobotsQuery)) {
-                        pluggedRobotsPreparedStatement.setInt(1, foundChargerId);
-                        ResultSet pluggedRobotResultSet = pluggedRobotsPreparedStatement.executeQuery();
-                        while (pluggedRobotResultSet.next()) {
-                            int foundRobotId = pluggedRobotResultSet.getInt("id");
-                            String foundRobotName = pluggedRobotResultSet.getString("name");
-                            int foundRobotEnergyLevel = pluggedRobotResultSet.getInt("energy_level");
-                            boolean isFoundRobotOn = pluggedRobotResultSet.getBoolean("is_on");
-
-                            foundPluggedRobots.add(new Robot(foundRobotId, foundRobotName, foundRobotEnergyLevel, isFoundRobotOn));
-                        }
-                    }
-
-                    String foundChargerName = resultSet.getString("name");
+                    List<Robot> foundPluggedRobots = findPluggedRobots(foundChargerId);
                     int foundFreeEnergySlots = resultSet.getInt("free_energy_slots");
 
-                    charger = new Charger(foundChargerId, foundChargerName, foundFreeEnergySlots, foundPluggedRobots);
+                    charger = new Charger(foundChargerId, chargerName, foundFreeEnergySlots, foundPluggedRobots);
                 }
             }
         } catch (SQLException e) {
@@ -98,12 +83,36 @@ public class Database {
                 int foundChargerId = resultSet.getInt("idchargers");
                 String foundChargerName = resultSet.getString("name");
                 int foundFreeEnergySlots = resultSet.getInt("free_energy_slots");
-                chargers.add(new Charger(foundChargerId, foundChargerName, foundFreeEnergySlots));
+
+                List<Robot> pluggedRobots = findPluggedRobots(foundChargerId);
+
+                chargers.add(new Charger(foundChargerId, foundChargerName, foundFreeEnergySlots, pluggedRobots));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return chargers;
+    }
+
+    private List<Robot> findPluggedRobots(int chargerId) {
+        String selectPluggedRobots = "SELECT r.id, r.name, r.energy_level, r.is_on FROM plugged_robots pr JOIN robots r on r.id = pr.id_robot WHERE id_charger = ?";
+
+        List<Robot> pluggedRobots = new ArrayList<>();
+        try (PreparedStatement preparedStatement = DatabaseConnection.getConnection().prepareStatement(selectPluggedRobots)) {
+            preparedStatement.setInt(1, chargerId);
+            ResultSet pluggedRobotsDataRows = preparedStatement.executeQuery();
+
+            while (pluggedRobotsDataRows.next()) {
+                int id = pluggedRobotsDataRows.getInt("id");
+                String name = pluggedRobotsDataRows.getString("name");
+                int energyLevel = pluggedRobotsDataRows.getInt("energy_level");
+                boolean isOn = pluggedRobotsDataRows.getBoolean("is_on");
+                pluggedRobots.add(new Robot(id, name, energyLevel, isOn));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return pluggedRobots;
     }
 
     public boolean doesRobotAlreadyExist(String robotName) {

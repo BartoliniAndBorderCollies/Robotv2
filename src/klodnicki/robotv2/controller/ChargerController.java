@@ -88,6 +88,7 @@ public class ChargerController {
         }
         Scanner scanner = new Scanner(System.in);
         System.out.println("Which charger you want to choose to unplug robot?");
+        // same nazwy ładowarek
         System.out.println(chargerService.getListOfChargers());
         String chargerName = scanner.nextLine();
 
@@ -96,14 +97,14 @@ public class ChargerController {
                 System.out.println("There is no robot connected to this charger: " + chargerName);
                 return;
             }
-        } catch (ObjectNotFoundException eee) {
-            eee.getMessage();
+        } catch (ObjectNotFoundException e) {
+            System.out.println(e.getMessage());
         }
 
         System.out.println("Which robot you want to unplug from the charger?");
 
         try {
-            System.out.println((chargerService.getPluggedRobots(chargerName)));
+            System.out.println(chargerService.getPluggedRobots(chargerName));
         } catch (ObjectNotFoundException e) {
             System.out.println(e.getMessage());
         }
