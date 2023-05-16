@@ -80,6 +80,7 @@ public class ChargerController {
         try {
             chargerService.plugIn(chargerName, robotName);
             System.out.println("Robot " + robotName + " has been plugged in.");
+            chargeRobots();
             turnCounter.count();
         } catch (ObjectNotFoundException | NotEnoughFreeEnergySlotsException e) {
             System.out.println(e.getMessage());

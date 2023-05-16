@@ -29,6 +29,7 @@ public class ChargerService {
         Robot foundRobot = robotService.findRobot(robotName);
         robotService.addRobotToPluggedRobots(foundCharger, foundRobot);
         foundCharger.plugInRobot(foundRobot);
+
     }
 
     public void unplug(String chargerName, String robotName) throws ObjectNotFoundException {
@@ -54,7 +55,7 @@ public class ChargerService {
         List<Charger> chargers = getListOfChargers();
         for (Charger charger : chargers) {
             charger.chargeRobots();
-            for (Robot robot : getPluggedRobots(charger.getName())) {
+            for (Robot robot : getPluggedRobots(charger.getName())) { //TODO: does not go to database
                 //TODO: energy level does not increase
                 robotService.updateEnergyLevel(robot);
             }

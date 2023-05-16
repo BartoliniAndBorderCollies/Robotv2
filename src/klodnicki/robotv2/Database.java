@@ -202,6 +202,7 @@ public class Database {
         return false;
     }
 
+    // To jest załadowanie do pamięci
     public List<Robot> getPluggedRobots() {
         List<Robot> pluggedRobots = new ArrayList<>();
         try (Connection connection = DatabaseConnection.getConnection()) {
