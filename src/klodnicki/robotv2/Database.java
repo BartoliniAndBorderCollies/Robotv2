@@ -180,12 +180,12 @@ public class Database {
     }
 
     public void removeRobotFromPluggedRobots(Robot robot) {
-        String removeRobotFromPluggedRobots = "DELETE from plugged_robots where id =?";
+        String removeRobotFromPluggedRobots = "DELETE from plugged_robots where id_robot = ?";
 
         try (PreparedStatement preparedStatementRemove = DatabaseConnection.getConnection().prepareStatement
                 (removeRobotFromPluggedRobots)) {
             preparedStatementRemove.setInt(1, robot.getId());
-            preparedStatementRemove.executeQuery();
+            preparedStatementRemove.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -245,5 +245,4 @@ public class Database {
             e.printStackTrace();
         }
     }
-
 }
