@@ -5,6 +5,7 @@ import klodnicki.robotv2.TurnCounter;
 import klodnicki.robotv2.exception.ObjectNotFoundException;
 import klodnicki.robotv2.exception.RobotNotTurnedOnException;
 import klodnicki.robotv2.exception.TooLowEnergyException;
+import klodnicki.robotv2.model.Robot;
 import klodnicki.robotv2.service.RobotService;
 
 import java.util.List;
@@ -48,14 +49,17 @@ public class RobotController {
     }
 
     public void moveRobot() {
-        if (robotService.prepareListOfRobotNamesWithEnergy().isEmpty()) {
+        List<String> rows = robotService.prepareListOfRobotNamesWithEnergy();
+        if (rows.isEmpty()) {
             System.out.println("There is no robot on the list.");
             return;
         }
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("Below is the list of robots:");
-        System.out.println(robotService.prepareListOfRobotNamesWithEnergy());
+        for (String row : rows) {
+            System.out.println(row);
+        }
         System.out.println("Type the name of robot which you want to move:");
         String chosenRobot = scanner.nextLine();
 
@@ -108,5 +112,9 @@ public class RobotController {
             System.out.println(e.getMessage());
         }
         return false;
+    }
+
+    public boolean isOn(Robot robot) {
+        return robotService.isOn(robot);
     }
 }

@@ -8,6 +8,7 @@ import klodnicki.robotv2.model.Charger;
 import klodnicki.robotv2.service.ChargerService;
 
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 public class ChargerController {
@@ -47,19 +48,22 @@ public class ChargerController {
     }
 
     public void plugIn() {
-        Scanner scanner = new Scanner(System.in);
-
-        for (Charger charger : chargerService.getListOfChargers()) {
-            System.out.println(charger.toString());
-        }
-        if (chargerService.getListOfChargers().isEmpty()) {
+        // Pobierać aktualne info z DB
+        List<Charger> listOfChargers = chargerService.getListOfChargers();
+        if (listOfChargers.isEmpty()) {
             System.out.println("There is no charger on the list.");
             return;
         }
 
+        for (Charger charger : listOfChargers) {
+            System.out.println(charger.toString());
+        }
+
+        Scanner scanner = new Scanner(System.in);
         System.out.println("Which charger you want to choose to plug robot in?");
         String chargerName = scanner.nextLine();
 
+        // TODO: pewnie przydałoby się zmienić żeby pokazywało z konkretnego chargera
         if (robotController.showListOfRobotsAndEnergyLevel().isEmpty()) {
             return;
         }

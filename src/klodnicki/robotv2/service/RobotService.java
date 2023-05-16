@@ -83,4 +83,7 @@ public class RobotService {
         database.updateEnergyLevel(robot);
     }
 
+    public boolean isOn(Robot robot) {
+        return robot.isOn();
+    }
 }

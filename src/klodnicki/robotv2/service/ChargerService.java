@@ -55,8 +55,7 @@ public class ChargerService {
         List<Charger> chargers = getListOfChargers();
         for (Charger charger : chargers) {
             charger.chargeRobots();
-            for (Robot robot : getPluggedRobots(charger.getName())) { //TODO: does not go to database
-                //TODO: energy level does not increase
+            for (Robot robot : charger.getPluggedRobots()) {
                 robotService.updateEnergyLevel(robot);
             }
         }
