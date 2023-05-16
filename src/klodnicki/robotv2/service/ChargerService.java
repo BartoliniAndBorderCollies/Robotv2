@@ -46,7 +46,7 @@ public class ChargerService {
         return database.findCharger(chargerName).orElseThrow(() -> new ObjectNotFoundException(Charger.class));
     }
 
-    public List<Robot> getPluggedRobots(String chargerName) throws ObjectNotFoundException{
+    public List<Robot> getPluggedRobots(String chargerName) throws ObjectNotFoundException {
         return findCharger(chargerName).getPluggedRobots();
     }
 
@@ -54,7 +54,7 @@ public class ChargerService {
         List<Charger> chargers = getListOfChargers();
         for (Charger charger : chargers) {
             charger.chargeRobots();
-            for (Robot robot : getPluggedRobots(charger.getName())){
+            for (Robot robot : getPluggedRobots(charger.getName())) {
                 //TODO: energy level does not increase
                 robotService.updateEnergyLevel(robot);
             }
@@ -63,6 +63,10 @@ public class ChargerService {
 
     public boolean doesChargerAlreadyExist(String chargerName) {
         return database.doesChargerAlreadyExist(chargerName);
+    }
+
+    public boolean isRobotAlreadyPlugged(String robotName) {
+        return database.isRobotAlreadyPlugged(robotName);
     }
 }
 

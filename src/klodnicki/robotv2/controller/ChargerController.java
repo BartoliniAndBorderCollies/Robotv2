@@ -37,7 +37,7 @@ public class ChargerController {
         scanner.nextLine();
         System.out.println("Give the name for the charger.");
         String chargerName = scanner.nextLine();
-        if(chargerService.doesChargerAlreadyExist(chargerName)) {
+        if (chargerService.doesChargerAlreadyExist(chargerName)) {
             System.out.println("This charger name already exist.");
             return;
         }
@@ -69,6 +69,11 @@ public class ChargerController {
 
         if (robotController.isOn(robotName)) {
             System.out.println("Robot must be turned off.");
+            return;
+        }
+
+        if (chargerService.isRobotAlreadyPlugged(robotName)) {
+            System.out.println("Cannot plug robot. This robot is already plugged.");
             return;
         }
 
@@ -123,7 +128,7 @@ public class ChargerController {
     public void chargeRobots() {
         try {
             chargerService.chargeRobots();
-        }catch (MaximumEnergyLevelException | ObjectNotFoundException e) {
+        } catch (MaximumEnergyLevelException | ObjectNotFoundException e) {
             System.out.println(e.getMessage());
         }
     }

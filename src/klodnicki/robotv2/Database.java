@@ -192,6 +192,16 @@ public class Database {
         }
     }
 
+    public boolean isRobotAlreadyPlugged(String robotName) {
+
+        for (int i = 0; i < getPluggedRobots().size(); i++) {
+            if (getPluggedRobots().get(i).getName().equals(robotName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public List<Robot> getPluggedRobots() {
         List<Robot> pluggedRobots = new ArrayList<>();
         try (Connection connection = DatabaseConnection.getConnection()) {
@@ -206,7 +216,7 @@ public class Database {
                         preparedStatement.setInt(1, robotsIds.getInt("id_robot"));
                         ResultSet foundRobotInfo = preparedStatement.executeQuery();
                         if (foundRobotInfo.next()) {
-                            pluggedRobots.add(new Robot(foundRobotInfo.getInt("id_robot"), foundRobotInfo.getString("name"),
+                            pluggedRobots.add(new Robot(foundRobotInfo.getInt("id"), foundRobotInfo.getString("name"),
                                     foundRobotInfo.getInt("energy_level"), foundRobotInfo.getBoolean("is_on")));
                         }
                     }
