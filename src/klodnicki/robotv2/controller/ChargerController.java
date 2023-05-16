@@ -63,7 +63,6 @@ public class ChargerController {
         System.out.println("Which charger you want to choose to plug robot in?");
         String chargerName = scanner.nextLine();
 
-        // TODO: pewnie przydałoby się zmienić żeby pokazywało z konkretnego chargera
         if (robotController.showListOfRobotsAndEnergyLevel().isEmpty()) {
             return;
         }

@@ -78,8 +78,12 @@ public class RobotController {
     }
 
     public void turnOff() {
+        List<String> robotsNames = robotService.prepareListOfRobotNamesWithEnergy();
+        for (String robotName: robotsNames) {
+            System.out.println(robotName);
+        }
+
         Scanner scanner = new Scanner(System.in);
-        System.out.println(robotService.prepareListOfRobotNamesWithEnergy());
         System.out.println("Type the name of robot you want to turn off:");
         String robotToTurnOff = scanner.nextLine();
         try {
@@ -92,8 +96,13 @@ public class RobotController {
     }
 
     public void turnOn() {
+        List<String> robotsNames = robotService.prepareListOfRobotNamesWithEnergy();
+
+        for (String robotName : robotsNames) {
+            System.out.println(robotName);
+
+        }
         Scanner scanner = new Scanner(System.in);
-        System.out.println(robotService.prepareListOfRobotNamesWithEnergy());
         System.out.println("Type the name of robot you want to turn on:");
         String robotToTurnOn = scanner.nextLine();
         try {
